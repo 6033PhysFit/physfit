@@ -10,20 +10,22 @@
 
     <title>PhysFit</title>
 
+    <!-- load JS -->
+    <script type="text/javascript" src="Resources/jquery-1.9.0.min.js"></script>
+
+    <script type="text/javascript" src="Resources/jquery-ui-1.10.0.custom.min.js"></script>
+
+    <script type="text/javascript" src="kv.js"></script>
+
     <!-- Bootstrap core CSS -->
-    <link href="bootstrap.css" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" rel="stylesheet">
 
+  <!--   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
+    rel="stylesheet">
+ -->
     <!-- Custom styles for this template -->
-    <link type="text/css" href="dashboard.css" rel="stylesheet">
-
-    <!-- Just for debugging purposes. Don't actually copy this line! -->
-    <!--[if lt IE 9]><script src="../../assets/js/ie8-responsive-file-warning.js"></script><![endif]-->
-
-    <!-- HTML5 shim and Respond.js IE8 support of HTML5 elements and media queries -->
-    <!--[if lt IE 9]>
-      <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
-      <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
-    <![endif]-->
+    <link type="text/css" href="kv.css" rel="stylesheet">
+    
   <style id="holderjs-style" type="text/css"></style></head>
 
   <body style="">
@@ -45,12 +47,15 @@
 
     <div class="navbar navbar-inverse navbar-top" role="navigation">
       <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand">Here goes the tabs</a>
-        </div>
+          <div id="tabs">
+              <ul>
+                <li><a href="#">Nunc tincidunt</a></li>
+                <li><a href="#">Proin dolor</a></li>
+              </ul>
+          </div>
       </div>
     </div>
-
+<!-- 
     <div id="nameList" class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -70,13 +75,11 @@
         </div>
       </div>
     </div>
-
+ -->
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-    <script src="./jquery.min.js"></script>
-    <script src="./bootstrap.min.js"></script>
-    <script src="./docs.min.js"></script>
+  
   
 
 </body></html>
