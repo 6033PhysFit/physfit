@@ -24,3 +24,7 @@ body {
 .container-fluid, .lowerbar{
   padding:0px;
 }
+
+.navbar{
+  border:none;
+}
