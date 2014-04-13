@@ -10,22 +10,25 @@
 
     <title>PhysFit</title>
 
-    <!-- load JS -->
-    <script type="text/javascript" src="Resources/jquery-1.9.0.min.js"></script>
+    <!-- load JS
+    <script type="text/javascript" src="Resources/jquery-1.9.0.min.js"></script> -->
+<!-- 
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
 
-    <script type="text/javascript" src="Resources/jquery-ui-1.10.0.custom.min.js"></script>
-
-    <script type="text/javascript" src="kv.js"></script>
+    <script src="Resources/jquery-ui-1.10.0.custom.min.js"></script>
+ 
+    <script type="text/javascript" src="kv.js"></script>-->
 
     <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" rel="stylesheet">
+    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
+<!--     <link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap2.2.css" rel="stylesheet">  -->
 
-  <!--   <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
+    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
     rel="stylesheet">
- -->
+
     <!-- Custom styles for this template -->
     <link type="text/css" href="kv.css" rel="stylesheet">
-    
+
   <style id="holderjs-style" type="text/css"></style></head>
 
   <body style="">
@@ -39,17 +42,17 @@
 
         <div class="navbar-collapse collapse">
           <div class="nav navbar-nav navbar-right">
-            <img src="./favicon.ico" ></img>
+            <img id="notificationImg" src="./favicon.ico" ></img>
           </div>
         </div>
       </div>
     </div>
 
     <div class="navbar navbar-inverse navbar-top" role="navigation">
-      <div class="container-fluid">
+      <div class="container-fluid lowerbar">
           <div id="tabs">
-              <ul>
-                <li><a href="#">Nunc tincidunt</a></li>
+              <ul class="nav nav-tabs">
+                <li class="active"><a href="#">Nunc tincidunt</a></li>
                 <li><a href="#">Proin dolor</a></li>
               </ul>
           </div>
