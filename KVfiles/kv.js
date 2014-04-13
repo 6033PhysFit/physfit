@@ -1,6 +1,6 @@
 $(function() {
 
-    activaTab('nameList');
+    // activaTab('freedomList');
     //  $('.tabs').bind('change', function (e) {
     //     // e.target is the new active tab according to docs
     //     // so save the reference in case it's needed later on
@@ -9,6 +9,18 @@ $(function() {
     //     alert("hello");
     //     // Load data etc
     // });
+
+	$('#actualTabs a[href="#nameList"]').click(function (e) {
+		  e.preventDefault();
+		  console.log("nameList");
+		  $(this).tab('show');
+		});
+
+	$('#actualTabs a[href="#freedomList"]').click(function (e) {
+		  e.preventDefault();
+		  console.log("freedomList");
+		  $(this).tab('show');
+		});
   });
 
 function activaTab(tab){
