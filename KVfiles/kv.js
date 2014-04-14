@@ -12,13 +12,11 @@ $(function() {
 
 	$('#actualTabs a[href="#nameList"]').click(function (e) {
 		  e.preventDefault();
-		  console.log("nameList");
 		  $(this).tab('show');
 		});
 
 	$('#actualTabs a[href="#freedomList"]').click(function (e) {
 		  e.preventDefault();
-		  console.log("freedomList");
 		  $(this).tab('show');
 		});
   });
