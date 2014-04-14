@@ -19,6 +19,11 @@ $(function() {
 		  e.preventDefault();
 		  $(this).tab('show');
 		});
+
+	$('#notification').click(function() {
+  	$('#myModal').modal('toggle');
+});
+
   });
 
 function activaTab(tab){

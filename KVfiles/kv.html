@@ -15,7 +15,7 @@
     <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!--
     <script src="Resources/jquery-ui-1.10.0.custom.min.js"></script>-->
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.1.1/js/bootstrap.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
  
     <script type="text/javascript" src="kv.js"></script>
@@ -45,10 +45,29 @@
 
 
         <div class="pull-right center">
-<!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">
-
-          <span class="glyphicon glyphicon-bell"></span>
+<!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button id="notification" class="btn btn-warning btn-sm" data-toggle="modal" data-target="#myModal">
+                        <span class="glyphicon glyphicon-bell"></span>
         </button>
+            <!--MODAL TEST-->
+            <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+              <div class="modal-dialog">
+                <div class="modal-content">
+                  <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-hidden="true">&times;</button>
+                    <h4 class="modal-title" id="myModalLabel">Modal title</h4>
+                  </div>
+                  <div class="modal-body">
+                    <input type="text"></text>
+                  </div>
+                  <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary">Save changes</button>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <!--END MODAL-->
         </div>
       </div>
     </div>
