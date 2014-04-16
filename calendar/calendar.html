@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Calendar</title>
+		<link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen">
+		<link href="jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet">
+		<link href="timepicker/jquery.ui.timepicker.css" rel="stylesheet">
+		<link href="calendar.css" rel="stylesheet" type="text/css">
+	</head>
+	<body>
+		
+		<div id="calendar_view" class="hero-unit">
+			<h1 id="cal_title">Calendar</h1>
+			<hr>
+			<div id="navbar" class="row">
+				<div class="span2">
+					<a id="today" class="btn">Today</a>
+				</div>
+				<div class="span2">
+					<a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
+				</div>
+				<div class="span3">
+					<input type="hidden" id="calendar_icon" />
+					<span id="view_date"></span>
+				</div>
+				<div class="offset2 span3">
+					<button class="btn btn-success" id="add_appt">Add Appointment</button>
+				</div>
+			</div>
+			<br>
+		</div>
+		<script type="text/javascript" src="jquery-1.9.0.min.js"></script>
+		<script type="text/javascript" src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
+		<script type="text/javascript" src="timepicker/jquery.ui.timepicker.js"></script>
+		<script src="bootstrap/js/bootstrap.min.js"></script>
+		<script type="text/javascript" src="calendar.js"></script>
+	</body>
+</html>

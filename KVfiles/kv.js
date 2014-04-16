@@ -20,13 +20,5 @@ $(function() {
 		  $(this).tab('show');
 		});
 
-	$('#notification').click(function() {
-  	$('#myModal').modal('toggle');
-});
-
   });
 
-function activaTab(tab){
-	console.log(tab);
-    $('.nav-tabs a[href="#' + tab + '"]').tab('show');
-};
