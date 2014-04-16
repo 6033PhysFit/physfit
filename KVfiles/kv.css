@@ -7,6 +7,10 @@ body {
   font-size: 1.5em;
   padding-top: 50px;
 }
+.sub {
+  font-size: 1em;
+  color : #999;
+}
 
 .glyphicon{
   font-size:3em;
@@ -25,6 +29,8 @@ body {
 
 .navbar-brand{
   font-size: 2em;
+  color:black;
+
 }
 
 .container-fluid, .lowerbar{
@@ -33,6 +39,9 @@ body {
 
 .navbar{
   border:none;
+  background-color: #EEE;
+  font-color:black;
+
 }
 
 textarea {
@@ -77,7 +86,7 @@ textarea {
 
 #lightbox {
   position: fixed;
-  top: 0;
+  top: 50px;
   left: 50%;
   width: 400px;
   margin-left: -250px;

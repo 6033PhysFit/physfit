@@ -131,7 +131,7 @@ var Appointment = function(kind, date, hour, patient_name, notes){
         } else if(this.kind == "me"){
             return "Meeting";
         }
-        return "Appt"
+        return "Other"
     }
 
     // INSERT INTO DATABASE
@@ -218,7 +218,7 @@ function _lightbox_appt(appt){
 
     content.append(button_div);
 
-    _lightbox(content);
+    _lightbox(content, 50);
 
     $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
     $("#lightbox_selected").val(appt.kind); // set default to appt's current type
@@ -239,17 +239,18 @@ function _lightbox_new(){
     content.append($("<div id='lightbox_title'>Create a New Appointment</div>"));
     content.append($("<br>"));
     content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
+    content.append($("<div id='lightbox_kind'><b>Type:</b> "+
+    "<input type='radio' name='lightbox_radio' value='ch'>Check-In<br>"+
+    "<input type='radio' name='lightbox_radio' value='ev'>Evaluation<br>"+
+    "<input type='radio' name='lightbox_radio' value='hon'>Hands-On<br>"+
+    "<input type='radio' name='lightbox_radio' value='hof'>Hands-Off<br>"+
+    "<input type='radio' name='lightbox_radio' value='me'>Meeting<br>"+
+    "</div>"));
+
+
     content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
     content.append($("<div id='lightbox_time'><b>Time:</b> <input id='timepicker' type='text'></input></div>"));
-    content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-    "<select id='lightbox_selected'>"+
-    "<option value='ch'>Check-In</option>"+
-    "<option value='ev'>Evaluation</option>"+
-    "<option value='hon'>Hands-On</option>"+
-    "<option value='hof'>Hands-Off</option>"+
-    "<option value='me'>Meeting</option>"+
-    "</select>"+
-    "</div>"));
+
     content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
         "<div><textarea id='lightbox_input'></textarea></div>"
     ));
@@ -260,25 +261,39 @@ function _lightbox_new(){
 
     content.append(button_div);
     // draw on screen
-    _lightbox(content);
+    _lightbox(content, 50);
 
     $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
 
+
     $("#lightbox_cancel").click(_closeLightbox);
     $("#lightbox_save").click(function(){
-        var new_appt = new Appointment($("#lightbox_selected").val(),
+
+        var kind = $('input:radio[name=lightbox_radio]:checked').val();
+        var new_appt = new Appointment(kind,
             $('#datepicker').val(),
             $("#timepicker").val(),
             $("#namepicker").val(),
             $("#lightbox_input").val());
         _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
         _closeLightbox();
+
+        // Success message
+        _lightbox($("<div style='text-align: center'>You've added an appointment for "+
+            new_appt.patient_name+
+            " at "+
+            new_appt.hour+
+            " on "+
+            new_appt.date+
+            "!</div>"), 5);
     });
 
 }
 
-// display the lightbox for a certain string content
-function _lightbox(content){
+// display the lightbox for a certain jQuery DOM element content
+// content = DOM element
+// top = px from top
+function _lightbox(content, top){
 
     // add lightbox/shadow <div/>'s if not previously added
     if($('#lightbox').size() == 0){
@@ -298,7 +313,7 @@ function _lightbox(content){
     // TODO: Saving does not do anything yet, since no backend. 
 
     // move the lightbox to the current window top + 100px
-    $('#lightbox').css('top', $(window).scrollTop() + 100 + 'px');
+    $('#lightbox').css('top', top + 'px');
 
     // display the lightbox
     $('#lightbox').show();
