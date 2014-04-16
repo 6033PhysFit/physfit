@@ -8,20 +8,20 @@ $(document).ready(function(){
 
     //Add tabs Listeners
     $('#actualTabs a[href="#nameList"]').click(function (e) {
-          e.preventDefault();
-          $(this).tab('show');
-        });
+      e.preventDefault();
+      $(this).tab('show');
+  });
 
     $('#actualTabs a[href="#freedomList"]').click(function (e) {
-          e.preventDefault();
-          $(this).tab('show');
-        });
+      e.preventDefault();
+      $(this).tab('show');
+  });
 
     $("a.patient").click(function(){
         // $("#starting_patient_view").hide();
         $("#starting_patient_view").css("visibility", "hidden");
         $("#letterman_patient_view").css("visibility", "visible");
-   
+
         // $("#letterman_patient_view").show();
     });
 
@@ -36,7 +36,10 @@ $(document).ready(function(){
     appts[3] = new Appointment('hof', date_str, 10, 'Howard', 'Weights');
     appts[4] = new Appointment('me', date_str, 11, 'Blake', 'Progress Report');
     appts[5] = new Appointment('me', '2014/04/16', 11, 'Blake', 'Progress Report');
-
+    appts[6] = new Appointment('me', '2014/04/25', 11, 'David', 'Progress Report');
+    appts[7] = new Appointment('me', '2014/04/27', 11, 'David', 'Progress Report');
+    appts[8] = new Appointment('me', '2014/04/02', 11, 'David', 'Progress Report');
+    appts[9] = new Appointment('me', '2014/03/27', 11, 'David', 'Progress Report');
     // put appts into sheet
     _draw_date(date_str);
 
@@ -51,7 +54,7 @@ $(document).ready(function(){
         buttonImageOnly: true,
         dateFormat: 'yy/mm/dd',
         showOn: 'both',
-     });
+    });
     $("#calendar_icon").change(function(){
         set_day($("#calendar_icon").val());
     });
@@ -59,6 +62,18 @@ $(document).ready(function(){
     $("#view_date").text(date_str);
     $("#add_appt").click(_lightbox_new);
 
+    $("#date425").click(function(){
+        _lightbox_appt(appts[6]);
+    });
+    $("#date427").click(function(){
+        _lightbox_appt(appts[7]);
+    });
+    $("#date42").click(function(){
+        _lightbox_appt(appts[8]);
+    });
+    $("#date327").click(function(){
+        _lightbox_appt(appts[9]);
+    });
 });
 
 
@@ -178,15 +193,15 @@ var _put_hours_list = function(start, end){
 // Draw row for hour given by integer i
 var _make_hour_element = function(i){
     var hour_div = $("<div class='row hour_row'>");
-        hour_div.id = 'hour_'+i;
+    hour_div.id = 'hour_'+i;
 
 
-        hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
+    hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
 
-        var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
+    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
 
-        hour_div.prepend($("<div class='span1 hour_label'>").append(hour_label));
-        hour_div.append(hour_inner_ul);
+    hour_div.prepend($("<div class='span1 hour_label'>").append(hour_label));
+    hour_div.append(hour_inner_ul);
     return hour_div;
 }
 
@@ -199,18 +214,18 @@ function _lightbox_appt(appt){
     content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+appt.date+"'></input></div>"));
     content.append($("<div id='lightbox_time'><b>Time:</b> <input id='timepicker' type='text' value='"+appt.hour+"'></input></div>"));
     content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-    "<select id='lightbox_selected'>"+
-    "<option value='ch'>Check-In</option>"+
-    "<option value='ev'>Evaluation</option>"+
-    "<option value='hon'>Hands-On</option>"+
-    "<option value='hof'>Hands-Off</option>"+
-    "<option value='me'>Meeting</option>"+
-    "</select>"+
-    "</div>"));
+        "<select id='lightbox_selected'>"+
+        "<option value='ch'>Check-In</option>"+
+        "<option value='ev'>Evaluation</option>"+
+        "<option value='hon'>Hands-On</option>"+
+        "<option value='hof'>Hands-Off</option>"+
+        "<option value='me'>Meeting</option>"+
+        "</select>"+
+        "</div>"));
 
     content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
         "<div><textarea id='lightbox_input'>"+appt.notes+"</textarea></div>"
-    ));
+        ));
 
     var button_div = $("<div id='lightbox_buttons' />");
     button_div.append($("<button id='lightbox_cancel' class='btn'>Cancel</button>"));
@@ -240,12 +255,12 @@ function _lightbox_new(){
     content.append($("<br>"));
     content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
     content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-    "<input type='radio' name='lightbox_radio' value='ch'>Check-In<br>"+
-    "<input type='radio' name='lightbox_radio' value='ev'>Evaluation<br>"+
-    "<input type='radio' name='lightbox_radio' value='hon'>Hands-On<br>"+
-    "<input type='radio' name='lightbox_radio' value='hof'>Hands-Off<br>"+
-    "<input type='radio' name='lightbox_radio' value='me'>Meeting<br>"+
-    "</div>"));
+        "<input type='radio' name='lightbox_radio' value='ch'>Check-In<br>"+
+        "<input type='radio' name='lightbox_radio' value='ev'>Evaluation<br>"+
+        "<input type='radio' name='lightbox_radio' value='hon'>Hands-On<br>"+
+        "<input type='radio' name='lightbox_radio' value='hof'>Hands-Off<br>"+
+        "<input type='radio' name='lightbox_radio' value='me'>Meeting<br>"+
+        "</div>"));
 
 
     content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
@@ -253,7 +268,7 @@ function _lightbox_new(){
 
     content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
         "<div><textarea id='lightbox_input'></textarea></div>"
-    ));
+        ));
 
     var button_div = $("<div id='lightbox_buttons' />");
     button_div.append($("<button id='lightbox_cancel' class='btn'>Cancel</button>"));
