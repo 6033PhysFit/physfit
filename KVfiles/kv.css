@@ -3,10 +3,14 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+html{
+  /*height:100%;*/
+}
 body {
   font-size: 1.5em;
   padding-top: 50px;
   background-color: #EEE;
+  /*height:100%;*/
 }
 .sub {
   font-size: 1em;
@@ -79,10 +83,44 @@ body {
   font-size: 2em;
 }
 
-.container-fluid, .lowerbar{
+.container-fluid{
+  padding:0px;
+  border-bottom: 2px solid #999;
+}
+
+/*Underlining of tabs*/
+/*#actualTabs{
+  border-bottom: 2px solid #999;
+}*/
+
+#appointmentList, #patientList{
+  border-right: 2px solid #999;
+  height:100vmax;
+  margin: 0px 0px 0px 0px;
+  padding-right: 0px;
+/*  min-height: 100%;
+*/
+}
+.lowerbar{
   padding:0px;
 }
 
+div.time-heading-div{
+  width:100%;
+}
+li.appointment{
+  min-width:100%;
+  border-bottom: 1px solid #999;
+}
+p{
+  margin: 0px 0px 0px 0px;
+  padding:none;
+}
+
+p.time-heading{
+  font-weight:bold;
+  /*text-align:center;
+*/}
 .navbar{
   border:none;
   background-color: inherit;
