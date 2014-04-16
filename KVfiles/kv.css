@@ -394,3 +394,7 @@ textarea {
 .tab-content {
   height: 100%;
 }
+
+.popover {
+  z-index: 10000;
+}

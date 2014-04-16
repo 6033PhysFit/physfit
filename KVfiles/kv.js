@@ -17,6 +17,8 @@ $(document).ready(function(){
       $(this).tab('show');
   });
 
+    $('#popovergoddamit').popover('hide');
+
     $("a.patient").click(function(){
         // $("#starting_patient_view").hide();
         $("#starting_patient_view").css("visibility", "hidden");
