@@ -10,205 +10,205 @@
 
 <title>PhysFit</title>
 
-    <!-- JAVASCRIPT FILES IMPORTED -->
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-    <script type="text/javascript" src="kv.js"></script>
+<!-- JAVASCRIPT FILES IMPORTED -->
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+<script type="text/javascript" src="kv.js"></script>
 
-    <script type="text/javascript" src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
-    <script type="text/javascript" src="timepicker/jquery.ui.timepicker.js"></script>
-
-
+<script type="text/javascript" src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
+<script type="text/javascript" src="timepicker/jquery.ui.timepicker.js"></script>
 
 
-    <!-- Bootstrap core CSS -->
-    <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" media="screen">
-    <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
-    rel="stylesheet">
-
-    <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
-    <link href="jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet">
-    <link href="timepicker/jquery.ui.timepicker.css" rel="stylesheet">
-    <!-- <link href="calendar.css" rel="stylesheet" type="text/css"> -->
-
-    <!-- Custom styles for this template -->
-    <link type="text/css" href="kv.css" rel="stylesheet">
-
-    <style id="holderjs-style" type="text/css"></style></head>
-
-    <body style="">
-
-      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-        <div class="container-fluid">
-          <div class="navbar-header">
-            <a class="navbar-brand" href="#">PhysFit</a>
-          </div>
 
 
-          <div class="pull-right center">
-            <!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button id="notification" class="btn btn-warning btn-sm">           <span class="glyphicon glyphicon-bell"></span>
-          </button>
-          
-        </div>
+<!-- Bootstrap core CSS -->
+<link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet" media="screen">
+<link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
+rel="stylesheet">
+
+<!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
+<link href="jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet">
+<link href="timepicker/jquery.ui.timepicker.css" rel="stylesheet">
+<!-- <link href="calendar.css" rel="stylesheet" type="text/css"> -->
+
+<!-- Custom styles for this template -->
+<link type="text/css" href="kv.css" rel="stylesheet">
+
+<style id="holderjs-style" type="text/css"></style></head>
+
+<body style="">
+
+  <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+    <div class="container-fluid">
+      <div class="navbar-header">
+        <a class="navbar-brand" href="#">PhysFit</a>
       </div>
+
+
+      <div class="pull-right center">
+        <!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button id="notification" class="btn btn-warning btn-sm">           <span class="glyphicon glyphicon-bell"></span>
+      </button>
+      
     </div>
+  </div>
+</div>
 
-    <div class="navbar navbar-inverse navbar-top" role="navigation">
-      <div class="container-fluid lowerbar">
-        <div id="tabContainer" class="tabbable">
-          <ul id="actualTabs" class="nav nav-tabs">
-            <li class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
-            <li ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
-          </ul>
+<div class="navbar navbar-inverse navbar-top" role="navigation">
+  <div class="container-fluid lowerbar">
+    <div id="tabContainer" class="tabbable">
+      <ul id="actualTabs" class="nav nav-tabs">
+        <li class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
+        <li ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
+      </ul>
 
-          <div class="tab-content" id="tabs">
-            <div id="nameList" class="tab-pane fade active in">
-              <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                  <ul class="nav nav-sidebar">
-                    <li>       
-                      <input type="text" class="form-control" placeholder="Search...">
-                    </li>
-                    <li><a href="#">Johnny Carson</a></li>
-                    <li><a href="#">David Letterman</a></li>
-                    <li><a href="#">Jimmy Fallon</a></li>
-                    <li><a href="#">Stephen Colbert</a></li>
-                  </ul>
-                </div>
-
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main"> 
-                  <div id="calendar_view" class="hero-unit">
-                    <h1 id="cal_title">Calendar</h1>
-                    <hr>
-                    <div id="navbar" class="row">
-                      <div class="span2">
-                        <a id="today" class="btn">Today</a>
-                      </div>
-                      <div class="span2">
-                        <a id="prev_day" class="btn"></a><a id="next_day" class="btn"></a>
-                      </div>
-                      <div class="span3">
-                        <input type="hidden" id="calendar_icon" />
-                        <span id="view_date"></span>
-                      </div>
-                      <div class="offset2 span3">
-                        <button class="btn btn-success" id="add_appt">Add Appointment</button>
-                      </div>
-                    </div>
-                    <br>
-                  </div>
-                </div>
-              </div>
+      <div class="tab-content" id="tabs">
+        <div id="nameList" class="tab-pane fade active in">
+          <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+              <ul class="nav nav-sidebar">
+                <li>       
+                  <input type="text" class="form-control" placeholder="Search...">
+                </li>
+                <li><a href="#">Johnny Carson</a></li>
+                <li><a href="#">David Letterman</a></li>
+                <li><a href="#">Jimmy Fallon</a></li>
+                <li><a href="#">Stephen Colbert</a></li>
+              </ul>
             </div>
 
-            <div id="freedomList" class="tab-pane">
-              <div class="row">
-                <div class="col-sm-3 col-md-2 sidebar">
-                  <ul class="nav nav-sidebar">
-                    <li>       
-                      <input type="text" class="form-control" placeholder="Search...">
-                    </li>
-                    <li><a href="#">Johnny Carson</a></li>
-                    <li><a href="#">David Letterman</a></li>
-                    <li><a href="#">Jimmy Fallon</a></li>
-                    <li><a href="#">Stephen Colbert</a></li>
-                  </ul>
-                </div>
-                <div class="col-sm-9 col-md-10 main">
-                  <div id="starting_patient_view">
-                    <h1 class="page-header">Choose a Patient</h1>
-                    <span class="glyphicon glyphicon-hand-left" style="font-size:100px;"></span>
+            <div class="col-sm-9 col-md-10 main"> 
+              <div id="calendar_view" class="hero-unit">
+                <h1 id="cal_title">Calendar</h1>
+                <hr>
+                <div id="navbar" class="row">
+                  <div class="span2">
+                    <a id="today" class="btn">Today</a>
                   </div>
-                  <div id="letterman_patient_view">
-
-                    <h1 class="page-header">Letterman, David</h1>
-                    <div class="row">
-                      <div class="col-md-6">
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">
-                              <span>Summary</span>
-                            </h3>
-                          </div>
-                          <div class="panel-body">
-                            <p>
-                              <span>
-                                Men's Varsity Football
-                                <br>
-                                Class of 2015
-                                <br>
-                                Cannot meet Wednesdays 3-5
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        <div class="panel panel-default">
-                          <div class="panel-heading">
-                            <h3 class="panel-title">
-                              <span>Conditions</span>
-                            </h3>
-                          </div>
-                          <div class="panel-body">
-                            <p>
-                              <span>
-                                Stress reaction (left tibia)
-                                <br>
-                                Strain (left quadricep)
-                                <br>
-                                Stress reaction (right femur)
-                                <br>
-                                Scapholunate disassociation (right wrist)
-                              </span>
-                            </p>
-                          </div>
-                        </div>
-                        <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
-                        <div class="panel-group" id="accordion">
-                          <div class="panel panel-default" id="panel1">
-                            <div class="panel-heading">
-                              <h4 class="panel-title">
-                                <a data-toggle="collapse" data-target="#collapseOne" 
-                                href="#collapseOne" class="collapsed">
-                                Upcoming Appointments
-                              </a>
-                            </h4>
-                          </div>
-                          <div id="collapseOne" class="panel-collapse collapse in">
-                            <div class="panel-body">
-                              4/25/2014<br>
-                              4/27/2014
-                            </div>
-                          </div>
-                        </div>
-                        <div class="panel panel-default" id="panel2">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-target="#collapseTwo" 
-                              href="#collapseTwo" class="collapsed">
-                              Past Appointments
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseTwo" class="panel-collapse collapse">
-                          <div class="panel-body">
-                            4/2/2014<br>
-                            3/27/2014
-                          </div>
-                        </div>
-                      </div>
-                    </div>
+                  <div class="span2">
+                    <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
                   </div>
-                  <div class="col-md-3">
-                    <img data-src="holder.js/140x140/auto" alt="140x140" src="david_letterman.jpg"/>
+                  <div class="span3">
+                    <input type="hidden" id="calendar_icon" />
+                    <span id="view_date"></span>
+                  </div>
+                  <div class="offset2 span3">
+                    <button class="btn btn-success" id="add_appt">Add Appointment</button>
                   </div>
                 </div>
+                <br>
               </div>
             </div>
           </div>
+        </div>
 
+        <div id="freedomList" class="tab-pane">
+          <div class="row">
+            <div class="col-sm-3 col-md-2 sidebar">
+              <ul class="nav nav-sidebar">
+                <li>       
+                  <input type="text" class="form-control" placeholder="Search...">
+                </li>
+                <li><a href="#">Johnny Carson</a></li>
+                <li><a href="#">David Letterman</a></li>
+                <li><a href="#">Jimmy Fallon</a></li>
+                <li><a href="#">Stephen Colbert</a></li>
+              </ul>
+            </div>
+            <div class="col-sm-9 col-md-10 main">
+              <div id="starting_patient_view">
+                <h1 class="page-header">Choose a Patient</h1>
+                <span class="glyphicon glyphicon-hand-left" style="font-size:100px;"></span>
+              </div>
+              <div id="letterman_patient_view">
+
+                <h1 class="page-header">Letterman, David</h1>
+                <div class="row">
+                  <div class="col-md-6">
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">
+                          <span>Summary</span>
+                        </h3>
+                      </div>
+                      <div class="panel-body">
+                        <p>
+                          <span>
+                            Men's Varsity Football
+                            <br>
+                            Class of 2015
+                            <br>
+                            Cannot meet Wednesdays 3-5
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <div class="panel panel-default">
+                      <div class="panel-heading">
+                        <h3 class="panel-title">
+                          <span>Conditions</span>
+                        </h3>
+                      </div>
+                      <div class="panel-body">
+                        <p>
+                          <span>
+                            Stress reaction (left tibia)
+                            <br>
+                            Strain (left quadricep)
+                            <br>
+                            Stress reaction (right femur)
+                            <br>
+                            Scapholunate disassociation (right wrist)
+                          </span>
+                        </p>
+                      </div>
+                    </div>
+                    <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
+                    <div class="panel-group" id="accordion">
+                      <div class="panel panel-default" id="panel1">
+                        <div class="panel-heading">
+                          <h4 class="panel-title">
+                            <a data-toggle="collapse" data-target="#collapseOne" 
+                            href="#collapseOne" class="collapsed">
+                            Upcoming Appointments
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseOne" class="panel-collapse collapse in">
+                        <div class="panel-body">
+                          4/25/2014<br>
+                          4/27/2014
+                        </div>
+                      </div>
+                    </div>
+                    <div class="panel panel-default" id="panel2">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-target="#collapseTwo" 
+                          href="#collapseTwo" class="collapsed">
+                          Past Appointments
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        4/2/2014<br>
+                        3/27/2014
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="col-md-3">
+                <img data-src="holder.js/140x140/auto" alt="140x140" src="david_letterman.jpg"/>
+              </div>
+            </div>
+          </div>
         </div>
       </div>
+
     </div>
+  </div>
+</div>
 
     <!-- <div id="freedomList" class="container-fluid">
       <div class="row">
