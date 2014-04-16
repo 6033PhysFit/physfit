@@ -327,12 +327,12 @@ textarea {
 }
 
 #letterman_patient_view {
-  visibility: hidden;
+  visibility: visible;
   position: relative;
 }
 
 #starting_patient_view {
-  visibility: visible;
+  visibility: hidden;
   position: absolute;
 }
 .tab-content {
