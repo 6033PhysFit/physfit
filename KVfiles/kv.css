@@ -34,3 +34,16 @@ body {
 .navbar{
   border:none;
 }
+
+#letterman_patient_view {
+  visibility: hidden;
+  position: relative;
+}
+
+#starting_patient_view {
+  visibility: visible;
+  position: absolute;
+}
+.tab-content {
+  height: 100%;
+}

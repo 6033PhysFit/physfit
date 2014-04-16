@@ -84,7 +84,7 @@
                         <a id="today" class="btn">Today</a>
                       </div>
                       <div class="span2">
-                        <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
+                        <a id="prev_day" class="btn"></a><a id="next_day" class="btn"></a>
                       </div>
                       <div class="span3">
                         <input type="hidden" id="calendar_icon" />
@@ -113,19 +113,102 @@
                     <li><a href="#">Stephen Colbert</a></li>
                   </ul>
                 </div>
+                <div class="col-sm-9 col-md-10 main">
+                  <div id="starting_patient_view">
+                    <h1 class="page-header">Choose a Patient</h1>
+                    <span class="glyphicon glyphicon-hand-left" style="font-size:100px;"></span>
+                  </div>
+                  <div id="letterman_patient_view">
 
-                <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-
-                  <h1 class="page-header">Patient GOES HERE</h1>
-
-
+                    <h1 class="page-header">Letterman, David</h1>
+                    <div class="row">
+                      <div class="col-md-6">
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">
+                              <span>Summary</span>
+                            </h3>
+                          </div>
+                          <div class="panel-body">
+                            <p>
+                              <span>
+                                Men's Varsity Football
+                                <br>
+                                Class of 2015
+                                <br>
+                                Cannot meet Wednesdays 3-5
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <div class="panel panel-default">
+                          <div class="panel-heading">
+                            <h3 class="panel-title">
+                              <span>Conditions</span>
+                            </h3>
+                          </div>
+                          <div class="panel-body">
+                            <p>
+                              <span>
+                                Stress reaction (left tibia)
+                                <br>
+                                Strain (left quadricep)
+                                <br>
+                                Stress reaction (right femur)
+                                <br>
+                                Scapholunate disassociation (right wrist)
+                              </span>
+                            </p>
+                          </div>
+                        </div>
+                        <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
+                        <div class="panel-group" id="accordion">
+                          <div class="panel panel-default" id="panel1">
+                            <div class="panel-heading">
+                              <h4 class="panel-title">
+                                <a data-toggle="collapse" data-target="#collapseOne" 
+                                href="#collapseOne" class="collapsed">
+                                Upcoming Appointments
+                              </a>
+                            </h4>
+                          </div>
+                          <div id="collapseOne" class="panel-collapse collapse in">
+                            <div class="panel-body">
+                              4/25/2014<br>
+                              4/27/2014
+                            </div>
+                          </div>
+                        </div>
+                        <div class="panel panel-default" id="panel2">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-target="#collapseTwo" 
+                              href="#collapseTwo" class="collapsed">
+                              Past Appointments
+                            </a>
+                          </h4>
+                        </div>
+                        <div id="collapseTwo" class="panel-collapse collapse">
+                          <div class="panel-body">
+                            4/2/2014<br>
+                            3/27/2014
+                          </div>
+                        </div>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="col-md-3">
+                    <img data-src="holder.js/140x140/auto" alt="140x140" src="david_letterman.jpg"/>
+                  </div>
                 </div>
               </div>
             </div>
           </div>
+
         </div>
       </div>
     </div>
+
     <!-- <div id="freedomList" class="container-fluid">
       <div class="row">
         <div class="col-sm-3 col-md-2 sidebar">
@@ -153,4 +236,5 @@
 
 
 
-  </body></html>
+  </body>
+  </html>
