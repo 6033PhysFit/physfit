@@ -96,6 +96,8 @@ body {
 #appointmentList, #patientList{
   border-right: 2px solid #999;
   height:100vmax;
+  margin: 0px 0px 0px 0px;
+  padding-right: 0px;
 /*  min-height: 100%;
 */
 }
@@ -103,6 +105,22 @@ body {
   padding:0px;
 }
 
+div.time-heading-div{
+  width:100%;
+}
+li.appointment{
+  min-width:100%;
+  border-bottom: 1px solid #999;
+}
+p{
+  margin: 0px 0px 0px 0px;
+  padding:none;
+}
+
+p.time-heading{
+  font-weight:bold;
+  /*text-align:center;
+*/}
 .navbar{
   border:none;
   background-color: inherit;
