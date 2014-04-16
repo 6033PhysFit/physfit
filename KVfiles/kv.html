@@ -63,11 +63,6 @@ rel="stylesheet">
               <div class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
 
-                  <!--     appts[0] = new Appointment('ch', date_str, 10, 'Peter', 'Broken bone');
-    appts[1] = new Appointment('ev', date_str, 11, 'Lily', 'Running exercises');
-    appts[2] = new Appointment('hon', date_str, 12, 'John', 'Stretches');
-    appts[3] = new Appointment('hof', date_str, 10, 'Howard', 'Weights');
-    appts[4] = new Appointment('me', date_str, 11, 'Blake', 'Progress Report'); -->
                   <li class="sub"> 10 AM </li>
                   <li><a class="appointment" href="#">Johnny Carson</a></li>
                   <li><a class="appointment" href="#">David Letterman</a></li>
@@ -75,7 +70,6 @@ rel="stylesheet">
                   <li><a class="appointment" href="#">Stephen Colbert</a></li>
                   <li class="sub"> 11 AM </li>
                   <li class="sub"> 12 AM </li>
-
 
                 </ul>
               </div>
@@ -129,30 +123,41 @@ rel="stylesheet">
                   <h1 class="page-header">Letterman, David</h1>
                   <div class="row">
                     <div class="col-md-6">
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          <h3 class="panel-title">
-                            <span>Summary</span>
-                          </h3>
+                      <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
+                      <div class="panel-group" id="accordion">
+                        <div class="panel panel-default" id="panel-1">
+                          <div class="panel-heading">
+                            <h4 class="panel-title">
+                              <a data-toggle="collapse" data-target="#collapseMinusOne" 
+                              href="#collapseMinusOne" class="collapsed">
+                              Summary
+                            </a>
+                          </h4>
                         </div>
-                        <div class="panel-body">
-                          <p>
-                            <span>
-                              Men's Varsity Football
-                              <br>
-                              Class of 2015
-                              <br>
-                              Cannot meet Wednesdays 3-5
-                            </span>
-                          </p>
+                        <div id="collapseMinusOne" class="panel-collapse collapse in">
+                          <div class="panel-body">
+                            <p>
+                              <span>
+                                Men's Varsity Football
+                                <br>
+                                Class of 2015
+                                <br>
+                                Cannot meet Wednesdays 3-5
+                              </span>
+                            </p>
+                          </div>
                         </div>
                       </div>
-                      <div class="panel panel-default">
+                      <div class="panel panel-default" id="panel0">
                         <div class="panel-heading">
-                          <h3 class="panel-title">
-                            <span>Conditions</span>
-                          </h3>
-                        </div>
+                          <a data-toggle="collapse" data-target="#collapseZero" 
+                          href="#collapseZero" class="collapsed">
+                          <h4 class="panel-title">
+                            Conditions
+                          </a>
+                        </h4>
+                      </div>
+                      <div id="collapseZero" class="panel-collapse collapse">
                         <div class="panel-body">
                           <p>
                             <span>
@@ -167,54 +172,53 @@ rel="stylesheet">
                           </p>
                         </div>
                       </div>
-                      <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
-                      <div class="panel-group" id="accordion">
-                        <div class="panel panel-default" id="panel1">
-                          <div class="panel-heading">
-                            <h4 class="panel-title">
-                              <a data-toggle="collapse" data-target="#collapseOne" 
-                              href="#collapseOne" class="collapsed">
-                              Upcoming Appointments
-                            </a>
-                          </h4>
-                        </div>
-                        <div id="collapseOne" class="panel-collapse collapse in">
-                          <div class="panel-body">
-                            4/25/2014<br>
-                            4/27/2014
-                          </div>
-                        </div>
-                      </div>
-                      <div class="panel panel-default" id="panel2">
-                        <div class="panel-heading">
-                          <h4 class="panel-title">
-                            <a data-toggle="collapse" data-target="#collapseTwo" 
-                            href="#collapseTwo" class="collapsed">
-                            Past Appointments
-                          </a>
-                        </h4>
-                      </div>
-                      <div id="collapseTwo" class="panel-collapse collapse">
-                        <div class="panel-body">
-                          4/2/2014<br>
-                          3/27/2014
-                        </div>
+                    </div>
 
+                    <div class="panel panel-default" id="panel1">
+                      <div class="panel-heading">
+                        <h4 class="panel-title">
+                          <a data-toggle="collapse" data-target="#collapseOne" 
+                          href="#collapseOne" class="collapsed">
+                          Upcoming Appointments
+                        </a>
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse">
+                      <div class="panel-body">
+                        <span id="date425"><a href="#">4/25/2014</a></span><br>
+                        <span id="date427"><a href="#">4/27/2014</a></span>
                       </div>
                     </div>
                   </div>
-                </div>
-                <div class="col-md-3">
-                  <img data-src="holder.js/140x140/auto" alt="140x140" src="david_letterman.jpg"/>
+                  <div class="panel panel-default" id="panel2">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        <a data-toggle="collapse" data-target="#collapseTwo" 
+                        href="#collapseTwo" class="collapsed">
+                        Past Appointments
+                      </a>
+                    </h4>
+                  </div>
+                  <div id="collapseTwo" class="panel-collapse collapse">
+                    <div class="panel-body">
+                      <span id="date42"><a href="#">4/2/2014</a></span><br>
+                      <span id="date327"><a href="#">3/27/2014</a></span>
+                    </div>
+                  </div>
                 </div>
               </div>
             </div>
+            <div class="col-md-4">
+              <img data-src="holder.js/180x180/auto" alt="200x200" src="david_letterman.jpg"/>
+            </div>
           </div>
         </div>
-
       </div>
     </div>
+
   </div>
+</div>
+</div>
 
     <!-- <div id="freedomList" class="container-fluid">
       <div class="row">
@@ -243,12 +247,12 @@ rel="stylesheet">
 
 
 
-<!-- JAVASCRIPT FILES IMPORTED -->
-<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
-<script type="text/javascript" src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
-<script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
-<script type="text/javascript" src="kv.js"></script>
+    <!-- JAVASCRIPT FILES IMPORTED -->
+    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+    <script type="text/javascript" src="jquery-ui-1.10.4/js/jquery-ui-1.10.4.min.js"></script>
+    <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
+    <script type="text/javascript" src="kv.js"></script>
 
-<script type="text/javascript" src="timepicker/jquery.ui.timepicker.js"></script>
+    <script type="text/javascript" src="timepicker/jquery.ui.timepicker.js"></script>
   </body>
   </html>
