@@ -18,8 +18,10 @@ $(document).ready(function(){
         });
 
     $("a.patient").click(function(){
-        $("#starting_patient_view").hide();
-
+        // $("#starting_patient_view").hide();
+        $("#starting_patient_view").css("visibility", "hidden");
+        $("#letterman_patient_view").css("visibility", "visible");
+   
         // $("#letterman_patient_view").show();
     });
 
