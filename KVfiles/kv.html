@@ -1,23 +1,23 @@
 <!DOCTYPE html>
 <!-- saved from url=(0048)file:///Users/keertankini/Desktop/Dashboard.html -->
 <html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <meta name="description" content="">
-    <meta name="author" content="">
-    <link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.ico">
+<meta charset="utf-8">
+<meta http-equiv="X-UA-Compatible" content="IE=edge">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="">
+<meta name="author" content="">
+<link rel="shortcut icon" href="http://getbootstrap.com/assets/ico/favicon.ico">
 
-    <title>PhysFit</title>
+<title>PhysFit</title>
 
-    <!--<script type="text/javascript" src="Resources/jquery-1.9.0.min.js"></script>-->
+<!--<script type="text/javascript" src="Resources/jquery-1.9.0.min.js"></script>-->
 
-    <script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
+<script src="http://code.jquery.com/jquery-1.11.0.min.js"></script>
     <!--
     <script src="Resources/jquery-ui-1.10.0.custom.min.js"></script>-->
     <script src="http://netdna.bootstrapcdn.com/bootstrap/3.0.0/js/bootstrap.min.js"></script>
 
- 
+
     <script type="text/javascript" src="kv.js"></script>
 
 
@@ -25,7 +25,7 @@
 
     <!-- Bootstrap core CSS -->
     <link href="http://getbootstrap.com/dist/css/bootstrap.css" rel="stylesheet">
-<!--     <link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap2.2.css" rel="stylesheet">  -->
+    <!--     <link href="/twitter-bootstrap/twitter-bootstrap-v2/docs/assets/css/bootstrap2.2.css" rel="stylesheet">  -->
 
     <link href="http://ajax.googleapis.com/ajax/libs/jqueryui/1.10.0/themes/base/jquery-ui.css"
     rel="stylesheet">
@@ -33,20 +33,20 @@
     <!-- Custom styles for this template -->
     <link type="text/css" href="kv.css" rel="stylesheet">
 
-  <style id="holderjs-style" type="text/css"></style></head>
+    <style id="holderjs-style" type="text/css"></style></head>
 
-  <body style="">
+    <body style="">
 
-    <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
-      <div class="container-fluid">
-        <div class="navbar-header">
-          <a class="navbar-brand" href="#">PhysFit</a>
-        </div>
+      <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
+        <div class="container-fluid">
+          <div class="navbar-header">
+            <a class="navbar-brand" href="#">PhysFit</a>
+          </div>
 
 
-        <div class="pull-right center">
-<!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button id="notification" class="btn btn-warning btn-sm">           <span class="glyphicon glyphicon-bell"></span>
-        </button>
+          <div class="pull-right center">
+            <!--           <img id="notificationImg" src="./favicon.ico" ></img> -->      <button id="notification" class="btn btn-warning btn-sm">           <span class="glyphicon glyphicon-bell"></span>
+          </button>
           
         </div>
       </div>
@@ -54,11 +54,11 @@
 
     <div class="navbar navbar-inverse navbar-top" role="navigation">
       <div class="container-fluid lowerbar">
-          <div id="tabContainer" class="tabbable">
-              <ul id="actualTabs" class="nav nav-tabs">
-                <li class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
-                <li ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
-              </ul>
+        <div id="tabContainer" class="tabbable">
+          <ul id="actualTabs" class="nav nav-tabs">
+            <li class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
+            <li ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
+          </ul>
 
           <div class="tab-content" id="tabs">
             <div id="nameList" class="tab-pane fade active in">
@@ -76,7 +76,26 @@
                 </div>
 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                  <h1 class="page-header">CALENDAR GOES HERE</h1>
+                  <div id="calendar_view" class="hero-unit">
+                    <h1 id="cal_title">Calendar</h1>
+                    <hr>
+                    <div id="navbar" class="row">
+                      <div class="span2">
+                        <a id="today" class="btn">Today</a>
+                      </div>
+                      <div class="span2">
+                        <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
+                      </div>
+                      <div class="span3">
+                        <input type="hidden" id="calendar_icon" />
+                        <span id="view_date"></span>
+                      </div>
+                      <div class="offset2 span3">
+                        <button class="btn btn-success" id="add_appt">Add Appointment</button>
+                      </div>
+                    </div>
+                    <br>
+                  </div>
                 </div>
               </div>
             </div>
@@ -96,27 +115,9 @@
                 </div>
 
                 <div class="col-sm-9 col-sm-offset-3 col-md-10 col-md-offset-2 main">
-                    
-    <div id="calendar_view" class="hero-unit">
-      <h1 id="cal_title">Calendar</h1>
-      <hr>
-      <div id="navbar" class="row">
-        <div class="span2">
-          <a id="today" class="btn">Today</a>
-        </div>
-        <div class="span2">
-          <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
-        </div>
-        <div class="span3">
-          <input type="hidden" id="calendar_icon" />
-          <span id="view_date"></span>
-        </div>
-        <div class="offset2 span3">
-          <button class="btn btn-success" id="add_appt">Add Appointment</button>
-        </div>
-      </div>
-      <br>
-    </div>
+
+                  <h1 class="page-header">Patient GOES HERE</h1>
+
 
                 </div>
               </div>
@@ -149,7 +150,7 @@
     <!-- Bootstrap core JavaScript
     ================================================== -->
     <!-- Placed at the end of the document so the pages load faster -->
-  
-  
 
-</body></html>
+
+
+  </body></html>
