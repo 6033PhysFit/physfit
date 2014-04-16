@@ -17,6 +17,12 @@ $(document).ready(function(){
           $(this).tab('show');
         });
 
+    $("a.patient").click(function(){
+        $("#starting_patient_view").hide();
+
+        // $("#letterman_patient_view").show();
+    });
+
     // set view date to current
     view_date = new Date();
     var date_str = $.datepicker.formatDate('yy/mm/dd', view_date);
