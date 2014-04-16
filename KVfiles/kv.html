@@ -25,11 +25,11 @@ rel="stylesheet">
 <link href="jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet">
 <link href="timepicker/jquery.ui.timepicker.css" rel="stylesheet">
 <!-- <link href="calendar.css" rel="stylesheet" type="text/css"> -->
-
+<style id="holderjs-style" type="text/css"></style>
 <!-- Custom styles for this template -->
 <link type="text/css" href="kv.css" rel="stylesheet">
 
-<style id="holderjs-style" type="text/css"></style></head>
+</head>
 
 <body style="">
 
@@ -41,7 +41,7 @@ rel="stylesheet">
 
 
       <div class="pull-right center">
-        <button id="notification" class="btn btn-warning btn-sm">
+        <button id="notification" class="btn btn-sm">
           <span class="glyphicon glyphicon-bell"></span>
         </button>
 
@@ -53,8 +53,8 @@ rel="stylesheet">
     <div class="container-fluid lowerbar">
       <div id="tabContainer" class="tabbable">
         <ul id="actualTabs" class="nav nav-tabs">
-          <li class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
-          <li ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
+          <li id="calendarTab" class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
+          <li id="patientTab" ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
         </ul>
 
         <div class="tab-content" id="tabs">
@@ -69,10 +69,10 @@ rel="stylesheet">
     appts[3] = new Appointment('hof', date_str, 10, 'Howard', 'Weights');
     appts[4] = new Appointment('me', date_str, 11, 'Blake', 'Progress Report'); -->
                   <li class="sub"> 10 AM </li>
-                  <li><a class="patient" href="#">Johnny Carson</a></li>
-                  <li><a class="patient" href="#">David Letterman</a></li>
-                  <li><a class="patient" href="#">Jimmy Fallon</a></li>
-                  <li><a class="patient" href="#">Stephen Colbert</a></li>
+                  <li><a class="appointment" href="#">Johnny Carson</a></li>
+                  <li><a class="appointment" href="#">David Letterman</a></li>
+                  <li><a class="appointment" href="#">Jimmy Fallon</a></li>
+                  <li><a class="appointment" href="#">Stephen Colbert</a></li>
                   <li class="sub"> 11 AM </li>
                   <li class="sub"> 12 AM </li>
 

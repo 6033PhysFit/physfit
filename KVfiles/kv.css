@@ -14,18 +14,61 @@ body {
 
 .glyphicon{
   font-size:3em;
-  color:red;
+  color: red;
 }
 
 #tabs {
     width: 100%;
     border:none;
+    background-color: #EEE;
+    color: #999;
+}
+/*#calendarTab:hover{
+  color:#999;
+  }
+#patientTab:hover{
+  color:#999;
+
+}*/
+.navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
+  /*color:#EEE;*/
+  color:#999;
+  background-color:#ccc;
+
 }
 
 #notificationImg{
   width : 50px;
   height: 50px;
 }
+
+#notification{
+    background-color : #F5F5F5;
+    box-shadow: 1px 1px 1px #999 inherit;
+    border-style:solid;
+    border-width:1px;
+    border-color:#999;
+
+
+}
+.navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand:hover{
+  color:#999;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav>li>a {
+  text-shadow: none;
+}
+
+.navbar-inverse .brand, .navbar-inverse .nav>li>a:hover {
+  color:#999;
+  background-color:#F5F5F5;
+}
+
+
+#notification:hover { 
+  background-color: #CCC; 
+}
+
 .navbar-fixed-top{
   border-style:solid;
   border-width:5px;
@@ -33,7 +76,6 @@ body {
 }
 .navbar-brand{
   font-size: 2em;
-  color:black;
 }
 
 .container-fluid, .lowerbar{
