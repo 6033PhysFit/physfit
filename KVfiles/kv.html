@@ -39,7 +39,7 @@ rel="stylesheet">
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
-        <a class="navbar-brand" href="#">PhysFit</a>
+        <a class="navbar-brand" href="#" id="logo">PhysFit</a>
       </div>
 
 
@@ -63,12 +63,6 @@ rel="stylesheet">
             <div id="nameRow" class="row">
               <div id="appointmentList" class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
-
-                  <!--     appts[0] = new Appointment('ch', date_str, 10, 'Peter', 'Broken bone');
-    appts[1] = new Appointment('ev', date_str, 11, 'Lily', 'Running exercises');
-    appts[2] = new Appointment('hon', date_str, 12, 'John', 'Stretches');
-    appts[3] = new Appointment('hof', date_str, 10, 'Howard', 'Weights');
-    appts[4] = new Appointment('me', date_str, 11, 'Blake', 'Progress Report'); -->
                   <li class="sub appointment"><div class="col-sm-12"><p class="time-heading">9 AM</p></div></li>
 
                   <li class="sub appointment"><div class="col-sm-12"><p class="time-heading">10 AM</p></div></li>
@@ -90,7 +84,7 @@ rel="stylesheet">
               </div>
               <div class="col-sm-9 col-md-10 main"> 
                 <div id="calendar_view" class="hero-unit">
-                  <h1 id="cal_title">Calendar</h1>
+                  <h1 id="cal_title" class="page-header">Calendar</h1>
                   <hr>
                   <div id="navbar" class="row">
                     <div class="span2">
@@ -103,7 +97,7 @@ rel="stylesheet">
                       <input type="hidden" id="calendar_icon" />
                       <span id="view_date"></span>
                     </div>
-                    <div class="offset2 span3">
+                    <div class="offset5 span3">
                       <button class="btn btn-success" id="add_appt">Add Appointment</button>
                     </div>
                   </div>
@@ -120,7 +114,7 @@ rel="stylesheet">
               <div id="patientList"class="col-sm-3 col-md-2 sidebar">
                 <ul class="nav nav-sidebar">
                   <li>       
-                    <input type="text" class="form-control" placeholder="Search...">
+                    <input type="text" class="form-control" id="searchBar" placeholder="Search...">
                   </li>
                   <li><a class="patient" href="#">Johnny Carson</a></li>
                   <li><a class="patient" href="#">David Letterman</a></li>
@@ -128,14 +122,14 @@ rel="stylesheet">
                   <li><a class="patient" href="#">Stephen Colbert</a></li>
                 </ul>
               </div>
-              <div class="col-sm-9 col-md-10 main">
+              <div class="col-sm-9 col-md-10 main" id="freedommain">
                 <div id="starting_patient_view">
-                  <h1 class="page-header">Choose a Patient</h1>
-                  <span class="glyphicon glyphicon-hand-left" style="font-size:100px;"></span>
+                  <h1 class="page-header" id="title2">Choose a Patient</h1>
+                  <span class="glyphicon glyphicon-hand-left" style="font-size:100px;" id="hand"></span>
                 </div>
                 <div id="letterman_patient_view">
 
-                  <h1 class="page-header">Letterman, David</h1>
+                  <h1 class="page-header" id="title1">Letterman, David</h1>
                   <div class="row">
                     <div class="col-md-6">
                       <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
@@ -224,7 +218,7 @@ rel="stylesheet">
               </div>
             </div>
             <div class="col-md-4">
-              <img data-src="holder.js/180x180/auto" alt="200x200" src="david_letterman.jpg"/>
+              <img data-src="holder.js/250x250/auto" alt="250x250" src="david_letterman.jpg"/>
             </div>
           </div>
         </div>

@@ -3,14 +3,10 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-html{
-  /*height:100%;*/
-}
 body {
   font-size: 1.5em;
   padding-top: 50px;
   background-color: #EEE;
-  /*height:100%;*/
 }
 .sub {
   font-size: 1em;
@@ -95,12 +91,16 @@ body {
 
 #appointmentList, #patientList{
   border-right: 2px solid #999;
-  height:100vmax;
+  height:80vmax;
   margin: 0px 0px 0px 0px;
   padding-right: 0px;
-/*  min-height: 100%;
-*/
 }
+
+#patientList {
+  height:41vmax;
+  /*do not touch. ask ashley why.*/
+}
+
 .lowerbar{
   padding:0px;
 }
@@ -112,6 +112,10 @@ li.appointment{
   min-width:100%;
   border-bottom: 1px solid #999;
 }
+a.patient {
+  width: 242px;
+  border-bottom: 1px solid #999;
+}
 p{
   margin: 0px 0px 0px 0px;
   padding:none;
@@ -119,8 +123,8 @@ p{
 
 p.time-heading{
   font-weight:bold;
-  /*text-align:center;
-*/}
+  /*text-align:center;*/
+}
 .navbar{
   border:none;
   background-color: inherit;
@@ -146,6 +150,7 @@ textarea {
 
 #schedule_view {
   background-color: #DDDDDD;
+  margin-left: 0px;
 }
 
 .hour_row {
@@ -429,10 +434,46 @@ textarea {
   visibility: visible;
   position: absolute;
 }
-.tab-content {
-  height: 100%;
-}
 
 .popover {
   z-index: 10000;
+}
+
+#calendar_view {
+  padding-top:0px;
+  margin-top:0px;
+}
+
+#cal_title, #title1, #title2 {
+  font-size: 45px;
+}
+
+#freedommain {
+  padding-left: 76px;
+}
+
+#hand {
+  padding-left: 125px;
+}
+
+#logo {
+  margin-top: 2px;
+  margin-left: 0px;
+}
+
+#tabContainer {
+  margin-top: 15px;
+}
+#nameRow, #freedomRow {
+  padding-top: 20px;
+}
+#searchBar {
+  margin-left: 10px;
+  width:232px;
+  padding:5px;
+  padding-top:15px;
+  padding-bottom: 15px;
+}
+#add_appt {
+  margin-left: 95px;
 }
