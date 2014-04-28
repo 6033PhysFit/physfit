@@ -80,9 +80,10 @@ $(document).ready(function(){
 
 
 // insert a certain appointment appt into the DOM
+// TO DO: insert line break
 var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='span2 appt_elem'>");
-    apptElement.text(appt.to_string());
+    apptElement.text(appt.to_string() + "\n" + appt.patient_name);
     if(appt.kind == "ch"){
         apptElement.prepend($("<i class='icon-ok icon-white'></i>"));
     } else if(appt.kind == "ev"){
