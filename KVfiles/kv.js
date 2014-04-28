@@ -81,6 +81,7 @@ $(document).ready(function(){
 
 
 // insert a certain appointment appt into the DOM
+// TO DO: Bigger icons
 var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='span2 appt_elem'>");
     apptElement.html(appt.to_string());
@@ -263,6 +264,7 @@ function _lightbox_appt(appt){
 }
 
 // TO DO: Align radio buttons.
+// TO DO: Verify correctness of information after submission.
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title'>Create a New Appointment</div>"));
@@ -322,6 +324,7 @@ function _lightbox_new(){
 // display the lightbox for a certain jQuery DOM element content
 // content = DOM element
 // top = px from top
+// TO DO: remove appt
 function _lightbox(content, top){
 
     // add lightbox/shadow <div/>'s if not previously added
