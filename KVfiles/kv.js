@@ -80,10 +80,9 @@ $(document).ready(function(){
 
 
 // insert a certain appointment appt into the DOM
-// TO DO: insert line break
 var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='span2 appt_elem'>");
-    apptElement.text(appt.to_string() + "\n" + appt.patient_name);
+    apptElement.html(appt.to_string());
     if(appt.kind == "ch"){
         apptElement.prepend($("<i class='icon-ok icon-white'></i>"));
     } else if(appt.kind == "ev"){
@@ -138,18 +137,23 @@ var Appointment = function(kind, date, hour, patient_name, notes){
     this.notes = notes;
     this.appt_id = appt_id;
     this.to_string = function(){
+        var s = "<span>";
         if(this.kind == "ch"){
-            return "Check-In";
+            s += "Check-In";
         } else if(this.kind == "ev"){
-            return "Evaluation";
+            s += "Evaluation";
         } else if(this.kind == "hon"){
-            return "Hands-On";
+            s += "Hands-On";
         } else if(this.kind == "hof"){
-            return "Hands-Off";
+            s += "Hands-Off";
         } else if(this.kind == "me"){
-            return "Meeting";
+            s += "Meeting";
+        } else {
+            s += "Other";
         }
-        return "Other"
+
+        s += "</span><br><span>" + this.patient_name + "</span>";
+        return s;
     }
 
     // INSERT INTO DATABASE
