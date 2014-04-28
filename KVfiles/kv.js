@@ -202,16 +202,18 @@ var _make_hour_element = function(i){
     var hour_div = $("<div class='row hour_row'>");
     hour_div.id = 'hour_'+i;
 
+    // TO DO: WHY POINTER?
 
     hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
 
-    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
+    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%;'>");
 
     hour_div.prepend($("<div class='span1 hour_label'>").append(hour_label));
     hour_div.append(hour_inner_ul);
     return hour_div;
 }
 
+// TO DO: radio vs dropdown for appt type
 // display the lightbox for a certain Appointment object appt
 function _lightbox_appt(appt){
 
@@ -256,6 +258,7 @@ function _lightbox_appt(appt){
     });
 }
 
+// TO DO: Align radio buttons.
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title'>Create a New Appointment</div>"));
