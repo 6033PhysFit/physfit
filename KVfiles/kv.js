@@ -2,6 +2,7 @@ var appt_id;
 var appts = {};
 var view_date;
 
+// TO DO: HUGGGGGGEEE DELETE APPOINTMENT FUNCTION
 $(document).ready(function(){
     appt_id = 0;
     _put_hours_list(9,17);
@@ -189,6 +190,8 @@ var _readable_hour = function(i){
 // Draws the hours list in the calendar view.
 // start = earliest hour desired to view (0-23)
 // end = latest hour desired to view (0-23)
+
+// TO DO: change formatting because it is off
 var _put_hours_list = function(start, end){
     var hour_ul = $("<ul id='schedule_view'>");
     for(var i=start;i<end;i++){
@@ -215,6 +218,7 @@ var _make_hour_element = function(i){
 
 // TO DO: radio vs dropdown for appt type
 // display the lightbox for a certain Appointment object appt
+// TO DO: change to "edit appointment", deal with cancel button (people are confused by what it does)
 function _lightbox_appt(appt){
 
     var content = $("<div id='innerbox' />");

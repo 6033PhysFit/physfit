@@ -3,10 +3,13 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+/*TO DO: align all of the things*/
 body {
   font-size: 1.5em;
   padding-top: 50px;
   background-color: #EEE;
+
+  /* TO DO: change background color */
 }
 .sub {
   font-size: 1em;
@@ -17,6 +20,7 @@ body {
   font-size:3em;
   color: red;
 }
+/*TO DO: make them responsive (not red when no notifications)*/
 
 #tabs {
     width: 100%;
@@ -30,6 +34,7 @@ body {
 #patientTab:hover{
   color:#999;
 
+  TO DO: change tab colors?;
 }*/
 .navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
   /*color:#EEE;*/
@@ -169,6 +174,7 @@ textarea {
   margin-left: 5px;
 }
 
+/*TO DO: add responsiveness to hovering for calendar icon*/
 #calendar_icon:hover {
   cursor: pointer;
 }
@@ -223,6 +229,7 @@ textarea {
   text-align: right;
 }
 
+/*TO DO: change appt box colors*/
 .ch {
   -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
   -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
@@ -429,6 +436,8 @@ textarea {
   visibility: hidden;
   position: relative;
 }
+
+/* TO DO: Make patient view collapsibility more obvious (add little arrow to drop downs)*/
 
 #starting_patient_view {
   visibility: visible;
