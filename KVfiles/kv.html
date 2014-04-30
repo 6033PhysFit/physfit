@@ -36,7 +36,6 @@ rel="stylesheet">
 
 <body style="">
 
-  <!-- TO DO: TOP BAR HAS TOO HIGH Z-INDEX -->
   <div class="navbar navbar-inverse navbar-fixed-top" role="navigation">
     <div class="container-fluid">
       <div class="navbar-header">
@@ -45,7 +44,7 @@ rel="stylesheet">
 
 
       <div class="pull-right center" id="notificationDiv">
-        <!-- TO DO: this should not be hardcoded -->
+        <!-- TO DO: (INSERT BACKEND REQUEST FOR DATA-CONTENT) -->
          <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
            <span class="glyphicon glyphicon-bell"></span>        </button>
       </div>
@@ -59,17 +58,13 @@ rel="stylesheet">
           <li id="calendarTab" class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
           <li id="patientTab" ><a href="#freedomList" data-toggle="tab">Patient View</a></li>
         </ul>
-        <!-- TO DO: make calendar fit on one page-->
         <div class="tab-content" id="tabs">
           <div id="nameList" class="tab-pane fade active in">
             <div id="nameRow" class="row">
               <div class="col-sm-9 col-md-10 main"> 
                 <div id="calendar_view" class="hero-unit">
-                  <h1 id="cal_title" class="page-header">Calendar</h1>
-                  <hr>
                   <div id="navbar" class="row">
                     <div class="span2">
-                      <!-- TO DO: Grey 'Today' when Today -->
                       <a id="today" class="btn">Today</a>
                     </div>
                     <div class="span2">
@@ -80,7 +75,7 @@ rel="stylesheet">
                       <span id="view_date"></span>
                     </div>
                     <div class="offset5 span3">
-                      <button class="btn btn-success" id="add_appt">Add Appointment</button> <!-- TO DO: bootstrap resizing -->
+                      <button class="btn btn-success" id="add_appt">Add Appointment</button>
                     </div>
                   </div>
                   <br>
@@ -121,7 +116,7 @@ rel="stylesheet">
                             <h4 class="panel-title">
                               <a data-toggle="collapse" data-target="#collapseMinusOne" 
                               href="#collapseMinusOne" class="collapsed">
-                              Summary
+                              Summary &#9660;
                             </a>
                           </h4>
                         </div>
@@ -144,7 +139,7 @@ rel="stylesheet">
                           <a data-toggle="collapse" data-target="#collapseZero" 
                           href="#collapseZero" class="collapsed">
                           <h4 class="panel-title">
-                            Conditions
+                            Conditions &#9660;
                           </a>
                         </h4>
                       </div>
@@ -170,7 +165,7 @@ rel="stylesheet">
                         <h4 class="panel-title">
                           <a data-toggle="collapse" data-target="#collapseOne" 
                           href="#collapseOne" class="collapsed">
-                          Upcoming Appointments
+                          Upcoming Appointments &#9660;
                         </a>
                       </h4>
                     </div>
@@ -186,7 +181,7 @@ rel="stylesheet">
                       <h4 class="panel-title">
                         <a data-toggle="collapse" data-target="#collapseTwo" 
                         href="#collapseTwo" class="collapsed">
-                        Past Appointments
+                        Past Appointments &#9660;
                       </a>
                     </h4>
                   </div>
