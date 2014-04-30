@@ -82,7 +82,7 @@ $(document).ready(function(){
 
 // insert a certain appointment appt into the DOM
 var insert_appt = function(appt){
-    var apptElement = $("<div id='appt"+appt.appt_id+"' class='span2 appt_elem'>");
+    var apptElement = $("<div id='appt"+appt.appt_id+"' class='appt_elem'>");
     apptElement.html(appt.to_string());
     if(appt.kind == "ch"){
         apptElement.prepend($("<i class='icon-ok icon-white'></i>"));
@@ -206,7 +206,7 @@ var _make_hour_element = function(i){
     hour_div.id = 'hour_'+i;
 
 
-    hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
+    hour_label = $("<label class='label pull-left'>"+_readable_hour(i)+"</label>");
 
     var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
 

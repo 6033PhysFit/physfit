@@ -24,6 +24,7 @@ rel="stylesheet">
 <!-- <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" media="screen"> -->
 <link href="jquery-ui-1.10.4/css/ui-lightness/jquery-ui-1.10.4.min.css" rel="stylesheet">
 <link href="timepicker/jquery.ui.timepicker.css" rel="stylesheet">
+<link href='http://fonts.googleapis.com/css?family=Open+Sans:300' rel='stylesheet' type='text/css'>
 <!-- <link href="calendar.css" rel="stylesheet" type="text/css"> -->
 <style id="holderjs-style" type="text/css"></style>
 <!-- Custom styles for this template -->
@@ -60,25 +61,16 @@ rel="stylesheet">
         <!-- TO DO: make calendar fit on one page-->
         <div class="tab-content" id="tabs">
           <div id="nameList" class="tab-pane fade active in">
-            <div id="nameRow" class="row">
-              <div class="col-sm-9 col-md-10 main"> 
-                <div id="calendar_view" class="hero-unit">
-                  <h1 id="cal_title" class="page-header">Calendar</h1>
-                  <hr>
-                  <div id="navbar" class="row">
-                    <div class="span2">
-                      <a id="today" class="btn">Today</a>
-                    </div>
-                    <div class="span2">
-                      <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
-                    </div>
-                    <div class="span3">
-                      <input type="hidden" id="calendar_icon" />
-                      <span id="view_date"></span>
-                    </div>
-                    <div class="offset5 span3">
-                      <button class="btn btn-success" id="add_appt">Add Appointment</button> <!-- TO DO: bootstrap resizing -->
-                    </div>
+            <div id="nameRow" class="row-fluid">
+              <div class="main"> <!--VK-->
+                <div id="calendar_view" class="span12 hero-unit"> <!--VK-->
+                  <h1 id="cal_title" class="page-header">Calendar</h1> <!--VK-->
+                  <div id="navbar" class="row-fluid">
+                    <a id="today" class="btn">Today</a>
+                    <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
+                    <input type="hidden" id="calendar_icon"/>
+                    <span id="view_date"></span><!--VK-->
+                    <button class="btn btn-success pull-right" id="add_appt">Add Appointment</button> <!-- TO DO: bootstrap resizing -->
                   </div>
                   <br>
                 </div>
@@ -86,11 +78,9 @@ rel="stylesheet">
             </div>
           </div>
 
-
-
           <div id="freedomList" class="tab-pane">
-            <div id = "freedomRow" class="row">
-              <div id="patientList"class="col-sm-3 col-md-2 sidebar">
+            <div id = "freedomRow" class="row-fluid">
+              <div id="patientList"class="col-sm-3 sidebar"> <!--VK-->
                 <ul class="nav nav-sidebar">
                   <li>       
                     <input type="text" class="form-control" id="searchBar" placeholder="Search...">
@@ -101,7 +91,7 @@ rel="stylesheet">
                   <li><a class="patient" href="#">Stephen Colbert</a></li>
                 </ul>
               </div>
-              <div class="col-sm-9 col-md-10 main" id="freedommain">
+              <div class="col-sm-9 main" id="freedommain"> <!--VK-->
                 <div id="starting_patient_view">
                   <h1 class="page-header" id="title2">Choose a Patient</h1>
                   <span class="glyphicon glyphicon-hand-left" style="font-size:100px;" id="hand"></span>
@@ -109,7 +99,7 @@ rel="stylesheet">
                 <div id="letterman_patient_view">
 
                   <h1 class="page-header" id="title1">Letterman, David</h1>
-                  <div class="row">
+                  <div class="row-fluid">
                     <div class="col-md-6">
                       <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
                       <div class="panel-group" id="accordion">
