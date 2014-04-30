@@ -2,6 +2,7 @@ var appt_id;
 var appts = {};
 var view_date;
 
+// TO DO: HUGGGGGGEEE DELETE APPOINTMENT FUNCTION
 $(document).ready(function(){
     Parse.initialize("ACgcVmi7NIsZZMBO4kjKXBiJ9W91CRo5exB1aydL", "sEQY6C57HTZ7PGG2wrIwh7sRXasumLxI0OvinNhC");
 
@@ -18,6 +19,8 @@ $(document).ready(function(){
       e.preventDefault();
       $(this).tab('show');
   });
+
+    $('#popovergoddamit').popover('hide');
 
     $("a.patient").click(function(){
         // $("#starting_patient_view").hide();
@@ -80,9 +83,10 @@ $(document).ready(function(){
 
 
 // insert a certain appointment appt into the DOM
+// TO DO: Bigger icons
 var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='span2 appt_elem'>");
-    apptElement.text(appt.to_string());
+    apptElement.html(appt.to_string());
     if(appt.kind == "ch"){
         apptElement.prepend($("<i class='icon-ok icon-white'></i>"));
     } else if(appt.kind == "ev"){
@@ -137,18 +141,23 @@ var Appointment = function(kind, date, hour, patient_name, notes){
     this.notes = notes;
     this.appt_id = appt_id;
     this.to_string = function(){
+        var s = "<span>";
         if(this.kind == "ch"){
-            return "Check-In";
+            s += "Check-In";
         } else if(this.kind == "ev"){
-            return "Evaluation";
+            s += "Evaluation";
         } else if(this.kind == "hon"){
-            return "Hands-On";
+            s += "Hands-On";
         } else if(this.kind == "hof"){
-            return "Hands-Off";
+            s += "Hands-Off";
         } else if(this.kind == "me"){
-            return "Meeting";
+            s += "Meeting";
+        } else {
+            s += "Other";
         }
-        return "Other"
+
+        s += "</span><br><span>" + this.patient_name + "</span>";
+        return s;
     }
 
     // INSERT INTO DATABASE
@@ -184,6 +193,8 @@ var _readable_hour = function(i){
 // Draws the hours list in the calendar view.
 // start = earliest hour desired to view (0-23)
 // end = latest hour desired to view (0-23)
+
+// TO DO: change formatting because it is off
 var _put_hours_list = function(start, end){
     var hour_ul = $("<ul id='schedule_view'>");
     for(var i=start;i<end;i++){
@@ -197,17 +208,20 @@ var _make_hour_element = function(i){
     var hour_div = $("<div class='row hour_row'>");
     hour_div.id = 'hour_'+i;
 
+    // TO DO: WHY POINTER?
 
     hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
 
-    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
+    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%;'>");
 
     hour_div.prepend($("<div class='span1 hour_label'>").append(hour_label));
     hour_div.append(hour_inner_ul);
     return hour_div;
 }
 
+// TO DO: radio vs dropdown for appt type
 // display the lightbox for a certain Appointment object appt
+// TO DO: change to "edit appointment", deal with cancel button (people are confused by what it does)
 function _lightbox_appt(appt){
 
     var content = $("<div id='innerbox' />");
@@ -251,6 +265,8 @@ function _lightbox_appt(appt){
     });
 }
 
+// TO DO: Align radio buttons.
+// TO DO: Verify correctness of information after submission.
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title'>Create a New Appointment</div>"));
@@ -310,6 +326,7 @@ function _lightbox_new(){
 // display the lightbox for a certain jQuery DOM element content
 // content = DOM element
 // top = px from top
+// TO DO: remove appt
 function _lightbox(content, top){
 
     // add lightbox/shadow <div/>'s if not previously added

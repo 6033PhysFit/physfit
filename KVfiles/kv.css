@@ -3,14 +3,13 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-html{
-  /*height:100%;*/
-}
+/*TO DO: align all of the things*/
 body {
   font-size: 1.5em;
   padding-top: 50px;
   background-color: #EEE;
-  /*height:100%;*/
+
+  /* TO DO: change background color */
 }
 .sub {
   font-size: 1em;
@@ -21,6 +20,7 @@ body {
   font-size:3em;
   color: red;
 }
+/*TO DO: make them responsive (not red when no notifications)*/
 
 #tabs {
     width: 100%;
@@ -34,6 +34,7 @@ body {
 #patientTab:hover{
   color:#999;
 
+  TO DO: change tab colors?;
 }*/
 .navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
   /*color:#EEE;*/
@@ -95,12 +96,16 @@ body {
 
 #appointmentList, #patientList{
   border-right: 2px solid #999;
-  height:100vmax;
+  height:80vmax;
   margin: 0px 0px 0px 0px;
   padding-right: 0px;
-/*  min-height: 100%;
-*/
 }
+
+#patientList {
+  height:41vmax;
+  /*do not touch. ask ashley why.*/
+}
+
 .lowerbar{
   padding:0px;
 }
@@ -112,6 +117,10 @@ li.appointment{
   min-width:100%;
   border-bottom: 1px solid #999;
 }
+a.patient {
+  width: 242px;
+  border-bottom: 1px solid #999;
+}
 p{
   margin: 0px 0px 0px 0px;
   padding:none;
@@ -119,8 +128,8 @@ p{
 
 p.time-heading{
   font-weight:bold;
-  /*text-align:center;
-*/}
+  /*text-align:center;*/
+}
 .navbar{
   border:none;
   background-color: inherit;
@@ -146,6 +155,7 @@ textarea {
 
 #schedule_view {
   background-color: #DDDDDD;
+  margin-left: 0px;
 }
 
 .hour_row {
@@ -164,6 +174,7 @@ textarea {
   margin-left: 5px;
 }
 
+/*TO DO: add responsiveness to hovering for calendar icon*/
 #calendar_icon:hover {
   cursor: pointer;
 }
@@ -218,6 +229,7 @@ textarea {
   text-align: right;
 }
 
+/*TO DO: change appt box colors*/
 .ch {
   -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
   -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
@@ -425,10 +437,52 @@ textarea {
   position: relative;
 }
 
+/* TO DO: Make patient view collapsibility more obvious (add little arrow to drop downs)*/
+
 #starting_patient_view {
   visibility: visible;
   position: absolute;
 }
-.tab-content {
-  height: 100%;
+
+.popover {
+  z-index: 10000;
+}
+
+#calendar_view {
+  padding-top:0px;
+  margin-top:0px;
+}
+
+#cal_title, #title1, #title2 {
+  font-size: 45px;
+}
+
+#freedommain {
+  padding-left: 76px;
+}
+
+#hand {
+  padding-left: 125px;
+}
+
+#logo {
+  margin-top: 2px;
+  margin-left: 0px;
+}
+
+#tabContainer {
+  margin-top: 15px;
+}
+#nameRow, #freedomRow {
+  padding-top: 20px;
+}
+#searchBar {
+  margin-left: 10px;
+  width:232px;
+  padding:5px;
+  padding-top:15px;
+  padding-bottom: 15px;
+}
+#add_appt {
+  margin-left: 95px;
 }
