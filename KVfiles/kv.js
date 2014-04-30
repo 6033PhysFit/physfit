@@ -1,11 +1,14 @@
 var appt_id;
 var appts = {};
 var view_date;
+var start_hour;
+var end_hour;
 
-// TO DO: HUGGGGGGEEE DELETE APPOINTMENT FUNCTION
 $(document).ready(function(){
     appt_id = 0;
-    _put_hours_list(9,17);
+    start_hour = 9;
+    end_hour = 17;
+    _put_hours_list(start_hour, end_hour);
 
     //Add tabs Listeners
     $('#actualTabs a[href="#nameList"]').click(function (e) {
@@ -85,15 +88,15 @@ var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='appt_elem'>");
     apptElement.html(appt.to_string());
     if(appt.kind == "ch"){
-        apptElement.prepend($("<i class='icon-ok icon-white'></i>"));
+        apptElement.prepend($("<span class='appt_icon glyphicon glyphicon-ok'></span>"));
     } else if(appt.kind == "ev"){
-        apptElement.prepend($("<i class='icon-list-alt icon-white'></i>"));
+        apptElement.prepend($("<span class='appt_icon glyphicon glyphicon-list-alt'></span>"));
     } else if(appt.kind == "hon"){
-        apptElement.prepend($("<i class='icon-thumbs-up icon-white'></i>"));
+        apptElement.prepend($("<span class='appt_icon glyphicon glyphicon-thumbs-up'></span>"));
     } else if(appt.kind == "hof"){
-        apptElement.prepend($("<i class='icon-ban-circle icon-white'></i>"));
+        apptElement.prepend($("<span class='appt_icon glyphicon glyphicon-ban-circle'></span>"));
     } else if(appt.kind == "me"){
-        apptElement.prepend($("<i class='icon-user icon-white'></i>"));
+        apptElement.prepend($("<span class='appt_icon glyphicon glyphicon-user'></span>"));
     }
     apptElement.addClass(appt.kind);
     $("#hour"+appt.hour).append($("<li>").append(apptElement));
@@ -153,7 +156,7 @@ var Appointment = function(kind, date, hour, patient_name, notes){
             s += "Other";
         }
 
-        s += "</span><br><span>" + this.patient_name + "</span>";
+        s += "</span><div>" + this.patient_name + "</div>";
         return s;
     }
 
@@ -169,6 +172,12 @@ var _draw_date = function(date_str){
         if(appts[appt].date == date_str){
             insert_appt(appts[appt]);
         }
+    }
+    var today = $.datepicker.formatDate('yy/mm/dd', new Date());
+    if(date_str == today){
+        $("#today").addClass('disabled');
+    } else {
+        $("#today").removeClass('disabled');
     }
 }
 
@@ -191,7 +200,6 @@ var _readable_hour = function(i){
 // start = earliest hour desired to view (0-23)
 // end = latest hour desired to view (0-23)
 
-// TO DO: change formatting because it is off
 var _put_hours_list = function(start, end){
     var hour_ul = $("<ul id='schedule_view'>");
     for(var i=start;i<end;i++){
@@ -205,25 +213,37 @@ var _make_hour_element = function(i){
     var hour_div = $("<div class='row hour_row'>");
     hour_div.id = 'hour_'+i;
 
+    hour_label = $("<label class='label' style='font-size:10px'>"+_readable_hour(i)+"</label>");
 
-    hour_label = $("<label class='label pull-left'>"+_readable_hour(i)+"</label>");
-
-    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%'>");
+    var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%;'>");
 
     hour_div.prepend($("<div class='span1 hour_label'>").append(hour_label));
     hour_div.append(hour_inner_ul);
     return hour_div;
 }
 
+function _generate_timepicker(start, end, curr){
+    var s = "<select id='timepicker' value='"+curr+"'>"
+    for(var i=start;i<end;i++){
+        s += "<option value='"+i+"'>"+_readable_hour(i)+"</option>";
+    }
+    s += "</select>";
+    return s;
+}
+
+
 // display the lightbox for a certain Appointment object appt
-// TO DO: change to "edit appointment", deal with cancel button (people are confused by what it does)
+
+// TO DO: remove appt
 function _lightbox_appt(appt){
 
     var content = $("<div id='innerbox' />");
-    content.append($("<div id='lightbox_title'>"+appt.patient_name+"'s Appointment</div>"));
+    content.append($("<div id='lightbox_title'>"+appt.patient_name+"'s Appointment<div id='lightbox_cancel' style='float:right;color:red;cursor:pointer'><b>X</b></div></div>"));
     content.append($("<br>"));
     content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+appt.date+"'></input></div>"));
-    content.append($("<div id='lightbox_time'><b>Time:</b> <input id='timepicker' type='text' value='"+appt.hour+"'></input></div>"));
+    content.append($("<div id='lightbox_time'><b>Time:</b>"+
+        _generate_timepicker(start_hour, end_hour, appt.hour)+
+        "</div>"));
     content.append($("<div id='lightbox_kind'><b>Type:</b> "+
         "<select id='lightbox_selected'>"+
         "<option value='ch'>Check-In</option>"+
@@ -239,7 +259,7 @@ function _lightbox_appt(appt){
         ));
 
     var button_div = $("<div id='lightbox_buttons' />");
-    button_div.append($("<button id='lightbox_cancel' class='btn'>Cancel</button>"));
+    button_div.append($("<button id='lightbox_remove' class='btn btn-danger'>Remove</button>"));
     button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
     content.append(button_div);
@@ -250,6 +270,11 @@ function _lightbox_appt(appt){
     $("#lightbox_selected").val(appt.kind); // set default to appt's current type
 
     $("#lightbox_cancel").click(_closeLightbox);
+    $("#lightbox_remove").click(function(){
+        // TO DO: (Insert backend call to delete appointment)
+        _draw_date($.datepicker.formatDate('yy/mm/dd', view_date)); // redraw calendar
+        _closeLightbox();
+    });
     $("#lightbox_save").click(function(){
         appt.kind = $('#lightbox_selected').val();
         appt.date = $('#datepicker').val();
@@ -262,41 +287,51 @@ function _lightbox_appt(appt){
 
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
-    content.append($("<div id='lightbox_title'>Create a New Appointment</div>"));
+    content.append($("<div id='lightbox_title'>Create a New Appointment<div id='lightbox_cancel' style='float:right;color:red;cursor:pointer'><b>X</b></div></div>"));
     content.append($("<br>"));
     content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
+
+    content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
+    content.append($("<div id='lightbox_time'><b>Time:</b>"+
+        _generate_timepicker(start_hour, end_hour)+
+        "</div>"));
     content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-        "<input type='radio' name='lightbox_radio' value='ch'>Check-In<br>"+
-        "<input type='radio' name='lightbox_radio' value='ev'>Evaluation<br>"+
-        "<input type='radio' name='lightbox_radio' value='hon'>Hands-On<br>"+
-        "<input type='radio' name='lightbox_radio' value='hof'>Hands-Off<br>"+
-        "<input type='radio' name='lightbox_radio' value='me'>Meeting<br>"+
+        "<select id='lightbox_selected'>"+
+        "<option value='ch'>Check-In</option>"+
+        "<option value='ev'>Evaluation</option>"+
+        "<option value='hon'>Hands-On</option>"+
+        "<option value='hof'>Hands-Off</option>"+
+        "<option value='me'>Meeting</option>"+
+        "</select>"+
         "</div>"));
 
 
-    content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
-    content.append($("<div id='lightbox_time'><b>Time:</b> <input id='timepicker' type='text'></input></div>"));
 
     content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
         "<div><textarea id='lightbox_input'></textarea></div>"
         ));
 
     var button_div = $("<div id='lightbox_buttons' />");
-    button_div.append($("<button id='lightbox_cancel' class='btn'>Cancel</button>"));
     button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
     content.append(button_div);
+
     // draw on screen
     _lightbox(content, 50);
 
-    $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
+    $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' });
 
 
     $("#lightbox_cancel").click(_closeLightbox);
     $("#lightbox_save").click(function(){
 
-        var kind = $('input:radio[name=lightbox_radio]:checked').val();
-        var new_appt = new Appointment(kind,
+       if(($("#namepicker").val() == "") || ($("#timepicker").val() == "")){
+            content.append($('<div class="alert">'+
+            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+            '<strong>Error:</strong> Please fill in all fields. Thanks!'+
+            '</div>'));
+       } else {
+        var new_appt = new Appointment($('#lightbox_selected').val(),
             $('#datepicker').val(),
             $("#timepicker").val(),
             $("#namepicker").val(),
@@ -304,14 +339,16 @@ function _lightbox_new(){
         _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
         _closeLightbox();
 
-        // Success message
+        // TODO: (BACKEND) INSERT APPT BACKEND
         _lightbox($("<div style='text-align: center'>You've added an appointment for "+
             new_appt.patient_name+
             " at "+
-            new_appt.hour+
+            _readable_hour(new_appt.hour)+
             " on "+
             new_appt.date+
             "!</div>"), 5);
+       }
+
     });
 
 }
@@ -336,10 +373,10 @@ function _lightbox(content, top){
     $('#lightbox').empty();
 
     $('#lightbox').append(content);
-    // TODO: Saving does not do anything yet, since no backend. 
 
     // move the lightbox to the current window top + 100px
-    $('#lightbox').css('top', top + 'px');
+    //$('#lightbox').css('top', top + 'px');
+    $('#lightbox').css('top', '100px');
 
     // display the lightbox
     $('#lightbox').show();

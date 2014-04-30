@@ -1,9 +1,8 @@
-/*
+/*lightbox
  * Base structure
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-/*TO DO: align all of the things*/
 body {
   font-family: 'Open Sans';
   font-size: 1.5em;
@@ -18,11 +17,12 @@ body {
   color : #999;
 }
 
-.glyphicon{
-  font-size:3em;
-  color: red;
+.appt_icon {
+  margin-right: 5px;
+  font-size: 24px;
+  color: white;
 }
-/*TO DO: make them responsive (not red when no notifications)*/
+/*TO DO: (BACKEND) make app icon responsive (not red when no notifications)*/
 
 #tabs {
     width: 100%;
@@ -143,6 +143,14 @@ textarea {
   resize: none;
 }
 
+label {
+  cursor: default;
+}
+
+.ui-datepicker-trigger {
+  cursor: pointer;
+}
+
 .hour_inner {
   overflow-x: auto;
   overflow-y: hidden;
@@ -164,6 +172,7 @@ textarea {
   padding: 30px; /*VK: default is 60px for hero-unit class*/
 }
 .hour_row {
+  padding: 2px;
   height: 99px;
 }
 .row{
@@ -184,7 +193,6 @@ textarea {
   height: 100%;
 }
 
-/*TO DO: add responsiveness to hovering for calendar icon*/
 #calendar_icon:hover {
   cursor: pointer;
 }
@@ -231,15 +239,15 @@ textarea {
   height: 80px;
 }
 
-#lightbox_cancel {
+#lightbox_remove {
   margin-right: 5px;
 }
 
 #lightbox_buttons {
+  margin: 5px;
   text-align: right;
 }
 
-/*TO DO: change appt box colors*/
 .ch {
   -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
   -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
@@ -261,7 +269,7 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  /*padding:6px 24px; VK*/
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #854629;
   text-align: center;
@@ -302,7 +310,7 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-/*  padding:6px 24px;*/
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #2f6627;
   text-align: center;
@@ -343,7 +351,7 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  /*padding:6px 24px;*/
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #3d768a;
   text-align: center;
@@ -384,7 +392,7 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  /*padding:6px 24px;*/
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #cc9f52;
   text-align: center;
@@ -427,7 +435,7 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  /*padding:6px 24px;*/
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #9752cc;
   text-align: center;
@@ -451,8 +459,6 @@ textarea {
   visibility: hidden;
   position: relative;
 }
-
-/* TO DO: Make patient view collapsibility more obvious (add little arrow to drop downs)*/
 
 #starting_patient_view {
   visibility: visible;
