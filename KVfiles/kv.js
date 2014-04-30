@@ -3,6 +3,8 @@ var appts = {};
 var view_date;
 
 $(document).ready(function(){
+    Parse.initialize("ACgcVmi7NIsZZMBO4kjKXBiJ9W91CRo5exB1aydL", "sEQY6C57HTZ7PGG2wrIwh7sRXasumLxI0OvinNhC");
+
     appt_id = 0;
     _put_hours_list(9,17);
 
