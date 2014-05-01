@@ -4,7 +4,9 @@ var view_date;
 
 // TO DO: HUGGGGGGEEE DELETE APPOINTMENT FUNCTION
 $(document).ready(function(){
-    Parse.initialize("ACgcVmi7NIsZZMBO4kjKXBiJ9W91CRo5exB1aydL", "sEQY6C57HTZ7PGG2wrIwh7sRXasumLxI0OvinNhC");
+    Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
+    var appointment = Parse.Object.extend("Appointment");
+
 
     appt_id = 0;
     _put_hours_list(9,17);
@@ -35,16 +37,17 @@ $(document).ready(function(){
     var date_str = $.datepicker.formatDate('yy/mm/dd', view_date);
 
     // placeholder "database" = appts
-    appts[0] = new Appointment('ch', date_str, 10, 'Peter', 'Broken bone');
-    appts[1] = new Appointment('ev', date_str, 11, 'Lily', 'Running exercises');
-    appts[2] = new Appointment('hon', date_str, 12, 'John', 'Stretches');
-    appts[3] = new Appointment('hof', date_str, 10, 'Howard', 'Weights');
-    appts[4] = new Appointment('me', date_str, 11, 'Blake', 'Progress Report');
-    appts[5] = new Appointment('me', '2014/04/16', 11, 'Blake', 'Progress Report');
-    appts[6] = new Appointment('me', '2014/04/25', 11, 'David', 'Progress Report');
-    appts[7] = new Appointment('me', '2014/04/27', 11, 'David', 'Progress Report');
-    appts[8] = new Appointment('me', '2014/04/02', 11, 'David', 'Progress Report');
-    appts[9] = new Appointment('me', '2014/03/27', 11, 'David', 'Progress Report');
+    appts[0] = new Appointment('ch', date_str, 10, 'Jeffrey Sun', 'Broken bone');
+    appts[1] = new Appointment('ev', date_str, 11, 'Keertan Kini', 'Running exercises');
+    appts[2] = new Appointment('hon', date_str, 12, 'Ashley Smith', 'Stretches');
+    appts[3] = new Appointment('hof', date_str, 10, 'Vynnie Kong', 'Weights');
+    appts[4] = new Appointment('me', date_str, 11, 'Keertan Kini', 'Progress Report');
+    appts[5] = new Appointment('me', '2014/04/16', 11, 'Jeffrey Sun', 'Progress Report');
+    appts[6] = new Appointment('me', '2014/04/25', 11, 'Ashley Smith', 'Progress Report');
+    appts[7] = new Appointment('me', '2014/04/27', 11, 'Vynnie Kong', 'Progress Report');
+    // appts[8] = new Appointment('me', '2014/04/02', 11, 'David', 'Progress Report');
+    // appts[9] = new Appointment('me', '2014/03/27', 11, 'David', 'Progress Report');
+    
     // put appts into sheet
     _draw_date(date_str);
 
@@ -255,6 +258,8 @@ function _lightbox_appt(appt){
     $("#lightbox_selected").val(appt.kind); // set default to appt's current type
 
     $("#lightbox_cancel").click(_closeLightbox);
+    // TODO: Save appointment with parse
+
     $("#lightbox_save").click(function(){
         appt.kind = $('#lightbox_selected').val();
         appt.date = $('#datepicker').val();
@@ -300,14 +305,18 @@ function _lightbox_new(){
 
 
     $("#lightbox_cancel").click(_closeLightbox);
+    // TODO: Save appointment with parse
     $("#lightbox_save").click(function(){
 
         var kind = $('input:radio[name=lightbox_radio]:checked').val();
-        var new_appt = new Appointment(kind,
-            $('#datepicker').val(),
-            $("#timepicker").val(),
-            $("#namepicker").val(),
-            $("#lightbox_input").val());
+        var date = $('#datepicker').val();
+        var time = $("#timepicker").val();
+        var name = $("#namepicker").val();
+        var input= $("#lightbox_input").val();
+
+        //OLD METHOD W/O Parse
+        //var new_appt = new Appointment(kind, date, time, name, input);
+        
         _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
         _closeLightbox();
 
