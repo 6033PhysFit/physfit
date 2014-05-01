@@ -1,13 +1,14 @@
-/*
+/*lightbox
  * Base structure
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
-/*TO DO: align all of the things*/
 body {
+  font-family: 'Open Sans';
   font-size: 1.5em;
   padding-top: 50px;
   background-color: #EEE;
+  resize: true;
 
   /* TO DO: change background color */
 }
@@ -16,11 +17,12 @@ body {
   color : #999;
 }
 
-.glyphicon{
-  font-size:3em;
-  color: red;
+.appt_icon {
+  margin-right: 5px;
+  font-size: 24px;
+  color: white;
 }
-/*TO DO: make them responsive (not red when no notifications)*/
+/*TO DO: (BACKEND) make app icon responsive (not red when no notifications)*/
 
 #tabs {
     width: 100%;
@@ -141,6 +143,14 @@ textarea {
   resize: none;
 }
 
+label {
+  cursor: default;
+}
+
+.ui-datepicker-trigger {
+  cursor: pointer;
+}
+
 .hour_inner {
   overflow-x: auto;
   overflow-y: hidden;
@@ -155,26 +165,34 @@ textarea {
 
 #schedule_view {
   background-color: #DDDDDD;
-  margin-left: 0px;
+  margin: 0px; /*VK*/
 }
 
+.hero-unit {
+  padding: 30px; /*VK: default is 60px for hero-unit class*/
+}
 .hour_row {
   padding: 2px;
   height: 99px;
+}
+.row{
+  margin: 0px; /*VK: default -15??? huh*/
 }
 
 .hour_label {
   background-color: #CCCCCC;
   height: 100%;
-  padding-left: 7px;
+}
+
+.label{ /*VK: could not get a centered label so just making the text only show... */
+  background-color: #CCCCCC;
+  padding: .5em;
 }
 
 .appt_elem {
   height: 100%;
-  margin-left: 5px;
 }
 
-/*TO DO: add responsiveness to hovering for calendar icon*/
 #calendar_icon:hover {
   cursor: pointer;
 }
@@ -221,15 +239,15 @@ textarea {
   height: 80px;
 }
 
-#lightbox_cancel {
+#lightbox_remove {
   margin-right: 5px;
 }
 
 #lightbox_buttons {
+  margin: 5px;
   text-align: right;
 }
 
-/*TO DO: change appt box colors*/
 .ch {
   -moz-box-shadow:inset 0px 1px 0px 0px #cf866c;
   -webkit-box-shadow:inset 0px 1px 0px 0px #cf866c;
@@ -251,9 +269,10 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  padding:6px 24px;
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #854629;
+  text-align: center;
 }
 .ch:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc3315), color-stop(1, #d0451b));
@@ -291,9 +310,10 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  padding:6px 24px;
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #2f6627;
+  text-align: center;
 }
 .ev:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #5cbf2a), color-stop(1, #44c767));
@@ -331,9 +351,10 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  padding:6px 24px;
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #3d768a;
+  text-align: center;
 }
 .hon:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #408c99), color-stop(1, #599bb3));
@@ -371,9 +392,10 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  padding:6px 24px;
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #cc9f52;
+  text-align: center;
 }
 .hof:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #fb9e25), color-stop(1, #ffc477));
@@ -413,9 +435,10 @@ textarea {
   color:#ffffff;
   font-family:arial;
   font-size:13px;
-  padding:6px 24px;
+  padding:6px 6px;
   text-decoration:none;
   text-shadow:0px 1px 0px #9752cc;
+  text-align: center;
 }
 .me:hover {
   background:-webkit-gradient(linear, left top, left bottom, color-stop(0.05, #bc80ea), color-stop(1, #dfbdfa));
@@ -437,8 +460,6 @@ textarea {
   position: relative;
 }
 
-/* TO DO: Make patient view collapsibility more obvious (add little arrow to drop downs)*/
-
 #starting_patient_view {
   visibility: visible;
   position: absolute;
@@ -455,6 +476,8 @@ textarea {
 
 #cal_title, #title1, #title2 {
   font-size: 45px;
+  margin: 0px;
+  padding-bottom: 30px; /*default for page-header is 9px*/
 }
 
 #freedommain {
@@ -474,7 +497,7 @@ textarea {
   margin-top: 15px;
 }
 #nameRow, #freedomRow {
-  padding-top: 20px;
+  padding-top: 30px; /*VK*/
 }
 #searchBar {
   margin-left: 10px;
@@ -482,7 +505,4 @@ textarea {
   padding:5px;
   padding-top:15px;
   padding-bottom: 15px;
-}
-#add_appt {
-  margin-left: 95px;
 }
