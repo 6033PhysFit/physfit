@@ -333,17 +333,6 @@ function _lightbox_new(){
     // TODO: Save appointment with parse
     $("#lightbox_save").click(function(){
 
-<<<<<<< HEAD
-        var kind = $('input:radio[name=lightbox_radio]:checked').val();
-        var date = $('#datepicker').val();
-        var time = $("#timepicker").val();
-        var name = $("#namepicker").val();
-        var input= $("#lightbox_input").val();
-
-        //OLD METHOD W/O Parse
-        //var new_appt = new Appointment(kind, date, time, name, input);
-        
-=======
        if(($("#namepicker").val() == "") || ($("#timepicker").val() == "")){
             content.append($('<div class="alert">'+
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
@@ -355,7 +344,7 @@ function _lightbox_new(){
             $("#timepicker").val(),
             $("#namepicker").val(),
             $("#lightbox_input").val());
->>>>>>> 0602bf2327972deac1ec47e5bb4e227fa797bcee
+
         _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
         _closeLightbox();
 
