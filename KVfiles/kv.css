@@ -3,6 +3,12 @@
  */
 
 /* Move down content because we have a fixed navbar that is 50px tall */
+/* TO DO 1) fix calendar formatting (weird stuff still with it like when you toggle days),
+         2) min window width (deal with resizing),
+         3) no auto scroll when you click on a dropdown
+         4) change background/tab/calendar colors
+         5) clean up code (if time)
+*/
 body {
   font-family: 'Open Sans';
   font-size: 1.5em;
@@ -10,7 +16,6 @@ body {
   background-color: #EEE;
   resize: true;
 
-  /* TO DO: change background color + set minimum width*/
 }
 .sub {
   font-size: 1em;
@@ -35,8 +40,6 @@ body {
   }
 #patientTab:hover{
   color:#999;
-
-  TO DO: change tab colors?;
 }*/
 .navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
   /*color:#EEE;*/
