@@ -3,11 +3,24 @@ var appts = {};
 var view_date;
 var start_hour;
 var end_hour;
+var patientInfo = [];
 
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
     var appointment = Parse.Object.extend("Appointment");
 
+    var Patient = Parse.Object.extend("Patient");
+    var query = new Parse.Query(Patient);
+  
+    query.exists("Name");
+
+    query.find({
+      success: function(results) {
+        results.forEach(function(patient) {
+          patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary")]);
+        });
+      }
+    });
 
     appt_id = 0;
     start_hour = 9;
