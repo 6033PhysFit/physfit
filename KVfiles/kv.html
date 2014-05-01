@@ -43,7 +43,6 @@ rel="stylesheet">
         <a class="navbar-brand" href="#" id="logo">PhysFit</a>
       </div>
 
-
       <div class="pull-right center" id="notificationDiv">
         <!-- TO DO: (INSERT BACKEND REQUEST FOR DATA-CONTENT) -->
          <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
@@ -81,14 +80,16 @@ rel="stylesheet">
           <div id="freedomList" class="tab-pane">
             <div id = "freedomRow" class="row-fluid">
               <div id="patientList"class="col-sm-3 sidebar"> <!--VK-->
-                <ul class="nav nav-sidebar">
-                  <li>       
+                <input type="text" class="form-control input-lg" id="searchBar" placeholder="Search...">
+                <ul class="list-group">
+                  <!-- <li>       
                     <input type="text" class="form-control" id="searchBar" placeholder="Search...">
-                  </li>
-                  <li><a class="patient" href="#">Johnny Carson</a></li>
-                  <li><a class="patient" href="#">David Letterman</a></li>
-                  <li><a class="patient" href="#">Jimmy Fallon</a></li>
-                  <li><a class="patient" href="#">Stephen Colbert</a></li>
+
+                  </li> -->
+                  <li><a class="list-group-item patient" href="#">Johnny Carson</a></li>
+                  <li><a class="list-group-item patient" href="#">David Letterman</a></li>
+                  <li><a class="list-group-item patient" href="#">Jimmy Fallon</a></li>
+                  <li><a class="list-group-item patient" href="#">Stephen Colbert</a></li>
                 </ul>
               </div>
               <div class="col-sm-9 main" id="freedommain"> <!--VK-->
@@ -100,7 +101,7 @@ rel="stylesheet">
 
                   <h1 class="page-header" id="title1">Letterman, David</h1>
                   <div class="row-fluid">
-                    <div class="col-md-6">
+                    <div class="col-md-6 nopadding">
                       <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
                       <div class="panel-group" id="accordion">
                         <div class="panel panel-default" id="panel-1">
