@@ -203,6 +203,8 @@ label {
 
 .appt_elem {
   height: 100%;
+  width: 110px;
+  margin-left: 2px;
 }
 
 #calendar_icon:hover {

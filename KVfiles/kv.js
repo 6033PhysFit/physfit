@@ -242,9 +242,13 @@ var _make_hour_element = function(i){
 }
 
 function _generate_timepicker(start, end, curr){
-    var s = "<select id='timepicker' value='"+curr+"'>"
+    var s = "<select id='timepicker'>";
     for(var i=start;i<end;i++){
-        s += "<option value='"+i+"'>"+_readable_hour(i)+"</option>";
+        if(i == curr){
+            s += "<option value='"+i+"' selected='selected'>"+_readable_hour(i)+"</option>";
+        } else {
+            s += "<option value='"+i+"'>"+_readable_hour(i)+"</option>";
+        }
     }
     s += "</select>";
     return s;
