@@ -208,6 +208,9 @@ label {
   height: 100%;
   width: 110px;
   margin-left: 2px;
+  white-space:nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
 }
 
 #calendar_icon:hover {

@@ -38,6 +38,12 @@ $(document).ready(function(){
             }
         }
     });
+
+    $('#searchBar').change(function(){
+        
+    });
+
+    $('#searchBar').autocomplete({source: patientInfo.map(function(patient){return patient[1];})});
 appt_id = 0;
 start_hour = 9;
 end_hour = 17;
@@ -53,6 +59,7 @@ _put_hours_list(start_hour, end_hour);
       e.preventDefault();
       $(this).tab('show');
   });
+
 
     $('#popovergoddamit').popover('hide');
 
