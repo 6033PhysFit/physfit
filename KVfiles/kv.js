@@ -36,15 +36,18 @@ $(document).ready(function(){
                 newListItem.onclick = function() {
                     $("#starting_patient_view").css("visibility", "hidden");
                     $("#letterman_patient_view").css("visibility", "visible");
-                    var patientSummary = document.getElementById("patientSummary");
                     var i = this.children[0].className;
+                    var patientSummary = document.getElementById("patientSummary");
                     patientSummary.innerHTML = "<p><span>"+patientInfo[i][3]+"</span></p>";
                     var patientConditions = document.getElementById("patientConditions");
                     patientConditions.innerHTML = "<p><span>"+patientInfo[i][2]+"</span></p>";
                     var patientTitle = document.getElementById("title1");
-                    patientTitle.innerHTML = patientInfo[i][1];
+                    patientTitle.innerHTML = patientInfo[i][1]; 
                     var patientImage = document.getElementById("patientImage");
                     patientImage.src = patientInfo[i][4].url();
+                    var patientPastAppts = document.getElementById("patientPastAppts");
+                    var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
+                    // TODO Ashley - fill in upcoming and past appts
                 }
             }
         }
