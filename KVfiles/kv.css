@@ -12,9 +12,11 @@
 body {
   font-family: 'Open Sans';
   font-size: 1.5em;
-  padding-top: 50px;
+  /*padding-top: 50px;*/
   background-color: #EEE;
   resize: true;
+
+  min-width: 950px !important; /*any smaller and the labels for the time would show...lols. TO DO maybe? fix that?*/
 
 }
 .sub {
@@ -84,8 +86,8 @@ body {
   border-style:solid;
   border-color:black;
 }*/
-.navbar-fixed-top{
-  background-color: #F5F5F5
+.navbar-static-top{
+  background-color: #F5F5F5;
 }
 
 .navbar-brand{
@@ -148,7 +150,8 @@ p.time-heading{
   border:none;
   background-color: inherit;
   font-color:black;
-
+  margin: 0px; /*define as 20px somewhere...*/
+  max-height: 62px;
 }
 
 textarea {
@@ -510,9 +513,9 @@ label {
   margin-left: 0px;
 }
 
-#tabContainer {
+/*#tabContainer {
   margin-top: 15px;
-}
+}*/
 #nameRow {
   padding-top: 30px; /*VK*/
 }
