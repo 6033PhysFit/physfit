@@ -5,15 +5,15 @@ var start_hour;
 var end_hour;
 var patientInfo = [];
 //NOTE appointment is for Parse, Appointment is for internal array until Parse fully implemented
-var appointment;
-var Patient;
+var parseAppointment;
+var parsePatient;
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
-    appointment = Parse.Object.extend("Appointment");
+    parseAppointment = Parse.Object.extend("Appointment");
 
-    Patient = Parse.Object.extend("Patient");
-    var query = new Parse.Query(Patient);
-
+    parsePatient = Parse.Object.extend("Patient");
+    var query = new Parse.Query(parsePatient);
+  
     query.exists("Name");
     query.ascending("Name");
     query.find({
@@ -52,10 +52,12 @@ $(document).ready(function(){
             }
         }
     });
-appt_id = 0;
-start_hour = 9;
-end_hour = 17;
-_put_hours_list(start_hour, end_hour);
+
+    //console.log(patientInfo);
+    appt_id = 0;
+    start_hour = 9;
+    end_hour = 17;
+    _put_hours_list(start_hour, end_hour);
 
     //Add tabs Listeners
     $('#actualTabs a[href="#nameList"]').click(function (e) {
@@ -209,11 +211,70 @@ var _draw_date = function(date_str){
     $("#view_date").text(date_str);
     $(".appt_elem").parent().remove();
 
-    for(var appt in appts){
-        if(appts[appt].date == date_str){
-            insert_appt(appts[appt]);
-        }
-    }
+    // var queryAppt = new Parse.Query(appointment);
+    // queryAppt.equalTo("date", date_str);
+    // apptList = [];
+
+    // queryAppt.find({
+    //   success: function(results) {
+    //     alert("Success");
+    //     // console.log(results);
+    //     // for(var result in results){
+    //     //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
+    //     // }
+    //     results.forEach(function(result) {
+    //         console.log(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
+    //         var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
+    //         insert_appt(ap)
+    //     });
+
+    //   },
+    //   error: function(error) {
+    //     alert("APPT Error: " + error.code + " " + error.message);
+    //   }
+    // });
+    //date_str = '2014/04/16';
+    var queryAppt = new Parse.Query(parseAppointment);
+    queryAppt.equalTo("date", date_str);
+    apptList = [];
+
+    queryAppt.find({
+      success: function(results) {
+        alert("Success");
+        console.log(results);
+        // for(var result in results){
+        //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
+        // }
+        results.forEach(function(result) {
+          // console.log(result.get('type'), result.get('date'), result.get('time'), result.get('notes'));
+          var queryPat = new Parse.Query(parsePatient);
+          queryPat.get(result.get("patient").id, {
+            success: function(pat) {
+              // The object was retrieved successfully.
+              // console.log(pat.get("Name"));
+              // console.log(result.get('type'));
+                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'));
+                insert_appt(ap);
+            },
+            error: function(object, error) {
+              alert("Patient Error: " + error.code + " " + error.message);
+
+            }
+          });
+          //console.log(result.get('patient'));
+        });
+
+      },
+      error: function(error) {
+        alert("Appointment Error: " + error.code + " " + error.message);
+      }
+    });
+
+    // for(var appt in appts){
+    //     if(appts[appt].date == date_str){
+    //         insert_appt(appts[appt]);
+    //     }
+    // }
     var today = $.datepicker.formatDate('yy/mm/dd', new Date());
     if(date_str == today){
         $("#today").addClass('disabled');
