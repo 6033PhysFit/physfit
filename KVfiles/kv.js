@@ -187,7 +187,8 @@ var Appointment = function(kind, date, hour, patient_name, notes){
 
 var _draw_date = function(date_str){
     $("#view_date").text(date_str);
-    $(".appt_elem").remove();
+    $(".appt_elem").parent().remove();
+
     for(var appt in appts){
         if(appts[appt].date == date_str){
             insert_appt(appts[appt]);
