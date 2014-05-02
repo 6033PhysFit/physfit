@@ -37,21 +37,21 @@ rel="stylesheet">
 <body style="">
 
   <div class="navbar navbar-inverse navbar-fixed-top col-xs-12" role="navigation">
-    <div class="container-fluid">
+    <div>
       <div class="navbar-header">
         <a class="navbar-brand" href="#" id="logo">PhysFit</a>
       </div>
 
-      <div class="pull-right center" id="notificationDiv">
+      <div style='position:fixed; right: 10px; top: 10px' id="notificationDiv">
         <!-- TO DO: (INSERT BACKEND REQUEST FOR DATA-CONTENT) -->
         <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
-         <span class="glyphicon glyphicon-bell"></span>        </button>
-       </div>
-     </div>
-   </div>
+           <span class="glyphicon glyphicon-bell"></span>
+         </button>
+      </div>
+    </div>
+  </div>
 
-   <div class="navbar navbar-inverse navbar-top" role="navigation">
-    <div class="container-fluid lowerbar">
+    <div class="lowerbar">
       <div id="tabContainer" class="tabbable">
         <ul id="actualTabs" class="nav nav-tabs">
           <li id="calendarTab" class="active"><a href="#nameList" data-toggle="tab">Calendar View</a></li>
@@ -60,7 +60,6 @@ rel="stylesheet">
         <div class="tab-content" id="tabs">
           <div id="nameList" class="tab-pane fade active in">
             <div id="nameRow" class="row-fluid">
-              <div class="col-xs-9 main"> 
                 <div id="calendar_view" class="span12 hero-unit">
                   <div id="navbar" class="row">
                     <a id="today" class="btn">Today</a>
@@ -71,7 +70,6 @@ rel="stylesheet">
                   </div>
                   <br>
                 </div>
-              </div>
             </div>
           </div>
 
@@ -185,7 +183,6 @@ rel="stylesheet">
       </div>
     </div>
 
-  </div>
 </div>
 </div>
 
