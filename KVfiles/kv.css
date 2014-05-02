@@ -4,10 +4,11 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 /* TO DO 1) fix calendar formatting (weird stuff still with it like when you toggle days),
-         2) min window width (deal with resizing),
+         2) min window width (deal with resizing) --> fix navbar (weird things...),
          3) no auto scroll when you click on a dropdown
-         4) change background/tab/calendar colors
-         5) clean up code (if time)
+         4) when you refresh scroll position should not be persistent?
+         5) change background/tab/calendar colors
+         6) clean up code (if time)
 */
 body {
   font-family: 'Open Sans';
@@ -19,6 +20,7 @@ body {
   min-width: 950px !important; /*any smaller and the labels for the time would show...lols. TO DO maybe? fix that?*/
 
 }
+
 .sub {
   font-size: 1em;
   color : #999;
