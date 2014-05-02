@@ -15,11 +15,11 @@ $(document).ready(function(){
     var query = new Parse.Query(Patient);
 
     query.exists("Name");
-
+    query.ascending("Name");
     query.find({
         success: function(results) {
             results.forEach(function(patient) {
-                patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary")]);
+                patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary"), patient.get("image")]);
             });
             var patientNameList = document.getElementById("patientNameList");
             for (var i=0; i<patientInfo.length; i++) {
@@ -38,12 +38,13 @@ $(document).ready(function(){
                     $("#letterman_patient_view").css("visibility", "visible");
                     var patientSummary = document.getElementById("patientSummary");
                     var i = this.children[0].className;
-                    console.log(i);
                     patientSummary.innerHTML = "<p><span>"+patientInfo[i][3]+"</span></p>";
                     var patientConditions = document.getElementById("patientConditions");
                     patientConditions.innerHTML = "<p><span>"+patientInfo[i][2]+"</span></p>";
                     var patientTitle = document.getElementById("title1");
                     patientTitle.innerHTML = patientInfo[i][1];
+                    var patientImage = document.getElementById("patientImage");
+                    patientImage.src = patientInfo[i][4].url();
                 }
             }
         }
