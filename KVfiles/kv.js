@@ -4,12 +4,14 @@ var view_date;
 var start_hour;
 var end_hour;
 var patientInfo = [];
-
+//NOTE appointment is for Parse, Appointment is for internal array until Parse fully implemented
+var appointment;
+var Patient;
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
-    var appointment = Parse.Object.extend("Appointment");
+    appointment = Parse.Object.extend("Appointment");
 
-    var Patient = Parse.Object.extend("Patient");
+    Patient = Parse.Object.extend("Patient");
     var query = new Parse.Query(Patient);
   
     query.exists("Name");
@@ -288,13 +290,14 @@ function _lightbox_appt(appt){
     $("#lightbox_selected").val(appt.kind); // set default to appt's current type
 
     $("#lightbox_cancel").click(_closeLightbox);
-    // TODO: Save appointment with parse
 
     $("#lightbox_remove").click(function(){
         // TO DO: (Insert backend call to delete appointment)
         _draw_date($.datepicker.formatDate('yy/mm/dd', view_date)); // redraw calendar
         _closeLightbox();
     });
+
+    // TODO: Save appointment with parse
     $("#lightbox_save").click(function(){
         appt.kind = $('#lightbox_selected').val();
         appt.date = $('#datepicker').val();
