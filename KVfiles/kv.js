@@ -6,13 +6,13 @@ var end_hour;
 var patientInfo = [];
 //NOTE appointment is for Parse, Appointment is for internal array until Parse fully implemented
 var appointment;
-var Patient;
+var patient;
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
     appointment = Parse.Object.extend("Appointment");
 
-    Patient = Parse.Object.extend("Patient");
-    var query = new Parse.Query(Patient);
+    patient = Parse.Object.extend("Patient");
+    var query = new Parse.Query(patient);
   
     query.exists("Name");
 
@@ -24,6 +24,7 @@ $(document).ready(function(){
       }
     });
 
+    //console.log(patientInfo);
     appt_id = 0;
     start_hour = 9;
     end_hour = 17;
@@ -188,6 +189,29 @@ var Appointment = function(kind, date, hour, patient_name, notes){
 var _draw_date = function(date_str){
     $("#view_date").text(date_str);
     $(".appt_elem").parent().remove();
+
+    var queryAppt = new Parse.Query(appointment);
+    queryAppt.equalTo("date", date_str);
+    apptList = [];
+
+    queryAppt.find({
+      success: function(results) {
+        alert("Success");
+        // console.log(results);
+        // for(var result in results){
+        //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
+        // }
+        results.forEach(function(result) {
+            console.log(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
+            var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
+            insert_appt(ap)
+        });
+
+      },
+      error: function(error) {
+        alert("APPT Error: " + error.code + " " + error.message);
+      }
+    });
 
     for(var appt in appts){
         if(appts[appt].date == date_str){
