@@ -13,21 +13,35 @@ $(document).ready(function(){
 
     Patient = Parse.Object.extend("Patient");
     var query = new Parse.Query(Patient);
-  
+
     query.exists("Name");
 
     query.find({
-      success: function(results) {
-        results.forEach(function(patient) {
-          patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary")]);
-        });
-      }
+        success: function(results) {
+            results.forEach(function(patient) {
+                patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary")]);
+            });
+            var patientNameList = document.getElementById("patientNameList");
+            for (var i=0; i<patientInfo.length; i++) {
+                var newListItem = document.createElement("li");
+                var newLinkItem = document.createElement("a");
+                newLinkItem.href="#";
+                newListItem.className = newListItem.className+" list-group-item patient";
+                var newListValue = document.createTextNode(patientInfo[i][1]);
+                newLinkItem.appendChild(newListValue);
+                newListItem.appendChild(newLinkItem);
+                patientNameList.appendChild(newListItem);
+                newListItem.onclick = function() {
+                    $("#starting_patient_view").css("visibility", "hidden");
+                    $("#letterman_patient_view").css("visibility", "visible");
+                }
+            }
+        }
     });
-
-    appt_id = 0;
-    start_hour = 9;
-    end_hour = 17;
-    _put_hours_list(start_hour, end_hour);
+appt_id = 0;
+start_hour = 9;
+end_hour = 17;
+_put_hours_list(start_hour, end_hour);
 
     //Add tabs Listeners
     $('#actualTabs a[href="#nameList"]').click(function (e) {
@@ -41,14 +55,6 @@ $(document).ready(function(){
   });
 
     $('#popovergoddamit').popover('hide');
-
-    $("a.patient").click(function(){
-        // $("#starting_patient_view").hide();
-        $("#starting_patient_view").css("visibility", "hidden");
-        $("#letterman_patient_view").css("visibility", "visible");
-
-        // $("#letterman_patient_view").show();
-    });
 
     // set view date to current
     view_date = new Date();
@@ -355,11 +361,11 @@ function _lightbox_new(){
     $("#lightbox_save").click(function(){
 
        if(($("#namepicker").val() == "") || ($("#timepicker").val() == "")){
-            content.append($('<div class="alert">'+
+        content.append($('<div class="alert">'+
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
             '<strong>Error:</strong> Please fill in all fields. Thanks!'+
             '</div>'));
-       } else {
+    } else {
         var new_appt = new Appointment($('#lightbox_selected').val(),
             $('#datepicker').val(),
             $("#timepicker").val(),
@@ -377,9 +383,9 @@ function _lightbox_new(){
             " on "+
             new_appt.date+
             "!</div>"), 5);
-       }
+    }
 
-    });
+});
 
 }
 
