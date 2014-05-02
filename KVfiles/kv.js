@@ -23,7 +23,6 @@ $(document).ready(function(){
             });
             var patientNameList = document.getElementById("patientNameList");
             for (var i=0; i<patientInfo.length; i++) {
-                console.log(patientInfo[i]);
                 var newListItem = document.createElement("li");
                 var newLinkItem = document.createElement("a");
                 newLinkItem.href="#";
