@@ -27,13 +27,23 @@ $(document).ready(function(){
                 var newLinkItem = document.createElement("a");
                 newLinkItem.href="#";
                 newListItem.className = newListItem.className+" list-group-item patient";
+                newLinkItem.className = i;
                 var newListValue = document.createTextNode(patientInfo[i][1]);
                 newLinkItem.appendChild(newListValue);
                 newListItem.appendChild(newLinkItem);
                 patientNameList.appendChild(newListItem);
+
                 newListItem.onclick = function() {
                     $("#starting_patient_view").css("visibility", "hidden");
                     $("#letterman_patient_view").css("visibility", "visible");
+                    var patientSummary = document.getElementById("patientSummary");
+                    var i = this.children[0].className;
+                    console.log(i);
+                    patientSummary.innerHTML = "<p><span>"+patientInfo[i][3]+"</span></p>";
+                    var patientConditions = document.getElementById("patientConditions");
+                    patientConditions.innerHTML = "<p><span>"+patientInfo[i][2]+"</span></p>";
+                    var patientTitle = document.getElementById("title1");
+                    patientTitle.innerHTML = patientInfo[i][1];
                 }
             }
         }
