@@ -44,13 +44,13 @@ rel="stylesheet">
 
       <div class="pull-right center" id="notificationDiv">
         <!-- TO DO: (INSERT BACKEND REQUEST FOR DATA-CONTENT) -->
-         <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
-           <span class="glyphicon glyphicon-bell"></span>        </button>
-      </div>
-    </div>
-  </div>
+        <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
+         <span class="glyphicon glyphicon-bell"></span>        </button>
+       </div>
+     </div>
+   </div>
 
-  <div class="navbar navbar-inverse navbar-top" role="navigation">
+   <div class="navbar navbar-inverse navbar-top" role="navigation">
     <div class="container-fluid lowerbar">
       <div id="tabContainer" class="tabbable">
         <ul id="actualTabs" class="nav nav-tabs">
@@ -63,11 +63,11 @@ rel="stylesheet">
               <div class="col-xs-9 main"> 
                 <div id="calendar_view" class="span12 hero-unit">
                   <div id="navbar" class="row">
-                      <a id="today" class="btn">Today</a>
-                      <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
-                      <input type="hidden" id="calendar_icon" />
-                      <span id="view_date"></span>
-                      <button class="btn btn-success pull-right" id="add_appt">Add Appointment</button>
+                    <a id="today" class="btn">Today</a>
+                    <a id="prev_day" class="btn"><</a><a id="next_day" class="btn">></a>
+                    <input type="hidden" id="calendar_icon" />
+                    <span id="view_date"></span>
+                    <button class="btn btn-success pull-right" id="add_appt">Add Appointment</button>
                   </div>
                   <br>
                 </div>
@@ -79,15 +79,7 @@ rel="stylesheet">
             <div id = "freedomRow" class="row-fluid">
               <div id="patientList"class="col-xs-3 sidebar"> <!--VK-->
                 <input type="text" class="form-control input-lg" id="searchBar" placeholder="Search...">
-                <ul class="list-group">
-                  <!-- <li>       
-                    <input type="text" class="form-control" id="searchBar" placeholder="Search...">
-
-                  </li> -->
-                  <li><a class="list-group-item patient" href="#">Johnny Carson</a></li>
-                  <li><a class="list-group-item patient" href="#">David Letterman</a></li>
-                  <li><a class="list-group-item patient" href="#">Jimmy Fallon</a></li>
-                  <li><a class="list-group-item patient" href="#">Stephen Colbert</a></li>
+                <ul class="list-group" id="patientNameList">
                 </ul>
               </div>
               <div class="col-xs-9 main" id="freedommain"> <!--VK-->
