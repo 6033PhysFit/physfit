@@ -511,6 +511,7 @@ label {
 
 .popover {
   z-index: 10000;
+  position: relative !important;
 }
 
 #popovergoddamit{
