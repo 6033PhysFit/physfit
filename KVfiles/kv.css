@@ -283,7 +283,7 @@ label {
   height: 80px;
 }
 
-#lightbox_remove {
+#lightbox_remove, #lightbox_cancel {
   margin-right: 5px;
 }
 

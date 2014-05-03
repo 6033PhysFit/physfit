@@ -438,7 +438,7 @@ function _generate_timepicker(start, end, curr){
 function _lightbox_appt(appt){
 
     var content = $("<div id='innerbox' />");
-    content.append($("<div id='lightbox_title'>"+appt.patient_name+"'s Appointment<div id='lightbox_cancel' style='float:right;color:red;cursor:pointer'><b>X</b></div></div>"));
+    content.append($("<div id='lightbox_title' class='text-center'>"+appt.patient_name+"'s Appointment</div>"));
     content.append($("<br>"));
     content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+appt.date+"'></input></div>"));
     content.append($("<div id='lightbox_time'><b>Time:</b>"+
@@ -459,6 +459,8 @@ function _lightbox_appt(appt){
         ));
 
     var button_div = $("<div id='lightbox_buttons' />");
+    button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
+
     button_div.append($("<button id='lightbox_remove' class='btn btn-danger'>Remove</button>"));
     button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
@@ -530,7 +532,7 @@ function _lightbox_appt(appt){
 
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
-    content.append($("<div id='lightbox_title'>Create a New Appointment<div id='lightbox_cancel' style='float:right;color:red;cursor:pointer'><b>X</b></div></div>"));
+    content.append($("<div id='lightbox_title' class='text-center'>Create a New Appointment</div>"));
     content.append($("<br>"));
     content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
 
@@ -556,6 +558,7 @@ function _lightbox_new(){
         ));
 
     var button_div = $("<div id='lightbox_buttons' />");
+    button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
     button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
     content.append(button_div);
