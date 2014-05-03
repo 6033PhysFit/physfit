@@ -354,7 +354,6 @@ function _generate_timepicker(start, end, curr){
 
 // display the lightbox for a certain Appointment object appt
 
-// TO DO: remove appt
 function _lightbox_appt(appt){
 
     var content = $("<div id='innerbox' />");
@@ -392,7 +391,6 @@ function _lightbox_appt(appt){
     $("#lightbox_cancel").click(_closeLightbox);
 
     $("#lightbox_remove").click(function(){
-        // TO DO: (Insert backend call to delete appointment)
         var query = new Parse.Query(parseAppointment);
         query.get(appt.appt_id, {
           success: function(ap) {
@@ -418,14 +416,13 @@ function _lightbox_appt(appt){
         });
     });
 
-    // TODO: Fix weird duplicate thing
     $("#lightbox_save").click(function(){
         appt.kind = $('#lightbox_selected').val();
         appt.date = $('#datepicker').val();
         appt.hour = Number($('#timepicker').val());
         appt.notes = $("#lightbox_input").val();
 
-        // Create a pointer to an object of class Point with id dlkj83d
+        // Create a pointer to an the parseAppointment object
         var ap = new parseAppointment();
         ap.id = appt.appt_id;
 
@@ -447,55 +444,6 @@ function _lightbox_appt(appt){
             alert('Failed to save the appointment, with error code: ' + error.description);
           }
         });
-        // var query = new Parse.Query(parseAppointment);
-        // query.get(appt.appt_id, {
-        //   success: function(ap) {
-        //     ap.set("type", appt.kind);
-        //     ap.set("date", appt.date);
-        //     ap.set("time", appt.hour);
-        //     ap.set("notes", appt.notes);
-        //     ap.save(null, {
-        //         success: function(ap) {
-        //             // Execute any logic that should take place after the object is saved.
-        //             //alert('New object created with objectId: ' + appointment.id);
-        //             // console.log(ap);
-        //             $(".appt_elem").parent().remove();
-        //             _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-        //             _closeLightbox();
-
-
-        //             // TODO: (BACKEND) INSERT APPT BACKEND
-        //             _lightbox($("<div style='text-align: center'>You've saved the appointment for "+
-        //                 appt.patient_name+
-        //                 " at "+
-        //                 _readable_hour(appt.hour)+
-        //                 " on "+
-        //                 appt.date+
-        //                 "!</div>"), 5);
-        //              _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-
-        //         },
-        //         error: function(ap, error) {
-        //             // Execute any logic that should take place if the save fails.
-        //             // error is a Parse.Error with an error code and description.
-        //             alert('Failed to save the appoinment, with error code: ' + error.description);
-        //         }
-        //     });
-        //     // ap.save();
-        //     // _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-        //     // _closeLightbox();
-        //     // _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-
-
-        //   },
-        //   error: function(ap, error) {
-        //     // The object was not retrieved successfully.
-        //     // error is a Parse.Error with an error code and description.
-        //     alert("Appointment to be saved was not found: " + error.description);
-        //   }
-        // });
-        // _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-        // _closeLightbox();
     });
 }
 
@@ -521,6 +469,7 @@ function _lightbox_new(){
 
 
 
+
     content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
         "<div><textarea id='lightbox_input'></textarea></div>"
         ));
@@ -533,19 +482,43 @@ function _lightbox_new(){
     // draw on screen
     _lightbox(content, 50);
 
+    var availableNames = [];
+    patientInfo.forEach(function(patient){availableNames.push(patient[1]);});
+    console.log(availableNames);
+    $( "#namepicker" ).autocomplete({
+        source: availableNames//,
+        // select: function (event, ui)
+        // {
+        //     //Checks the selected word
+        //     //and appropriately populates the columns
+        //     var selectedItem = ui.item;
+        //     var guess = selectedItem.value;
+        //     $("#namepicker").autocomplete("close");
+            
+        //     selectedItem.focus();
+        // }
+    });
+
+    $( "#namepicker" ).autocomplete( "option", "appendTo", ".eventInsForm" );
+    console.log("on the back");
     $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' });
 
 
     $("#lightbox_cancel").click(_closeLightbox);
-    // TODO: Save appointment with parse
     $("#lightbox_save").click(function(){
 
-       if(($("#namepicker").val() == "") || ($("#timepicker").val() == "")){
-        content.append($('<div class="alert">'+
+        if(($("#namepicker").val() == "") || ($("#timepicker").val() == "")){
+            content.append($('<div class="alert">'+
             '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
             '<strong>Error:</strong> Please fill in all fields. Thanks!'+
+            '</div>'));}
+        else if($.inArray($("#namepicker").val(), availableNames) == -1){
+            content.append($('<div class="alert">'+
+            '<button type="button" class="close" data-dismiss="alert">&times;</button>'+
+            '<strong>Error:</strong> Please choose an existing patient'+
             '</div>'));
-    } else {
+        }
+        else {
         //new Appointment('ev', date_str, 11, 'Keertan Kini', 'Running exercises');
         queryForPatient = new Parse.Query(parsePatient);
 
@@ -578,7 +551,6 @@ function _lightbox_new(){
                     _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
                     _closeLightbox();
 
-                    // TODO: (BACKEND) INSERT APPT BACKEND
                     _lightbox($("<div style='text-align: center'>You've added an appointment for "+
                         patient_name+
                         " at "+

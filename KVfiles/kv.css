@@ -13,6 +13,15 @@
   1) fix calendar formatting (weird stuff still with it like when you toggle days),
   2) min window width (deal with resizing) --> fix navbar (weird things...),
 */
+
+.ui-autocomplete {
+  /*position: absolute;*/
+  top: 0;
+  left: 0;
+  z-index: 1510 !important;
+  font-family:'Open Sans';
+}
+
 body {
   font-family: 'Open Sans';
   font-size: 1.5em;
