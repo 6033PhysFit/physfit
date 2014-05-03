@@ -538,3 +538,7 @@ label {
 .nopadding{
   padding: 0px;
 }
+
+#textareaEdit {
+  width: 100%;
+}
