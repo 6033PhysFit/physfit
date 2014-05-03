@@ -39,12 +39,16 @@ body {
     background-color: inherit;
     color: #999;
 }
-/*#calendarTab:hover{
-  color:#999;
+
+#calendarTab:hover{
+  cursor: pointer;
+  background-color:#000;
   }
 #patientTab:hover{
-  color:#999;
-}*/
+  cursor: pointer;
+  background-color:#000;
+}
+
 .navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
   /*color:#EEE;*/
   color:#999;
@@ -128,10 +132,10 @@ li.appointment{
   min-width:100%;
   border-bottom: 1px solid #999;
 }
-/*a.patient {
-  width: 242px;
-  border-bottom: 1px solid #999;
-}*/
+li.patient:hover {
+  cursor: pointer;
+  background-color: #999;
+}
 ul
 {
     list-style-type: none;
@@ -149,7 +153,7 @@ p.time-heading{
 }
 .navbar{
   border:none;
-  background-color: inherit;
+  background-color: #000;
   font-color:black;
 
 }
