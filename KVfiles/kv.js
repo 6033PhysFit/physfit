@@ -440,23 +440,36 @@ function _lightbox_appt(appt){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title' class='text-center'>"+appt.patient_name+"'s Appointment</div>"));
     content.append($("<br>"));
-    content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+appt.date+"'></input></div>"));
-    content.append($("<div id='lightbox_time'><b>Time:</b>"+
-        _generate_timepicker(start_hour, end_hour, appt.hour)+
-        "</div>"));
-    content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-        "<select id='lightbox_selected'>"+
-        "<option value='ch'>Check-In</option>"+
-        "<option value='ev'>Evaluation</option>"+
-        "<option value='hon'>Hands-On</option>"+
-        "<option value='hof'>Hands-Off</option>"+
-        "<option value='me'>Meeting</option>"+
-        "</select>"+
-        "</div>"));
+    content.append($("<div id='lightbox_container' class='container-fluid'>"+
+                        "<div id='lightbox_row' class='row-fluid'>"+
+                            "<div class='span3'>"+
+                                "<div class='lightbox_item'>Date:</div>"+
+                                "<div class='lightbox_item'>Time:</div>"+
+                                "<div class='lightbox_item'>Type:</div>"+
+                                "<div id='lightbox_notes_title' class='lightbox_item'>Notes:</div>"+
+                            "</div>"+
+                            "<div class='span9'>"+
+                                "<div class='lightbox_item'><input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"+
+                                "<div class='lightbox_item'>"+_generate_timepicker(start_hour, end_hour, appt.hour)+"</div>"+
+                                "<div class='lightbox_item'>"+
+                                    "<div id='lightbox_kind'>"+
+                                        "<select id='lightbox_selected'>"+
+                                        "<option value='ch'>Check-In</option>"+
+                                        "<option value='ev'>Evaluation</option>"+
+                                        "<option value='hon'>Hands-On</option>"+
+                                        "<option value='hof'>Hands-Off</option>"+
+                                        "<option value='me'>Meeting</option>"+
+                                        "</select>"+
+                                    "</div>"+
+                                "</div>"+                               
+                            "</div>"+
+                        "</div>"+
+                    "</div>"));
 
-    content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
-        "<div><textarea id='lightbox_input'>"+appt.notes+"</textarea></div>"
+    content.append($("<div id='lightbox_notes'>"+
+        "<textarea id='lightbox_input'>"+appt.notes+"</textarea></div>"
         ));
+
 
     var button_div = $("<div id='lightbox_buttons' />");
     button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
@@ -534,27 +547,65 @@ function _lightbox_new(){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title' class='text-center'>Create a New Appointment</div>"));
     content.append($("<br>"));
-    content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
 
-    content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
-    content.append($("<div id='lightbox_time'><b>Time:</b>"+
-        _generate_timepicker(start_hour, end_hour)+
-        "</div>"));
-    content.append($("<div id='lightbox_kind'><b>Type:</b> "+
-        "<select id='lightbox_selected'>"+
-        "<option value='ch'>Check-In</option>"+
-        "<option value='ev'>Evaluation</option>"+
-        "<option value='hon'>Hands-On</option>"+
-        "<option value='hof'>Hands-Off</option>"+
-        "<option value='me'>Meeting</option>"+
-        "</select>"+
-        "</div>"));
+    content.append($("<div id='lightbox_container' class='container-fluid'>"+
+                        "<div id='lightbox_row' class='row-fluid'>"+
+                            "<div class='span3'>"+
+                                "<div class='lightbox_item'>Name:</div>"+ 
+                                "<div class='lightbox_item'>Date:</div>"+
+                                "<div class='lightbox_item'>Time:</div>"+
+                                "<div class='lightbox_item'>Type:</div>"+
+                                "<div id='lightbox_notes_title' class='lightbox_item'>Notes:</div>"+
+                            "</div>"+
+                            "<div class='span9'>"+
+                                "<div class='lightbox_item'><input id='namepicker' type='text'></input></div>"+ 
+                                "<div class='lightbox_item'><input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"+
+                                "<div class='lightbox_item'>"+_generate_timepicker(start_hour, end_hour)+"</div>"+
+                                "<div class='lightbox_item'>"+
+                                    "<div id='lightbox_kind'>"+
+                                        "<select id='lightbox_selected'>"+
+                                        "<option value='ch'>Check-In</option>"+
+                                        "<option value='ev'>Evaluation</option>"+
+                                        "<option value='hon'>Hands-On</option>"+
+                                        "<option value='hof'>Hands-Off</option>"+
+                                        "<option value='me'>Meeting</option>"+
+                                        "</select>"+
+                                    "</div>"+
+                                "</div>"+
+                                // "<div class='lightbox_item'>"+
+                                //     "<div id='lightbox_notes'>"+
+                                //         "<textarea id='lightbox_input'></textarea>"+
+                                //     "</div>"+
+                                // "</div>"+                                
+                            "</div>"+
+                        "</div>"+
+                    "</div>"));
+
+    // content.append($("<div id='lightbox_name'><b>Name:</b> <input id='namepicker' type='text'></input></div>"));
+
+    // content.append($("<div id='lightbox_date'><b>Date:</b> <input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"));
+    // content.append($("<div id='lightbox_time'><b>Time:</b>"+
+    //     _generate_timepicker(start_hour, end_hour)+
+    //     "</div>"));
+    // content.append($("<div id='lightbox_kind'><b>Type:</b> "+
+    //     "<select id='lightbox_selected'>"+
+    //     "<option value='ch'>Check-In</option>"+
+    //     "<option value='ev'>Evaluation</option>"+
+    //     "<option value='hon'>Hands-On</option>"+
+    //     "<option value='hof'>Hands-Off</option>"+
+    //     "<option value='me'>Meeting</option>"+
+    //     "</select>"+
+    //     "</div>"));
 
 
 
 
-    content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
-        "<div><textarea id='lightbox_input'></textarea></div>"
+    // content.append($("<div id='lightbox_notes'><b>Notes:</b></div>"+
+    //     "<div><textarea id='lightbox_input'></textarea></div>"
+    //     ));
+
+    content.append($("<div id='lightbox_notes'>"+
+        "<textarea id='lightbox_input'></textarea></div>"
         ));
 
     var button_div = $("<div id='lightbox_buttons' />");
