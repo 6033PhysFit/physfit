@@ -109,10 +109,10 @@ rel="stylesheet">
                   </p> -->
                   <!-- Code below from http://jsfiddle.net/Wc4xt/158/ -->
                   <div class="panel-group" id="accordion">
-                     <div class="panel panel-default" id="panel-1">
-                      <div class="panel-heading">
-                        <h4 class="panel-title">
-                          Summary
+                   <div class="panel panel-default" id="panel-1">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        Summary
                       </h4>
                     </div>
                     <div id="collapseMinusOne" class="panel-collapse collapse in">
@@ -124,52 +124,48 @@ rel="stylesheet">
                     <div class="panel-heading">
                       <h4 class="panel-title">
                         Conditions
-                    </h4>
+                      </h4>
+                    </div>
+                    <div id="collapseZero" class="panel-collapse collapse in">
+                      <div class="panel-body" id="patientConditions">
+                      </div>
+                    </div>
                   </div>
-                  <div id="collapseZero" class="panel-collapse collapse in">
-                    <div class="panel-body" id="patientConditions">
+
+                  <div class="panel panel-default" id="panel1">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        Upcoming Appointments
+                      </h4>
+                    </div>
+                    <div id="collapseOne" class="panel-collapse collapse in">
+                      <div class="panel-body" id="patientUpcomingAppts">
+                      </div>
+                    </div>
+                  </div> 
+                  <div class="panel panel-default" id="panel2">
+                    <div class="panel-heading">
+                      <h4 class="panel-title">
+                        Past Appointments
+                      </h4>
+                    </div>
+                    <div id="collapseTwo" class="panel-collapse collapse in">
+                      <div class="panel-body" id="patientPastAppts">
+                      </div>
                     </div>
                   </div>
                 </div>
-
-                <div class="panel panel-default" id="panel1">
-                  <div class="panel-heading">
-                    <h4 class="panel-title">
-                      Upcoming Appointments
-                  </h4>
-                </div>
-                <div id="collapseOne" class="panel-collapse collapse in">
-                  <div class="panel-body" id="patientUpcomingAppts">
-                    <span id="date425"><a href="#">4/25/2014</a></span><br>
-                    <span id="date427"><a href="#">4/27/2014</a></span>
-                  </div>
-                </div>
-              </div> 
-              <div class="panel panel-default" id="panel2">
-                <div class="panel-heading">
-                  <h4 class="panel-title">
-                    Past Appointments
-                </h4>
               </div>
-              <div id="collapseTwo" class="panel-collapse collapse in">
-                <div class="panel-body" id="patientPastAppts">
-                  <span id="date42"><a href="#">4/2/2014</a></span><br>
-                  <span id="date327"><a href="#">3/27/2014</a></span>
-                </div>
+              <div class="col-xs-4">
+                <img id="patientImage" data-src="holder.js/250x250/auto" alt="250x250"/>
               </div>
             </div>
           </div>
         </div>
-        <div class="col-xs-4">
-          <img id="patientImage" data-src="holder.js/250x250/auto" alt="250x250"/>
-        </div>
       </div>
+
     </div>
   </div>
-</div>
-
-</div>
-</div>
 
 
     <!-- Bootstrap core JavaScript

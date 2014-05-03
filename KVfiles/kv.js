@@ -13,13 +13,13 @@ $(document).ready(function(){
 
     parsePatient = Parse.Object.extend("Patient");
     var query = new Parse.Query(parsePatient);
-  
+
     query.exists("Name");
     query.ascending("Name");
     query.find({
         success: function(results) {
             results.forEach(function(patient) {
-                patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary"), patient.get("image")]);
+                patientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary"), patient.get("image"), patient]);
             });
             var patientNameList = document.getElementById("patientNameList");
             for (var i=0; i<patientInfo.length; i++) {
@@ -46,18 +46,64 @@ $(document).ready(function(){
                     var patientImage = document.getElementById("patientImage");
                     patientImage.src = patientInfo[i][4].url();
                     var patientPastAppts = document.getElementById("patientPastAppts");
+                    patientPastAppts.innerHTML = "";
                     var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
-                    // TODO Ashley - fill in upcoming and past appts
+                    patientUpcomingAppts.innerHTML = "";
+                    var queryAppt = new Parse.Query(parseAppointment);
+                    queryAppt.lessThan("date", date_str);
+                    queryAppt.equalTo("patient",patientInfo[i][5]);
+                    queryAppt.find({
+                        success: function(results) {
+                            results.forEach(function(result) {
+                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'));
+                                var appt = document.createElement("a");
+                                appt.href="#";
+                                var apptText = document.createTextNode(result.get('date'));
+                                appt.appendChild(apptText);
+                                appt.onclick = function () {
+                                    _lightbox_appt(ap);
+                                }
+                                patientPastAppts.appendChild(appt);
+                                var lnbreak = document.createElement("br");
+                                patientPastAppts.appendChild(lnbreak);
+                            });
+                        },
+                        error: function(error) {
+                            alert("Appointment Error: " + error.code + " " + error.message);
+                        }
+                    });
+                    var queryApptFuture = new Parse.Query(parseAppointment);
+                    queryApptFuture.greaterThan("date", date_str);
+                    queryApptFuture.equalTo("patient",patientInfo[i][5]);
+                    queryApptFuture.find({
+                        success: function(results) {
+                            results.forEach(function(result) {
+                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'));
+                                var appt = document.createElement("a");
+                                appt.href="#";
+                                var apptText = document.createTextNode(result.get('date'));
+                                appt.appendChild(apptText);
+                                appt.onclick = function () {
+                                    _lightbox_appt(ap);
+                                }
+                                patientFutureAppts.appendChild(appt);
+                                var lnbreak = document.createElement("br");
+                                patientFutureAppts.appendChild(lnbreak);
+                            });
+                        },
+                        error: function(error) {
+                            alert("Appointment Error: " + error.code + " " + error.message);
+                        }
+                    });
                 }
             }
         }
     });
 
-    //console.log(patientInfo);
-    appt_id = 0;
-    start_hour = 9;
-    end_hour = 17;
-    _put_hours_list(start_hour, end_hour);
+appt_id = 0;
+start_hour = 9;
+end_hour = 17;
+_put_hours_list(start_hour, end_hour);
 
     //Add tabs Listeners
     $('#actualTabs a[href="#nameList"]').click(function (e) {
@@ -236,11 +282,9 @@ var _draw_date = function(date_str){
     //date_str = '2014/04/16';
     var queryAppt = new Parse.Query(parseAppointment);
     queryAppt.equalTo("date", date_str);
-    apptList = [];
 
     queryAppt.find({
       success: function(results) {
-        alert("Success");
         console.log(results);
         // for(var result in results){
         //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
@@ -253,22 +297,22 @@ var _draw_date = function(date_str){
               // The object was retrieved successfully.
               // console.log(pat.get("Name"));
               // console.log(result.get('type'));
-                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'));
-                insert_appt(ap);
-            },
-            error: function(object, error) {
+              var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'));
+              insert_appt(ap);
+          },
+          error: function(object, error) {
               alert("Patient Error: " + error.code + " " + error.message);
 
-            }
-          });
+          }
+      });
           //console.log(result.get('patient'));
-        });
+      });
 
-      },
-      error: function(error) {
+    },
+    error: function(error) {
         alert("Appointment Error: " + error.code + " " + error.message);
-      }
-    });
+    }
+});
 
     // for(var appt in appts){
     //     if(appts[appt].date == date_str){
