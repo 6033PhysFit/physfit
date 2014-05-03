@@ -4,6 +4,7 @@ var view_date;
 var start_hour;
 var end_hour;
 var patientInfo = [];
+var currentPatientIndex = 0;
 //NOTE appointment is for Parse, Appointment is for internal array until Parse fully implemented
 var parseAppointment;
 var parsePatient;
@@ -37,10 +38,11 @@ $(document).ready(function(){
                     $("#starting_patient_view").css("visibility", "hidden");
                     $("#letterman_patient_view").css("visibility", "visible");
                     var i = this.children[0].className;
+                    currentPatientIndex = i;
                     var patientSummary = document.getElementById("patientSummary");
-                    patientSummary.innerHTML = "<p><span>"+patientInfo[i][3]+"</span></p>";
+                    patientSummary.innerHTML = patientInfo[i][3];
                     var patientConditions = document.getElementById("patientConditions");
-                    patientConditions.innerHTML = "<p><span>"+patientInfo[i][2]+"</span></p>";
+                    patientConditions.innerHTML = patientInfo[i][2];
                     var patientTitle = document.getElementById("title1");
                     patientTitle.innerHTML = patientInfo[i][1]; 
                     var patientImage = document.getElementById("patientImage");
@@ -99,6 +101,85 @@ $(document).ready(function(){
             }
         }
     });
+    var summaryDivClicked = function () {
+        divClicked("summary");
+    }
+    var conditionsDivClicked = function () {
+        divClicked("conditions");
+    }
+    var divClicked = function (div) {
+        var divToReplace;
+        if(div == "summary") {
+            divToReplace = $("#patientSummary");
+        } else {
+            divToReplace = $("#patientConditions");
+        }
+        var divHtml = divToReplace.html();
+        var newTextItem = document.createElement("textarea");
+        newTextItem.innerHTML = divHtml;
+        newTextItem.className = "panel-body";
+        newTextItem.id = "textareaEdit";
+        divToReplace.replaceWith($(newTextItem));
+        newTextItem.focus();
+        // setup the blur event for this new textarea
+        if (div=="summary") {
+            $(newTextItem).blur(summaryEditableTextBlurred);            
+        } else {
+            $(newTextItem).blur(conditionsEditableTextBlurred);
+        }
+    }
+    var summaryEditableTextBlurred = function () {
+        editableTextBlurred("summary", $(this));
+    }
+    var conditionsEditableTextBlurred = function () {
+        editableTextBlurred("conditions", $(this));
+    }
+    var editableTextBlurred = function (div, thisDiv) {
+        var html = thisDiv.val();
+        var newTextItem = document.createElement("div");
+        newTextItem.innerHTML = html;
+        newTextItem.className = "panel-body";
+        if(div=="summary") {
+            newTextItem.id = "patientSummary";
+            newTextItem.click(summaryDivClicked);
+            patientInfo[currentPatientIndex][3] = html;
+            var query = new Parse.Query(parsePatient);
+            query.get(patientInfo[currentPatientIndex][0], {
+                success: function (patient) {
+                    patient.set("Summary",html);
+                    patient.save(null, {
+                        success: function(patient) {
+                            patient.save();
+                        }
+                    });
+                },
+                error: function (object, error) {
+                    console.log("struggz");
+                }
+            });
+        } else {
+            newTextItem.id = "patientConditions";
+            newTextItem.click(conditionsDivClicked);
+            patientInfo[currentPatientIndex][2] = html;
+            var query = new Parse.Query(parsePatient);
+            query.get(patientInfo[currentPatientIndex][0], {
+                success: function (patient) {
+                    patient.set("Conditions",html);
+                    patient.save(null, {
+                        success: function(patient) {
+                            patient.save();
+                        }
+                    });
+                },
+                error: function (object, error) {
+                    console.log("struggz");
+                }
+            });
+        }
+        thisDiv.replaceWith(newTextItem);
+    }
+    $('#edit_summary').click(summaryDivClicked);
+    $('#edit_conditions').click(conditionsDivClicked);
 
     appt_id = 0;
     start_hour = 9;
