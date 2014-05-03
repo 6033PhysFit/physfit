@@ -257,59 +257,29 @@ var _draw_date = function(date_str){
     $("#view_date").text(date_str);
     $(".appt_elem").parent().remove();
 
-    // var queryAppt = new Parse.Query(appointment);
-    // queryAppt.equalTo("date", date_str);
-    // apptList = [];
-
-    // queryAppt.find({
-    //   success: function(results) {
-    //     alert("Success");
-    //     // console.log(results);
-    //     // for(var result in results){
-    //     //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
-    //     // }
-    //     results.forEach(function(result) {
-    //         console.log(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
-    //         var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), result.get("patient").id, result.get('notes'));
-    //         insert_appt(ap)
-    //     });
-
-    //   },
-    //   error: function(error) {
-    //     alert("APPT Error: " + error.code + " " + error.message);
-    //   }
-    // });
     //date_str = '2014/04/16';
     var queryAppt = new Parse.Query(parseAppointment);
     queryAppt.equalTo("date", date_str);
 
     queryAppt.find({
       success: function(results) {
-        console.log(results);
-        // for(var result in results){
-        //     console.log(result);//.get('type'), result.get('date'), result.get('time'), 'Jeffrey Sun', result.get('notes'));
-        // }
         results.forEach(function(result) {
           // console.log(result.get('type'), result.get('date'), result.get('time'), result.get('notes'));
           var queryPat = new Parse.Query(parsePatient);
           queryPat.get(result.get("patient").id, {
             success: function(pat) {
               // The object was retrieved successfully.
-              // console.log(pat.get("Name"));
-              // console.log(result.get('type'));
-              var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'));
-              insert_appt(ap);
-          },
-          error: function(object, error) {
+                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'));
+                insert_appt(ap);
+            },
+            error: function(object, error) {
               alert("Patient Error: " + error.code + " " + error.message);
 
-          }
-      });
-          //console.log(result.get('patient'));
-      });
-
-    },
-    error: function(error) {
+            }
+          });
+        });
+      },
+      error: function(error) {
         alert("Appointment Error: " + error.code + " " + error.message);
     }
 });
@@ -485,23 +455,70 @@ function _lightbox_new(){
             '<strong>Error:</strong> Please fill in all fields. Thanks!'+
             '</div>'));
     } else {
-        var new_appt = new Appointment($('#lightbox_selected').val(),
-            $('#datepicker').val(),
-            $("#timepicker").val(),
-            $("#namepicker").val(),
-            $("#lightbox_input").val());
+        //new Appointment('ev', date_str, 11, 'Keertan Kini', 'Running exercises');
+        queryForPatient = new Parse.Query(parsePatient);
 
-        _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-        _closeLightbox();
+        queryForPatient.equalTo("Name", $("#namepicker").val());
+        var patient_name = $("#namepicker").val();
+        var hour =  $("#timepicker").val();
+        var date = $('#datepicker').val();
+        queryForPatient.find({
+          success: function(results) {
+            //alert("Successfully retrieved " + results.length + " patient.");
 
-        // TODO: (BACKEND) INSERT APPT BACKEND
-        _lightbox($("<div style='text-align: center'>You've added an appointment for "+
-            new_appt.patient_name+
-            " at "+
-            _readable_hour(new_appt.hour)+
-            " on "+
-            new_appt.date+
-            "!</div>"), 5);
+            console.log(results[0]);
+
+            var appointment = new parseAppointment();
+            appointment.set("type", $('#lightbox_selected').val());
+            appointment.set("date", $('#datepicker').val());
+            appointment.set("time", Number($("#timepicker").val()));
+            appointment.set("notes", $("#lightbox_input").val());
+            //var patientObject = results[0];
+
+            appointment.set("patient", results[0]);
+            console.log(appointment);
+
+
+            appointment.save(null, {
+                  success: function(appointment) {
+                    // Execute any logic that should take place after the object is saved.
+                    //alert('New object created with objectId: ' + appointment.id);
+
+                    _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
+                    _closeLightbox();
+
+                    // TODO: (BACKEND) INSERT APPT BACKEND
+                    _lightbox($("<div style='text-align: center'>You've added an appointment for "+
+                        patient_name+
+                        " at "+
+                        _readable_hour(hour)+
+                        " on "+
+                        date+
+                        "!</div>"), 5);
+                  },
+                  error: function(appointment, error) {
+                    // Execute any logic that should take place if the save fails.
+                    // error is a Parse.Error with an error code and description.
+                    alert('Failed to create new appoinment, with error code: ' + error.description);
+                  }
+                });
+
+                // console.log(appointment);
+          },
+          error: function(error) {
+            alert("Save Appointment Error: " + error.code + " " + error.message);
+          }
+        });
+
+
+        /////////////////////////////
+        // var new_appt = new Appointment($('#lightbox_selected').val(),
+        //     $('#datepicker').val(),
+        //     $("#timepicker").val(),
+        //     $("#namepicker").val(),
+        //     $("#lightbox_input").val());
+
+
     }
 
 });
