@@ -252,10 +252,9 @@ $(document).ready(function(){
             if (!((e.keyCode >= 48 && e.keyCode <=90) || e.keyCode == 8 || (e.keyCode >= 96 && e.keyCode <= 111) || (e.keyCode >= 186 && e.keyCode <=222))) {
             }
             else {
-                console.log(Number(e.keyCode) >= 65 && Number(e.keyCode) <=90);
-                //TODO Search editing
+                //TODO Lack of Case sensitiviity
                 var queryPat = new Parse.Query(parsePatient);
-                queryPat.contains("Name", str);
+                queryPat.contains("Name_lowercase", str.toLowerCase());
                 queryPat.ascending("Name");
                 var filteredPatientInfo = []
                 $('#patientNameList').empty();
