@@ -9,6 +9,8 @@ var currentPatientIndex = 0;
 var parseAppointment;
 var parsePatient;
 var parseNotification;
+var text = '';
+
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
     parseAppointment = Parse.Object.extend("Appointment");
@@ -244,15 +246,15 @@ $(document).ready(function(){
     });
     
     $("#notificationButton").click(_lightbox_notification);
-
     $("#searchBar").keyup(function(e){     
         var str = $.trim( $(this).val() );
         if( str != "" ) {
-            var regx = /^[A-Za-z]+$/;
-            if (!((e.keyCode >= 48 && e.keyCode <=90) || e.keyCode == 8 || (e.keyCode >= 96 && e.keyCode <= 111) || (e.keyCode >= 186 && e.keyCode <=222))) {
+            //var regx = /^[A-Za-z]+$/;
+            if (!((e.keyCode >= 48 && e.keyCode <=90) || e.keyCode == 8 || (e.keyCode >= 96 && e.keyCode <= 111) || (e.keyCode >= 186 && e.keyCode <=222)) || text == str ) {
             }
             else {
                 //TODO Lack of Case sensitiviity
+                text = str;
                 var queryPat = new Parse.Query(parsePatient);
                 queryPat.contains("Name_lowercase", str.toLowerCase());
                 queryPat.ascending("Name");
