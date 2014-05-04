@@ -8,13 +8,14 @@ var currentPatientIndex = 0;
 //NOTE appointment is for Parse, Appointment is for internal array until Parse fully implemented
 var parseAppointment;
 var parsePatient;
+var parseNotification;
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
     parseAppointment = Parse.Object.extend("Appointment");
-
     parsePatient = Parse.Object.extend("Patient");
-    var query = new Parse.Query(parsePatient);
+    parseNotification = Parse.Object.extend("Notification");
 
+    var query = new Parse.Query(parsePatient);
     query.exists("Name");
     query.ascending("Name");
     query.find({
@@ -57,13 +58,13 @@ $(document).ready(function(){
                     queryAppt.find({
                         success: function(results) {
                             results.forEach(function(result) {
-                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id);
+                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
                                 var appt = document.createElement("a");
                                 appt.href="#";
                                 var apptText = document.createTextNode(result.get('date'));
                                 appt.appendChild(apptText);
                                 appt.onclick = function () {
-                                    _lightbox_appt(ap);
+                                    _lightbox_appt(ap, false);
                                 }
                                 patientPastAppts.appendChild(appt);
                                 var lnbreak = document.createElement("br");
@@ -80,13 +81,13 @@ $(document).ready(function(){
                     queryApptFuture.find({
                         success: function(results) {
                             results.forEach(function(result) {
-                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id);
+                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
                                 var appt = document.createElement("a");
                                 appt.href="#";
                                 var apptText = document.createTextNode(result.get('date'));
                                 appt.appendChild(apptText);
                                 appt.onclick = function () {
-                                    _lightbox_appt(ap);
+                                    _lightbox_appt(ap, false);
                                 }
                                 patientFutureAppts.appendChild(appt);
                                 var lnbreak = document.createElement("br");
@@ -128,12 +129,15 @@ $(document).ready(function(){
             $(newTextItem).blur(conditionsEditableTextBlurred);
         }
     }
+
     var summaryEditableTextBlurred = function () {
         editableTextBlurred("summary", $(this));
     }
+
     var conditionsEditableTextBlurred = function () {
         editableTextBlurred("conditions", $(this));
     }
+
     var editableTextBlurred = function (div, thisDiv) {
         var html = thisDiv.val();
         var newTextItem = document.createElement("div");
@@ -178,6 +182,7 @@ $(document).ready(function(){
         }
         thisDiv.replaceWith(newTextItem);
     }
+
     $('#edit_summary').click(summaryDivClicked);
     $('#edit_conditions').click(conditionsDivClicked);
 
@@ -197,7 +202,7 @@ $(document).ready(function(){
       $(this).tab('show');
   });
 
-    $('#popovergoddamit').popover('hide');
+    // $('#notificationButton').popover('hide');
 
     // set view date to current
     view_date = new Date();
@@ -214,7 +219,7 @@ $(document).ready(function(){
     // appts[7] = new Appointment('me', '2014/04/27', 11, 'Vynnie Kong', 'Progress Report');
     // appts[8] = new Appointment('me', '2014/04/02', 11, 'David', 'Progress Report');
     // appts[9] = new Appointment('me', '2014/03/27', 11, 'David', 'Progress Report');
-    
+
     // put appts into sheet
     _draw_date(date_str);
 
@@ -238,17 +243,22 @@ $(document).ready(function(){
     $("#add_appt").click(_lightbox_new);
 
     $("#date425").click(function(){
-        _lightbox_appt(appts[6]);
+        _lightbox_appt(appts[6], false);
     });
     $("#date427").click(function(){
-        _lightbox_appt(appts[7]);
+        _lightbox_appt(appts[7], false);
     });
     $("#date42").click(function(){
-        _lightbox_appt(appts[8]);
+        _lightbox_appt(appts[8], false);
     });
     $("#date327").click(function(){
-        _lightbox_appt(appts[9]);
+        _lightbox_appt(appts[9], false);
     });
+    
+    $("#notificationButton").click(_lightbox_notification);
+
+    //end button click 
+
 });
 
 
@@ -272,7 +282,7 @@ var insert_appt = function(appt){
 
     // attach popup handler
     apptElement.click(function(){
-        _lightbox_appt(appt);
+        _lightbox_appt(appt, false);
     });
 }
 
@@ -302,13 +312,14 @@ var set_day = function(date){
 // name = notes for that appointment
 // returns: Appointment object
 
-var Appointment = function(kind, date, hour, patient_name, notes, id){
+var Appointment = function(kind, date, hour, patient_name, notes, id, information){
     this.kind = kind;
     this.date = date;
     this.hour = hour;
     this.patient_name = patient_name;
     this.notes = notes;
     this.appt_id = id;
+    this.information = information;
     this.to_string = function(){
         var s = "<span>";
         if(this.kind == "ch"){
@@ -350,7 +361,7 @@ var _draw_date = function(date_str){
               queryPat.get(result.get("patient").id, {
                 success: function(pat) {
                   // The object was retrieved successfully.
-                    var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'), result.id);
+                    var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), pat.get("Name"), result.get('notes'), result.id, []);
                     insert_appt(ap);
                 },
                 error: function(object, error) {
@@ -432,10 +443,111 @@ function _generate_timepicker(start, end, curr){
     return s;
 }
 
+//display notifications lightbox
+function _lightbox_notification(){
+    var notification_content=$("<div id='innerbox' />");
+    notification_content.append($("<div id='lightbox_title' class='text-center'>Appointment Requests</div><br>"));
+
+    var queryNot = new Parse.Query(parseNotification);
+
+    //Get most recently created first
+    queryNot.descending("createdAt");
+
+    //Include patient data
+    queryNot.include("patient");
+
+    // notPatientIDs = []
+    queryNot.find({
+        success: function(results) {
+            if(results.length == 0){
+                notification_content.append($("<div class='text-center'>No requests at this time</div><br>"));
+
+                var button_div = $("<div id='lightbox_buttons' />");
+                button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
+                notification_content.append(button_div);
+
+                _lightbox(notification_content, 50);
+
+                $("#lightbox_cancel").click(_closeLightbox);
+            }
+            else{
+                var notification_info = []
+                // console.log(results);
+                results.forEach(function(result) {
+                    var patient = result.get("patient");
+                    notification_info.push([patient.get("Name"), result.get('type'), patient, result]);
+                    // console.log(patient);
+                });
+
+                var list_content = '';
+                for (var i=0; i<notification_info.length; i++) {
+                    var kind = notification_info[i][1];
+                     if(kind == "ch"){
+                            kind = "Check-In";
+                        } else if(kind == "ev"){
+                            kind = "Evaluation";
+                        } else if(kind == "hon"){
+                            kind = "Hands-On";
+                        } else if(kind == "hof"){
+                            kind = "Hands-Off";
+                        } else if(kind == "me"){
+                            kind = "Meeting";
+                        } else {
+                            kind = "Other";
+                        }
+                    list_content += '<li ' + 'id="notification_list_' + i + '" class="notification">'+
+                        '<a href="#" id="notification_link_' + i + '">' +
+                        notification_info[i][0] + '<span class="pull-right">' + kind +
+                        '</span>'+'</a>'+  '</li>';
+                    }
+                notification_content.append($("<ul class='nav nav-pills nav-stacked' id='notificationList'>"+
+                    list_content+
+                    "</ul>"));
+
+                // notification_content.append($("</ul>"));
+
+                var button_div = $("<div id='lightbox_buttons' />");
+                button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
+
+                notification_content.append(button_div);
+                _lightbox(notification_content, 50);
+                //console.log('out');
+                for (var i=0; i<notification_info.length; i++) {
+                    var link_id = 'notification_link_'+i;
+                    view_date = new Date();
+                    console.log(link_id);
+                    var date_str = $.datepicker.formatDate('yy/mm/dd', view_date);
+                    
+                    var link = document.getElementById(link_id);
+                    //console.log(link);
+                    // console.log(ap);
+                    // $(link_id).click(function(ap){
+                    //     consle.log('inside');
+                    //     _lightbox_appt(ap, true);
+                    // });
+                if (typeof window.addEventListener === 'function'){
+                        (function (_link) {
+                            //link.onclick = _lightbox_appt(ap, true);
+                            var ap = new Appointment(notification_info[i][1], date_str, 9, notification_info[i][0], '', notification_info[i][2].id, [notification_info[i][2],notification_info[i][3]]);
+
+                            link.addEventListener('click', function(){
+                                _lightbox_appt(ap, true);
+                            });
+                        })(link);
+                    }
+                }
+
+                $("#lightbox_cancel").click(_closeLightbox);
+
+            }
+
+        }
+    });
+}
 
 // display the lightbox for a certain Appointment object appt
-
-function _lightbox_appt(appt){
+function _lightbox_appt(appt, isNotification){
+    // console.log(appt);
 
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title' class='text-center'>"+appt.patient_name+"'s Appointment</div>"));
@@ -470,79 +582,149 @@ function _lightbox_appt(appt){
         "<textarea id='lightbox_input'>"+appt.notes+"</textarea></div>"
         ));
 
+    if(isNotification){
+        var button_div = $("<div id='lightbox_buttons' />");
+        button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
+        button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
-    var button_div = $("<div id='lightbox_buttons' />");
-    button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
+        content.append(button_div);
 
-    button_div.append($("<button id='lightbox_remove' class='btn btn-danger'>Remove</button>"));
-    button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
+        _lightbox(content, 50);
 
-    content.append(button_div);
+        $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
+        $("#lightbox_selected").val(appt.kind); // set default to appt's current type
 
-    _lightbox(content, 50);
+        $("#lightbox_cancel").click(_closeLightbox);
 
-    $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
-    $("#lightbox_selected").val(appt.kind); // set default to appt's current type
+        $("#lightbox_save").click(function(){
+            appt.kind = $('#lightbox_selected').val();
+            appt.date = $('#datepicker').val();
+            appt.hour = Number($('#timepicker').val());
+            appt.notes = $("#lightbox_input").val();
 
-    $("#lightbox_cancel").click(_closeLightbox);
+            patient = appt.information[0];            
+            notification = appt.information[1];
 
-    $("#lightbox_remove").click(function(){
-        var query = new Parse.Query(parseAppointment);
-        query.get(appt.appt_id, {
-          success: function(ap) {
-            // The object was retrieved successfully.
-                ap.destroy({
-                    success: function(ap) {
+            // Create a pointer to an the parseAppointment object
+            var ap = new parseAppointment();
+            // Set a new value on quantity
+            ap.set("type", appt.kind);
+            ap.set("date", appt.date);
+            ap.set("time", appt.hour);
+            ap.set("notes", appt.notes);
+            ap.set("patient", patient);
+
+            ap.save(null, {
+              success: function(ap) {
+                // Execute any logic that should take place after the object is saved.
+
+                //DELETE THE NOTIFICATON
+                notification.destroy({
+                    success: function(notification) {
                         // The object was deleted from the Parse Cloud.
-                        _draw_date($.datepicker.formatDate('yy/mm/dd', view_date)); // redraw calendar
+
+                        _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));//redraw calendar
                         _closeLightbox();
+
+                        _lightbox($("<div style='text-align: center'>You've added an appointment for "+
+                            patient.get('Name')+
+                            " at "+
+                            _readable_hour(appt.hour)+
+                            " on "+
+                            appt.date+
+                            "!</div>"), 5);
                     },
-                    error: function(ap, error) {
+                    error: function(notification, error) {
                         // The delete failed.
                         // error is a Parse.Error with an error code and description.
-                        alert("Appointment could not be deleted: " + error.description);
-                        }
-                    });
-          },
-          error: function(ap, error) {
-            // The object was not retrieved successfully.
-            // error is a Parse.Error with an error code and description.
-            alert("Appointment to be deleted was not found: " + error.description);
-          }
+                        alert("Notification could not be deleted: " + error.description);
+                    }
+                });
+              },
+              error: function(ap, error) {
+                // Execute any logic that should take place if the save fails.
+                // error is a Parse.Error with an error code and description.
+                alert('Failed to answer the notification, with error code: ' + error.description);
+              }
+            });
         });
-    });
 
-    $("#lightbox_save").click(function(){
-        appt.kind = $('#lightbox_selected').val();
-        appt.date = $('#datepicker').val();
-        appt.hour = Number($('#timepicker').val());
-        appt.notes = $("#lightbox_input").val();
+    }
+    else{
+        var button_div = $("<div id='lightbox_buttons' />");
+        button_div.append($("<button id='lightbox_cancel' class='btn btn-default'>Cancel</button>"));
 
-        // Create a pointer to an the parseAppointment object
-        var ap = new parseAppointment();
-        ap.id = appt.appt_id;
+        button_div.append($("<button id='lightbox_remove' class='btn btn-danger'>Remove</button>"));
+        button_div.append($("<button id='lightbox_save' class='btn btn-primary'>Save</button>"));
 
-        // Set a new value on quantity
-        ap.set("type", appt.kind);
-        ap.set("date", appt.date);
-        ap.set("time", appt.hour);
-        ap.set("notes", appt.notes);
+        content.append(button_div);
 
-        // Save
-        ap.save(null, {
-          success: function(ap) {
-            _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
-            _closeLightbox();
-          },
-          error: function(ap, error) {
-            // The save failed.
-            // error is a Parse.Error with an error code and description.
-            alert('Failed to save the appointment, with error code: ' + error.description);
-          }
+        _lightbox(content, 50);
+
+        $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' })
+        $("#lightbox_selected").val(appt.kind); // set default to appt's current type
+
+        $("#lightbox_cancel").click(_closeLightbox);
+
+        $("#lightbox_remove").click(function(){
+            var query = new Parse.Query(parseAppointment);
+            query.get(appt.appt_id, {
+              success: function(ap) {
+                // The object was retrieved successfully.
+                    ap.destroy({
+                        success: function(ap) {
+                            // The object was deleted from the Parse Cloud.
+                            _draw_date($.datepicker.formatDate('yy/mm/dd', view_date)); // redraw calendar
+                            _closeLightbox();
+                        },
+                        error: function(ap, error) {
+                            // The delete failed.
+                            // error is a Parse.Error with an error code and description.
+                            alert("Appointment could not be deleted: " + error.description);
+                            }
+                        });
+              },
+              error: function(ap, error) {
+                // The object was not retrieved successfully.
+                // error is a Parse.Error with an error code and description.
+                alert("Appointment to be deleted was not found: " + error.description);
+              }
+            });
         });
-    });
+
+        $("#lightbox_save").click(function(){
+            appt.kind = $('#lightbox_selected').val();
+            appt.date = $('#datepicker').val();
+            appt.hour = Number($('#timepicker').val());
+            appt.notes = $("#lightbox_input").val();
+
+            // Create a pointer to an the parseAppointment object
+            var ap = new parseAppointment();
+            ap.id = appt.appt_id;
+
+            // Set a new value on quantity
+            ap.set("type", appt.kind);
+            ap.set("date", appt.date);
+            ap.set("time", appt.hour);
+            ap.set("notes", appt.notes);
+
+            // Save
+            ap.save(null, {
+              success: function(ap) {
+                _draw_date($.datepicker.formatDate('yy/mm/dd', view_date));
+                _closeLightbox();
+              },
+              error: function(ap, error) {
+                // The save failed.
+                // error is a Parse.Error with an error code and description.
+                alert('Failed to save the appointment, with error code: ' + error.description);
+              }
+            });
+        });
+    }
 }
 
+// display the lightbox to create a new Appointment
 function _lightbox_new(){
     var content = $("<div id='innerbox' />");
     content.append($("<div id='lightbox_title' class='text-center'>Create a New Appointment</div>"));
@@ -619,7 +801,7 @@ function _lightbox_new(){
 
     var availableNames = [];
     patientInfo.forEach(function(patient){availableNames.push(patient[1]);});
-    console.log(availableNames);
+    // console.log(availableNames);
     $( "#namepicker" ).autocomplete({
         source: availableNames//,
         // select: function (event, ui)
@@ -635,7 +817,7 @@ function _lightbox_new(){
     });
 
     $( "#namepicker" ).autocomplete( "option", "appendTo", ".eventInsForm" );
-    console.log("on the back");
+    // console.log("on the back");
     $('#datepicker').datepicker({ dateFormat: 'yy/mm/dd' });
 
 
@@ -665,7 +847,7 @@ function _lightbox_new(){
           success: function(results) {
             //alert("Successfully retrieved " + results.length + " patient.");
 
-            console.log(results[0]);
+            // console.log(results[0]);
 
             var appointment = new parseAppointment();
             appointment.set("type", $('#lightbox_selected').val());
@@ -675,7 +857,7 @@ function _lightbox_new(){
             //var patientObject = results[0];
 
             appointment.set("patient", results[0]);
-            console.log(appointment);
+            // console.log(appointment);
 
 
             appointment.save(null, {
@@ -725,7 +907,7 @@ function _lightbox_new(){
 // content = DOM element
 // top = px from top
 function _lightbox(content, top){
-
+    //console.log('in');
     // add lightbox/shadow <div/>'s if not previously added
     if($('#lightbox').size() == 0){
         var theLightbox = $('<div id="lightbox"/>');
@@ -749,6 +931,7 @@ function _lightbox(content, top){
     // display the lightbox
     $('#lightbox').show();
     $('#lightbox-shadow').show();
+    //console.log('still in');
 }
 
 // close the lightbox

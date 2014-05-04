@@ -39,14 +39,16 @@ rel="stylesheet">
         <a class="navbar-brand" href="#" id="logo">PhysFit</a>
       </div>
 
-      <div style='position:fixed; right: 10px; top: 10px' id="notificationDiv">
+      <div id="notificationDiv">
         <!-- TO DO: (INSERT BACKEND REQUEST FOR DATA-CONTENT) -->
-        <button type="button" id="popovergoddamit" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time.">
-         <span class="glyphicon glyphicon-bell"></span>
-       </button>
-     </div>
-   </div>
- </div>
+<!--         <button type="button" id="notificationButton" class="btn btn-sm" data-container="body" data-toggle="popover" data-placement="left" data-content="No requests at this time."> -->
+        <button type="button" id="notificationButton" class="btn btn-lg">
+          <span id="notificationIcon"class="glyphicon glyphicon-bell"></span><br>
+          <!-- <span id="notificationCount" class="badge">42</span> -->
+        </button>
+      </div>
+    </div>
+  </div>
 
  <div class="lowerbar">
   <div id="tabContainer" class="tabbable">
