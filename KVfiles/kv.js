@@ -10,6 +10,7 @@ var parseAppointment;
 var parsePatient;
 var parseNotification;
 var text = '';
+var inSearch = false;
 
 $(document).ready(function(){
     Parse.initialize("KTPQvAC5MnRTfoPJfqtOq1HS5zQy5OomLrRVmkH0", "UcT9MFG78hnKlgVz94FEolxdmJ63xyy1ZG9TTo10");
@@ -246,198 +247,209 @@ $(document).ready(function(){
     });
     
     $("#notificationButton").click(_lightbox_notification);
-    $("#searchBar").keyup(function(e){     
-        var str = $.trim( $(this).val() );
-        if( str != "" ) {
-            //var regx = /^[A-Za-z]+$/;
-            if (!((e.keyCode >= 48 && e.keyCode <=90) || e.keyCode == 8 || (e.keyCode >= 96 && e.keyCode <= 111) || (e.keyCode >= 186 && e.keyCode <=222)) || text == str ) {
-            }
-            else {
-                //TODO Lack of Case sensitiviity
-                text = str;
-                var queryPat = new Parse.Query(parsePatient);
-                queryPat.contains("Name_lowercase", str.toLowerCase());
-                queryPat.ascending("Name");
-                var filteredPatientInfo = []
-                $('#patientNameList').empty();
-
-                queryPat.find({
-                    success: function(results) {
-                        results.forEach(function(patient) {
-                            filteredPatientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary"), patient.get("image"), patient]);
-                        });
-                        var patientNameList = document.getElementById("patientNameList");
-                        for (var i=0; i<filteredPatientInfo.length; i++) {
-                            var newListItem = document.createElement("li");
-                            var newLinkItem = document.createElement("a");
-                            newLinkItem.href="#";
-                            newListItem.className = newListItem.className+" list-group-item patient";
-                            newLinkItem.className = i;
-                            var newListValue = document.createTextNode(filteredPatientInfo[i][1]);
-                            newLinkItem.appendChild(newListValue);
-                            newListItem.appendChild(newLinkItem);
-                            patientNameList.appendChild(newListItem);
-
-                            newListItem.onclick = function() {
-                                $("#starting_patient_view").css("visibility", "hidden");
-                                $("#letterman_patient_view").css("visibility", "visible");
-                                var i = this.children[0].className;
-                                currentPatientIndex = i;
-                                var patientSummary = document.getElementById("patientSummary");
-                                patientSummary.innerHTML = filteredPatientInfo[i][3];
-                                var patientConditions = document.getElementById("patientConditions");
-                                patientConditions.innerHTML = filteredPatientInfo[i][2];
-                                var patientTitle = document.getElementById("title1");
-                                patientTitle.innerHTML = filteredPatientInfo[i][1]; 
-                                var patientImage = document.getElementById("patientImage");
-                                patientImage.src = filteredPatientInfo[i][4].url();
-                                var patientPastAppts = document.getElementById("patientPastAppts");
-                                patientPastAppts.innerHTML = "";
-                                var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
-                                patientUpcomingAppts.innerHTML = "";
-                                var queryAppt = new Parse.Query(parseAppointment);
-                                queryAppt.lessThan("date", date_str);
-                                queryAppt.equalTo("patient",filteredPatientInfo[i][5]);
-
-                                queryAppt.find({
-                                    success: function(results) {
-                                        results.forEach(function(result) {
-                                            var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), filteredPatientInfo[i][1], result.get('notes'), result.id, []);
-                                            var appt = document.createElement("a");
-                                            appt.href="#";
-                                            var apptText = document.createTextNode(result.get('date'));
-                                            appt.appendChild(apptText);
-                                            appt.onclick = function () {
-                                                _lightbox_appt(ap, false);
-                                            }
-                                            patientPastAppts.appendChild(appt);
-                                            var lnbreak = document.createElement("br");
-                                            patientPastAppts.appendChild(lnbreak);
-                                        });
-                                    },
-                                    error: function(error) {
-                                        alert("Appointment Error: " + error.code + " " + error.message);
-                                    }
-                                });
-                                var queryApptFuture = new Parse.Query(parseAppointment);
-                                queryApptFuture.greaterThan("date", date_str);
-                                queryApptFuture.equalTo("patient",filteredPatientInfo[i][5]);
-                                queryApptFuture.find({
-                                    success: function(results) {
-                                        results.forEach(function(result) {
-                                            var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), filteredPatientInfo[i][1], result.get('notes'), result.id, []);
-                                            var appt = document.createElement("a");
-                                            appt.href="#";
-                                            var apptText = document.createTextNode(result.get('date'));
-                                            appt.appendChild(apptText);
-                                            appt.onclick = function () {
-                                                _lightbox_appt(ap, false);
-                                            }
-                                            patientFutureAppts.appendChild(appt);
-                                            var lnbreak = document.createElement("br");
-                                            patientFutureAppts.appendChild(lnbreak);
-                                        });
-                                    },
-                                    error: function(error) {
-                                        alert("Appointment Error: " + error.code + " " + error.message);
-                                    }
-                                });
-                            }
-                        }
-                    }
-                });
-
-           //empty value -- do something here
-            }
-        }
-        else{//Empty list
-            var patientNameList = document.getElementById("patientNameList");
-            $('#patientNameList').empty();
-            for (var i=0; i<patientInfo.length; i++) {
-                var newListItem = document.createElement("li");
-                var newLinkItem = document.createElement("a");
-                newLinkItem.href="#";
-                newListItem.className = newListItem.className+" list-group-item patient";
-                newLinkItem.className = i;
-                var newListValue = document.createTextNode(patientInfo[i][1]);
-                newLinkItem.appendChild(newListValue);
-                newListItem.appendChild(newLinkItem);
-                patientNameList.appendChild(newListItem);
-
-                newListItem.onclick = function() {
-                    $("#starting_patient_view").css("visibility", "hidden");
-                    $("#letterman_patient_view").css("visibility", "visible");
-                    var i = this.children[0].className;
-                    currentPatientIndex = i;
-                    var patientSummary = document.getElementById("patientSummary");
-                    patientSummary.innerHTML = patientInfo[i][3];
-                    var patientConditions = document.getElementById("patientConditions");
-                    patientConditions.innerHTML = patientInfo[i][2];
-                    var patientTitle = document.getElementById("title1");
-                    patientTitle.innerHTML = patientInfo[i][1]; 
-                    var patientImage = document.getElementById("patientImage");
-                    patientImage.src = patientInfo[i][4].url();
-                    var patientPastAppts = document.getElementById("patientPastAppts");
-                    patientPastAppts.innerHTML = "";
-                    var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
-                    patientUpcomingAppts.innerHTML = "";
-                    var queryAppt = new Parse.Query(parseAppointment);
-                    queryAppt.lessThan("date", date_str);
-                    queryAppt.equalTo("patient",patientInfo[i][5]);
-                    queryAppt.find({
-                        success: function(results) {
-                            results.forEach(function(result) {
-                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
-                                var appt = document.createElement("a");
-                                appt.href="#";
-                                var apptText = document.createTextNode(result.get('date'));
-                                appt.appendChild(apptText);
-                                appt.onclick = function () {
-                                    _lightbox_appt(ap, false);
-                                }
-                                patientPastAppts.appendChild(appt);
-                                var lnbreak = document.createElement("br");
-                                patientPastAppts.appendChild(lnbreak);
-                            });
-                        },
-                        error: function(error) {
-                            alert("Appointment Error: " + error.code + " " + error.message);
-                        }
-                    });
-                    var queryApptFuture = new Parse.Query(parseAppointment);
-                    queryApptFuture.greaterThan("date", date_str);
-                    queryApptFuture.equalTo("patient",patientInfo[i][5]);
-                    queryApptFuture.find({
-                        success: function(results) {
-                            results.forEach(function(result) {
-                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
-                                var appt = document.createElement("a");
-                                appt.href="#";
-                                var apptText = document.createTextNode(result.get('date'));
-                                appt.appendChild(apptText);
-                                appt.onclick = function () {
-                                    _lightbox_appt(ap, false);
-                                }
-                                patientFutureAppts.appendChild(appt);
-                                var lnbreak = document.createElement("br");
-                                patientFutureAppts.appendChild(lnbreak);
-                            });
-                        },
-                        error: function(error) {
-                            alert("Appointment Error: " + error.code + " " + error.message);
-                        }
-                    });
-                }
-            }
-        }
-        
-    //End of searchBar click function
-    });
+    $("#searchBar").on('keyup', filter_list);
     //end button click 
 
 });
 
 
+function filter_list(e){
+
+        $('#searchBar').off();
+        var str = $.trim( $(this).val() );
+        console.log(str + ':' + text);
+        if(!inSearch){
+            inSearch = true;
+            if( str != "" ) {
+                //var regx = /^[A-Za-z]+$/;
+                if (!((e.keyCode >= 48 && e.keyCode <=90) || e.keyCode == 8 || (e.keyCode >= 96 && e.keyCode <= 111) || (e.keyCode >= 186 && e.keyCode <=222)) || text == str ) {
+                //|| e.keyCode == 8
+                }
+                else {
+                    //TODO Lack of Case sensitiviity
+                    text = str;
+                    var queryPat = new Parse.Query(parsePatient);
+                    queryPat.contains("Name_lowercase", str.toLowerCase());
+                    queryPat.ascending("Name");
+                    var filteredPatientInfo = []
+                    $('#patientNameList').empty();
+
+                    queryPat.find({
+                        success: function(results) {
+                            results.forEach(function(patient) {
+                                filteredPatientInfo.push([patient.id, patient.get("Name"), patient.get("Conditions"), patient.get("Summary"), patient.get("image"), patient]);
+                            });
+                            var patientNameList = document.getElementById("patientNameList");
+                            for (var i=0; i<filteredPatientInfo.length; i++) {
+                                var newListItem = document.createElement("li");
+                                var newLinkItem = document.createElement("a");
+                                newLinkItem.href="#";
+                                newListItem.className = newListItem.className+" list-group-item patient";
+                                newLinkItem.className = i;
+                                var newListValue = document.createTextNode(filteredPatientInfo[i][1]);
+                                newLinkItem.appendChild(newListValue);
+                                newListItem.appendChild(newLinkItem);
+                                patientNameList.appendChild(newListItem);
+
+                                newListItem.onclick = function() {
+                                    $("#starting_patient_view").css("visibility", "hidden");
+                                    $("#letterman_patient_view").css("visibility", "visible");
+                                    var i = this.children[0].className;
+                                    currentPatientIndex = i;
+                                    var patientSummary = document.getElementById("patientSummary");
+                                    patientSummary.innerHTML = filteredPatientInfo[i][3];
+                                    var patientConditions = document.getElementById("patientConditions");
+                                    patientConditions.innerHTML = filteredPatientInfo[i][2];
+                                    var patientTitle = document.getElementById("title1");
+                                    patientTitle.innerHTML = filteredPatientInfo[i][1]; 
+                                    var patientImage = document.getElementById("patientImage");
+                                    patientImage.src = filteredPatientInfo[i][4].url();
+                                    var patientPastAppts = document.getElementById("patientPastAppts");
+                                    patientPastAppts.innerHTML = "";
+                                    var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
+                                    patientUpcomingAppts.innerHTML = "";
+                                    var queryAppt = new Parse.Query(parseAppointment);
+                                    queryAppt.lessThan("date", date_str);
+                                    queryAppt.equalTo("patient",filteredPatientInfo[i][5]);
+
+                                    queryAppt.find({
+                                        success: function(results) {
+                                            results.forEach(function(result) {
+                                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), filteredPatientInfo[i][1], result.get('notes'), result.id, []);
+                                                var appt = document.createElement("a");
+                                                appt.href="#";
+                                                var apptText = document.createTextNode(result.get('date'));
+                                                appt.appendChild(apptText);
+                                                appt.onclick = function () {
+                                                    _lightbox_appt(ap, false);
+                                                }
+                                                patientPastAppts.appendChild(appt);
+                                                var lnbreak = document.createElement("br");
+                                                patientPastAppts.appendChild(lnbreak);
+                                            });
+                                        },
+                                        error: function(error) {
+                                            alert("Appointment Error: " + error.code + " " + error.message);
+                                        }
+                                    });
+                                    var queryApptFuture = new Parse.Query(parseAppointment);
+                                    queryApptFuture.greaterThan("date", date_str);
+                                    queryApptFuture.equalTo("patient",filteredPatientInfo[i][5]);
+                                    queryApptFuture.find({
+                                        success: function(results) {
+                                            results.forEach(function(result) {
+                                                var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), filteredPatientInfo[i][1], result.get('notes'), result.id, []);
+                                                var appt = document.createElement("a");
+                                                appt.href="#";
+                                                var apptText = document.createTextNode(result.get('date'));
+                                                appt.appendChild(apptText);
+                                                appt.onclick = function () {
+                                                    _lightbox_appt(ap, false);
+                                                }
+                                                patientFutureAppts.appendChild(appt);
+                                                var lnbreak = document.createElement("br");
+                                                patientFutureAppts.appendChild(lnbreak);
+                                            });
+                                        },
+                                        error: function(error) {
+                                            alert("Appointment Error: " + error.code + " " + error.message);
+                                        }
+                                    });
+                                }
+                            }
+                        }
+                    });
+
+               //empty value -- do something here
+                }
+            }
+            else{//Empty list
+                var patientNameList = document.getElementById("patientNameList");
+                $('#patientNameList').empty();
+                text = str;
+                for (var i=0; i<patientInfo.length; i++) {
+                    var newListItem = document.createElement("li");
+                    var newLinkItem = document.createElement("a");
+                    newLinkItem.href="#";
+                    newListItem.className = newListItem.className+" list-group-item patient";
+                    newLinkItem.className = i;
+                    var newListValue = document.createTextNode(patientInfo[i][1]);
+                    newLinkItem.appendChild(newListValue);
+                    newListItem.appendChild(newLinkItem);
+                    patientNameList.appendChild(newListItem);
+
+                    newListItem.onclick = function() {
+                        $("#starting_patient_view").css("visibility", "hidden");
+                        $("#letterman_patient_view").css("visibility", "visible");
+                        var i = this.children[0].className;
+                        currentPatientIndex = i;
+                        var patientSummary = document.getElementById("patientSummary");
+                        patientSummary.innerHTML = patientInfo[i][3];
+                        var patientConditions = document.getElementById("patientConditions");
+                        patientConditions.innerHTML = patientInfo[i][2];
+                        var patientTitle = document.getElementById("title1");
+                        patientTitle.innerHTML = patientInfo[i][1]; 
+                        var patientImage = document.getElementById("patientImage");
+                        patientImage.src = patientInfo[i][4].url();
+                        var patientPastAppts = document.getElementById("patientPastAppts");
+                        patientPastAppts.innerHTML = "";
+                        var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
+                        patientUpcomingAppts.innerHTML = "";
+                        var queryAppt = new Parse.Query(parseAppointment);
+                        queryAppt.lessThan("date", date_str);
+                        queryAppt.equalTo("patient",patientInfo[i][5]);
+                        queryAppt.find({
+                            success: function(results) {
+                                results.forEach(function(result) {
+                                    var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
+                                    var appt = document.createElement("a");
+                                    appt.href="#";
+                                    var apptText = document.createTextNode(result.get('date'));
+                                    appt.appendChild(apptText);
+                                    appt.onclick = function () {
+                                        _lightbox_appt(ap, false);
+                                    }
+                                    patientPastAppts.appendChild(appt);
+                                    var lnbreak = document.createElement("br");
+                                    patientPastAppts.appendChild(lnbreak);
+                                });
+                            },
+                            error: function(error) {
+                                alert("Appointment Error: " + error.code + " " + error.message);
+                            }
+                        });
+                        var queryApptFuture = new Parse.Query(parseAppointment);
+                        queryApptFuture.greaterThan("date", date_str);
+                        queryApptFuture.equalTo("patient",patientInfo[i][5]);
+                        queryApptFuture.find({
+                            success: function(results) {
+                                results.forEach(function(result) {
+                                    var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][1], result.get('notes'), result.id, []);
+                                    var appt = document.createElement("a");
+                                    appt.href="#";
+                                    var apptText = document.createTextNode(result.get('date'));
+                                    appt.appendChild(apptText);
+                                    appt.onclick = function () {
+                                        _lightbox_appt(ap, false);
+                                    }
+                                    patientFutureAppts.appendChild(appt);
+                                    var lnbreak = document.createElement("br");
+                                    patientFutureAppts.appendChild(lnbreak);
+                                });
+                            },
+                            error: function(error) {
+                                alert("Appointment Error: " + error.code + " " + error.message);
+                            }
+                        });
+                    }
+                }
+            }
+        }
+    inSearch = false;
+    $("#searchBar").on('keyup', filter_list);
+
+    //End of searchBar click function
+    }
 // insert a certain appointment appt into the DOM
 var insert_appt = function(appt){
     var apptElement = $("<div id='appt"+appt.appt_id+"' class='appt_elem'>");
