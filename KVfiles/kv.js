@@ -108,14 +108,16 @@ function filter_list(e){
                 var queryPat = new Parse.Query(parsePatient);
                 queryPat.contains("Name_lowercase", str.toLowerCase());
                 queryPat.ascending("Name");
-                var filteredPatientInfo = []
-                $('#patientNameList').empty();
 
                 queryPat.find({
                     success: function(results) {
+
+                        var filteredPatientInfo = []
+                        $('#patientNameList').empty();
                         results.forEach(function(patient) {
                             filteredPatientInfo.push([patient.id, patient.get("Name"), patient]);
                         });
+
                         var patientNameList = document.getElementById("patientNameList");
                         for (var i=0; i<filteredPatientInfo.length; i++) {
                             var newListItem = document.createElement("li");
