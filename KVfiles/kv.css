@@ -1,3 +1,8 @@
+/*Prettiness todos:
+1. requests dialog (format + colors)
+2. appt. dialog (format + colors)
+3. calendar appts. (colors)
+4. calendar times (format) */
 
 .ui-autocomplete {
   top: 0;
@@ -121,7 +126,7 @@ p.time-heading{
 .navbar{
   border:none;
   padding: 0px;
-  background-color: #000;
+  background-color: #993333;
   font-color:black;
 
 }
@@ -151,7 +156,7 @@ label {
 }
 
 #schedule_view {
-  background-color: #DDDDDD;
+  background-color: #EEE;
   margin: 0px; 
 }
 
@@ -173,7 +178,9 @@ label {
 
 .label{ 
   background-color: #CCCCCC;
-  padding: .5em;
+  padding: 0px;
+  margin: 0px;
+  /*padding: .5em;*/
 }
 
 .appt_elem {
@@ -314,7 +321,7 @@ label {
   background:-ms-linear-gradient(top, #44c767 5%, #5cbf2a 100%);
   background:linear-gradient(to bottom, #44c767 5%, #5cbf2a 100%);
   filter:progid:DXImageTransform.Microsoft.gradient(startColorstr='#44c767', endColorstr='#5cbf2a',GradientType=0);
-  background-color:#44c767;
+  background-color: #44c767;
   -moz-border-radius:3px;
   -webkit-border-radius:3px;
   border-radius:3px;
@@ -486,6 +493,7 @@ label {
 
 #notificationIcon{
   font-size: 1em;
+  color: #000;
 }
 
 #notificationDiv{
@@ -494,16 +502,22 @@ label {
 }
 #notificationButton{
   margin: 0.5em;
+  /*#FFF;*/
+  /*#206CC7;*/ 
+  /*#e3e2de;*/
 }
 
 #calendar_view {
   padding-top:0px;
   margin-top:0px;
+  color: #000;
+  background-color: #FFF;
 }
 
 #title1, #title2 { 
   font-size: 45px;
   margin-top: .5em;
+  color: #6E6E6E;
 }
 
 #freedommain {
@@ -512,11 +526,13 @@ label {
 
 #hand {
   padding-left: 125px;
+  color: #6E6E6E;
 }
 
 #logo {
   margin: 0.2em;
   margin-left: 0px;
+  color: #FFF;
 }
 
 #tabContainer {
@@ -524,6 +540,7 @@ label {
 }
 #nameRow {
   padding-top: 30px;
+  background-color: #FFFFFF;
 }
 #searchBar {
   margin: 0px;
@@ -542,4 +559,8 @@ label {
 
 #textareaEdit {
   width: 100%;
+}
+
+.panel-body{
+  color: #6E6E6E;
 }
