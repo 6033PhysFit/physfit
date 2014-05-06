@@ -748,7 +748,7 @@ var displayPatient = function () {
                 patientSummary.innerHTML = result.get('Summary');
                 var patientConditions = document.getElementById("patientConditions");
                 patientConditions.innerHTML = result.get('Conditions');
-                var patientTitle = document.getElementById("title1");
+                var patientTitle = $("#title1");
                 patientTitle.innerHTML = result.get('Name'); 
                 var patientImage = document.getElementById("patientImage");
                 patientImage.src = result.get('image').url();
@@ -758,16 +758,18 @@ var displayPatient = function () {
             console.log("struggz");
         }
     });
-    var patientPastAppts = document.getElementById("patientPastAppts");
-    patientPastAppts.innerHTML = "";
-    var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
-    patientUpcomingAppts.innerHTML = "";
     var queryAppt = new Parse.Query(parseAppointment);
     var today = $.datepicker.formatDate('yy/mm/dd', new Date());
     queryAppt.lessThan("date", today);
     queryAppt.equalTo("patient",patientInfo[i][2]);
     queryAppt.find({
         success: function(results) {
+
+            var patientPastAppts = document.getElementById("patientPastAppts");
+            patientPastAppts.innerHTML = "";
+            var patientUpcomingAppts = document.getElementById("patientUpcomingAppts");
+            patientUpcomingAppts.innerHTML = "";
+            
             results.forEach(function(result) {
                 var ap = new Appointment(result.get('type'), result.get('date'), result.get('time'), patientInfo[i][2].get('Name'), result.get('notes'), result.id, []);
                 var appt = document.createElement("a");
