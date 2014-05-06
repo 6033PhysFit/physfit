@@ -4,19 +4,19 @@
 
 /* Move down content because we have a fixed navbar that is 50px tall */
 /* TODO 
-         3) make dialogs look pretty
-         4) search thingy
-         5) change background/tab/calendar colors
-         6) clean up code (if time)
+         1) make dialogs look pretty
+         2) change background/tab/calendar colors
+         3) clean up code (if time)
 
   DONE
   1) fix calendar formatting (weird stuff still with it like when you toggle days),
   2) min window width (deal with resizing) --> fix navbar (weird things...),
   3) add scroll for patient list?
+  4) search thingy
+  5) autocomplete for dialog?
 
   POSSIBLE ADDITIONS
   1) drag+drop, delete functions directly on calendar
-  2) autocomplete for dialog?
 */
 
 .ui-autocomplete {
