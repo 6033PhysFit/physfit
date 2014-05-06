@@ -82,14 +82,16 @@ li > a.viewTab:hover{
 
 
 #patientList{
-  height:80vmax;
+<<<<<<< HEAD
+/*  border-right: 1px solid #999;*/
+  height: 510px;
   margin: 0px 0px 0px 0px;
   padding-right: 0px;
 }
-
+/*
 #patientList {
   height:41vmax;
-}
+}*/
 
 .lowerbar{
   padding:0px;
