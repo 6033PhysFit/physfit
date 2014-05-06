@@ -370,7 +370,7 @@ function _lightbox_notification(){
                         kind = "Other";
                     }
                     list_content += '<li ' + 'id="notification_list_' + i + '" class="notification">'+
-                    '<a href="#" id="notification_link_' + i + '">' +
+                    '<a href="#" id="notification_link_' + i + '" class="notificationPill">' +
                     notification_info[i][0] + '<span class="pull-right">' + kind +
                     '</span>'+'</a>'+  '</li>';
                 }

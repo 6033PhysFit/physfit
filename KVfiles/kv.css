@@ -46,15 +46,12 @@ li > a.viewTab:hover{
   height: 50px;
 }
 
-#notification{
+.notificationPill{
     background-color : #F5F5F5;
-    box-shadow: 1px 1px 1px #999 inherit;
     border-style:solid;
     border-width:1px;
-    border-color:#999;
-
-
-}
+    border-color:#999; /*TODO FIX HOW THIS LOOKS*/
+} /*not sure why this was originally #notification since we don't have anything with an id with "notification"*/
 .navbar > .container .navbar-brand, .navbar > .container-fluid .navbar-brand:hover{
   color:#999;
 }
