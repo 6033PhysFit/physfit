@@ -1,26 +1,5 @@
-/*lightbox
- * Base structure
- */
-
-/* Move down content because we have a fixed navbar that is 50px tall */
-/* TODO 
-         1) make dialogs look pretty
-         2) change background/tab/calendar colors
-         3) clean up code (if time)
-
-  DONE
-  1) fix calendar formatting (weird stuff still with it like when you toggle days),
-  2) min window width (deal with resizing) --> fix navbar (weird things...),
-  3) add scroll for patient list?
-  4) search thingy
-  5) autocomplete for dialog?
-
-  POSSIBLE ADDITIONS
-  1) drag+drop, delete functions directly on calendar
-*/
 
 .ui-autocomplete {
-  /*position: absolute;*/
   top: 0;
   left: 0;
   z-index: 1510 !important;
@@ -34,21 +13,15 @@ body {
   background-color: #EEE;
   resize: true;
 
-  min-width: 950px !important; /*any smaller and the labels for the time would show...lols. TO DO maybe? fix that?*/
+  min-width: 950px !important; 
 
 }
-
-/*.sub {
-  font-size: 1em;
-  color : #999;
-}*/
 
 .appt_icon {
   margin-right: 5px;
   font-size: 24px;
   color: white;
 }
-/*TO DO: (BACKEND) make app icon responsive (not red when no notifications)*/
 
 #tabs {
     width: 100%;
@@ -57,22 +30,12 @@ body {
     color: #999;
 }
 
-/*#calendarTab:hover{
-  cursor: pointer;
-  background-color:#000;
-  }
-#patientTab:hover{
-  cursor: pointer;
-  background-color:#000;
-}*/
-
 li > a.viewTab:hover{
   cursor: pointer;
   background-color:#CCC;
 }
 
 .navbar-inverse .nav .active>a, .navbar-inverse .nav .active>a:hover, .navbar-inverse .nav .active>a:focus{
-  /*color:#EEE;*/
   color:#999;
   background-color:#ccc;
 
@@ -109,11 +72,6 @@ li > a.viewTab:hover{
 #notification:hover { 
   background-color: #CCC; 
 }
-
-/*.navbar-fixed-top{
-  border-style:solid;
-  border-color:black;
-}*/
 .navbar-fixed-top{
   background-color: #F5F5F5
 }
@@ -122,17 +80,8 @@ li > a.viewTab:hover{
   font-size: 2em;
 }
 
-/*.container-fluid{
-  padding:0px;
-}
-*/
-/*Underlining of tabs*/
-/*#actualTabs{
-  border-bottom: 2px solid #999;
-}*/
 
 #patientList{
-/*  border-right: 1px solid #999;*/
   height:80vmax;
   margin: 0px 0px 0px 0px;
   padding-right: 0px;
@@ -140,7 +89,6 @@ li > a.viewTab:hover{
 
 #patientList {
   height:41vmax;
-  /*do not touch. ask ashley why.*/
 }
 
 .lowerbar{
@@ -171,7 +119,6 @@ p{
 
 p.time-heading{
   font-weight:bold;
-  /*text-align:center;*/
 }
 .navbar{
   border:none;
@@ -207,18 +154,18 @@ label {
 
 #schedule_view {
   background-color: #DDDDDD;
-  margin: 0px; /*VK*/
+  margin: 0px; 
 }
 
 .hero-unit {
-  padding: 30px; /*VK: default is 60px for hero-unit class*/
+  padding: 30px; 
 }
 .hour_row {
   padding: 2px;
   height: 99px;
 }
 .row{
-  margin: 0px; /*VK: default -15??? huh*/
+  margin: 0px;
 }
 
 .hour_label {
@@ -226,7 +173,7 @@ label {
   height: 100%;
 }
 
-.label{ /*VK: could not get a centered label so just making the text only show... */
+.label{ 
   background-color: #CCCCCC;
   padding: .5em;
 }
@@ -281,16 +228,12 @@ label {
 }
 
 #lightbox_input {
-/*  width: 300px;
-*/height: 80px;
+  height: 80px;
   margin-top: 5px;
   margin-bottom:15px;
   width:inherit;
-/*  margin-left: 15px;
-  margin-right: 15px;
-  margin-bottom: 15px;*/
 }
-#namepicker, #timepicker, #datepicker, #lightbox_kind, #lightbox_selected/*, #lightbox_input*/{
+#namepicker, #timepicker, #datepicker, #lightbox_kind, #lightbox_selected {
   height:inherit;
   width :inherit;
   margin: none;
@@ -307,16 +250,11 @@ label {
 }
 
 .lightbox_item{
-  /*overflow: hidden !important;*/
   font-weight: bold;
   height: 2em;
   margin-bottom:15px;
   width: 100%;
 }
-/*.span3>b{
-  border:1px;
-  margin-bottom: 10px !important;
-}*/
 
 #lightbox_remove, #lightbox_cancel {
   margin-right: 5px;
@@ -556,9 +494,6 @@ label {
 #notificationDiv{
   position:fixed;
   right: 0px; 
-  /*top: 10px;*/
-/*  width: 50px;
-  height: 50px;*/
 }
 #notificationButton{
   margin: 0.5em;
@@ -569,10 +504,9 @@ label {
   margin-top:0px;
 }
 
-#title1, #title2 { /*title1 is patient title, title2 is "Choose a Patient" title*/
+#title1, #title2 { 
   font-size: 45px;
   margin-top: .5em;
-  /*default for page-header is 9px*/
 }
 
 #freedommain {
@@ -584,7 +518,6 @@ label {
 }
 
 #logo {
-/*  margin-top: 2px;*/
   margin: 0.2em;
   margin-left: 0px;
 }
@@ -593,16 +526,12 @@ label {
   margin-top: 15px;
 }
 #nameRow {
-  padding-top: 30px; /*VK*/
+  padding-top: 30px;
 }
 #searchBar {
-/*  margin-left: 10px;*/
   margin: 0px;
   padding-top: 1em;
   padding-bottom: 1em;
-/*  padding:5px;
-  padding-top:15px;
-  padding-bottom: 15px;*/
 }
 
 .sidebar{
