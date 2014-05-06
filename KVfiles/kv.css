@@ -531,8 +531,8 @@ label {
 }
 #searchBar {
   margin: 0px;
-  padding-top: 1em;
-  padding-bottom: 1em;
+/*  padding-top: 1em;
+  padding-bottom: 1em;*/
 }
 
 .sidebar{
