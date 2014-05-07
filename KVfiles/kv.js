@@ -298,11 +298,11 @@ var _make_hour_element = function(i){
     var hour_div = $("<div class='row hour_row'>");
     hour_div.id = 'hour_'+i;
 
-    hour_label = $("<label class='label' style='font-size:10px'>"+_readable_hour(i)+"</label>");
+    hour_label = $("<label class='label'>"+_readable_hour(i)+"</label>");
 
     var hour_inner_ul = $("<ul class='hour_inner' id='hour"+i+"' style='height:100%;'>");
 
-    hour_div.prepend($("<div class='col-md-1 hour_label'>").append(hour_label));
+    hour_div.prepend($("<div class='col-xs-1 hour_label'>").append(hour_label));
     hour_div.append(hour_inner_ul);
     return hour_div;
 }
@@ -417,13 +417,13 @@ function _lightbox_appt(appt, isNotification){
     content.append($("<br>"));
     content.append($("<div id='lightbox_container' class='container-fluid'>"+
         "<div id='lightbox_row' class='row-fluid'>"+
-        "<div class='col-md-3'>"+
+        "<div class='col-xs-3'>"+
         "<div class='lightbox_item'>Date:</div>"+
         "<div class='lightbox_item'>Time:</div>"+
         "<div class='lightbox_item'>Type:</div>"+
         "<div id='lightbox_notes_title' class='lightbox_item'>Notes:</div>"+
         "</div>"+
-        "<div class='col-md-9'>"+
+        "<div class='col-xs-9'>"+
         "<div class='lightbox_item'><input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"+
         "<div class='lightbox_item'>"+_generate_timepicker(start_hour, end_hour, appt.hour)+"</div>"+
         "<div class='lightbox_item'>"+
@@ -590,14 +590,14 @@ function _lightbox_new(){
 
     content.append($("<div id='lightbox_container' class='container-fluid'>"+
         "<div id='lightbox_row' class='row-fluid'>"+
-        "<div class='col-md-3'>"+
+        "<div class='col-xs-3'>"+
         "<div class='lightbox_item'>Name:</div>"+ 
         "<div class='lightbox_item'>Date:</div>"+
         "<div class='lightbox_item'>Time:</div>"+
         "<div class='lightbox_item'>Type:</div>"+
         "<div id='lightbox_notes_title' class='lightbox_item'>Notes:</div>"+
         "</div>"+
-        "<div class='col-md-9'>"+
+        "<div class='col-xs-9'>"+
         "<div class='lightbox_item'><input id='namepicker' type='text'></input></div>"+ 
         "<div class='lightbox_item'><input id='datepicker' type='text' value='"+$.datepicker.formatDate('yy/mm/dd', view_date)+"'></input></div>"+
         "<div class='lightbox_item'>"+_generate_timepicker(start_hour, end_hour)+"</div>"+
