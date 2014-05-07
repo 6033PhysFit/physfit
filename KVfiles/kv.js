@@ -748,8 +748,8 @@ var displayPatient = function () {
                 patientSummary.innerHTML = result.get('Summary');
                 var patientConditions = document.getElementById("patientConditions");
                 patientConditions.innerHTML = result.get('Conditions');
-                var patientTitle = $("#title1");
-                patientTitle.innerHTML = result.get('Name'); 
+                var patientTitle = document.getElementById("title1");
+                patientTitle.innerHTML = result.get('Name');
                 var patientImage = document.getElementById("patientImage");
                 patientImage.src = result.get('image').url();
             });
